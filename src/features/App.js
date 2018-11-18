@@ -11,6 +11,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
+import { Container } from 'reactstrap';
 
 class App extends Component {
   render() {
@@ -19,11 +20,14 @@ class App extends Component {
       <BrowserRouter basename={process.env.PUBLIC_URL}>
       <div className="App">
         <Nav />
+        <Container>
         <Switch>
+
           <Route exact path={routes.Main} component={Main} />
           <Route path={routes.SignIn} component={SignIn} />
           <Route path={routes.SignUp} component={SignUp} />
         </Switch>
+        </Container>
       </div>
     </BrowserRouter>
     );
