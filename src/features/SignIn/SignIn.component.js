@@ -1,5 +1,17 @@
 import React, { Component } from 'react';
-import { Row, Col, Card, CardBody, CardTitle, Button, Form, FormGroup, FormFeedback, Label, Input } from 'reactstrap';
+import { 
+  Row, 
+  Col, 
+  Card, 
+  CardBody, 
+  CardHeader, 
+  Button, 
+  Form, 
+  FormGroup, 
+  FormFeedback, 
+  Label, 
+  Input 
+} from 'reactstrap';
 
 class SignInComponent extends Component {
   render() {
@@ -7,8 +19,8 @@ class SignInComponent extends Component {
       <Row>
         <Col md={{ size: 8, offset: 2 }}>
           <Card className="my-5 mx-auto">
+            <CardHeader>Sign In</CardHeader>
             <CardBody>
-              <CardTitle>Sign In</CardTitle>
               <Form>
                 <FormGroup>
                   <Label for="email">Email</Label>

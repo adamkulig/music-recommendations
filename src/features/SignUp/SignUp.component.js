@@ -4,7 +4,7 @@ import {
   Col, 
   Card, 
   CardBody, 
-  CardTitle, 
+  CardHeader, 
   Button, 
   Form, 
   FormGroup, 
@@ -19,8 +19,8 @@ class SignUpComponent extends Component {
       <Row>
         <Col md={{ size: 8, offset: 2 }}>
           <Card className="my-5 mx-auto">
+            <CardHeader>Sign Up</CardHeader>
             <CardBody>
-              <CardTitle>Sign Up</CardTitle>
               <Form>
                 <FormGroup>
                   <Label for="email">Email</Label>
