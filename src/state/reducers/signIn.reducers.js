@@ -14,6 +14,10 @@ const signInReducer = (state = initialState, action ) => {
         password
       }
     }
+    case ACTIONS.SIGN_IN_ERROR: {
+      console.log(action.error);
+      return state;
+    }
     default:
       return state;
   }
