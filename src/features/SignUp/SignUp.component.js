@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { 
   Row, 
   Col, 
@@ -13,38 +14,65 @@ import {
   Input 
 } from 'reactstrap';
 
-class SignUpComponent extends Component {
-  render() {
-    return (
-      <Row>
-        <Col md={{ size: 8, offset: 2 }}>
-          <Card className="my-5 mx-auto">
-            <CardHeader>Sign Up</CardHeader>
-            <CardBody>
-              <Form>
-                <FormGroup>
-                  <Label for="email">Email</Label>
-                  <Input invalid type="email" name="email" id="email" placeholder="devil@hell.com" />
-                  <FormFeedback>This e-mail already exists.</FormFeedback>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="password">Password</Label>
-                  <Input invalid type="password" name="password" id="password" placeholder="must have at least 6 characters" />
-                  <FormFeedback>To weak password.</FormFeedback>
-                </FormGroup>
-                <FormGroup>
-                  <Label for="passwordConfirm">Confirm Password</Label>
-                  <Input invalid type="password" name="passwordConfirm" id="passwordConfirm" />
-                  <FormFeedback>Passwords don't match.</FormFeedback>
-                </FormGroup>
-                <Button color="primary" className="float-right">Submit</Button>
-              </Form>
-            </CardBody>
-          </Card>
-        </Col>
-      </Row>
-    );
-  }
+const SignUpComponent = ({ onSubmit, onTextChange, email, password, confirmPassword }) => {
+  return (
+    <Row>
+      <Col md={{ size: 8, offset: 2 }}>
+        <Card className="my-5 mx-auto">
+          <CardHeader>Sign Up</CardHeader>
+          <CardBody>
+            <Form onSubmit={onSubmit}>
+              <FormGroup>
+                <Label for="email">Email</Label>
+                <Input 
+                  type="email" 
+                  name="email" 
+                  id="email" 
+                  placeholder="devil@hell.com" 
+                  onChange={onTextChange} 
+                  value={email}
+                  invalid 
+                />
+                <FormFeedback>This e-mail already exists.</FormFeedback>
+              </FormGroup>
+              <FormGroup>
+                <Label for="password">Password</Label>
+                <Input 
+                  type="password" 
+                  name="password" 
+                  id="password" 
+                  placeholder="must have at least 6 characters" 
+                  onChange={onTextChange} 
+                  value={password}
+                />
+                <FormFeedback>To weak password.</FormFeedback>
+              </FormGroup>
+              <FormGroup>
+                <Label for="confirmPassword">Confirm Password</Label>
+                <Input 
+                  type="password" 
+                  name="confirmPassword" 
+                  id="confirmPassword" 
+                  onChange={onTextChange} 
+                  value={confirmPassword}
+                />
+                <FormFeedback>Passwords don't match.</FormFeedback>
+              </FormGroup>
+              <Button color="primary" className="float-right">Submit</Button>
+            </Form>
+          </CardBody>
+        </Card>
+      </Col>
+    </Row>
+  )
+}
+
+SignUpComponent.propTypes = {
+  onSubmit: PropTypes.func,
+  onTextChange: PropTypes.func,
+  email: PropTypes.string,
+  password: PropTypes.string,
+  confirmPassword: PropTypes.string
 }
 
 export default SignUpComponent;

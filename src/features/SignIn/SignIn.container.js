@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SignIn from './SignIn.component';
 
+import { signIn } from '../../state/actions/signIn.actions';
+
+
 class SignInContainer extends Component {
   state = {
     email: '',
@@ -13,17 +16,26 @@ class SignInContainer extends Component {
     [event.target.id]: event.target.value  
   });
 
-  onSubmit = () => {
-    console.log('click')
+  onSubmit = event => {
+    event.preventDefault();
+    this.props.onSignIn(this.state)
   }
 
   render() {
-    console.log(this.state)
     const { email, password } = this.state;
     return (
-      <SignIn onSubmit={this.onSubmit} onTextChange={this.onTextChange} email={email} password={password}/>
+      <SignIn 
+        onSubmit={this.onSubmit} 
+        onTextChange={this.onTextChange} 
+        email={email} 
+        password={password}
+      />
     );
   }
 }
 
-export default SignInContainer;
+const mapDispatchToProps = {
+  onSignIn: signIn
+}
+
+export default connect(null, mapDispatchToProps)(SignInContainer);

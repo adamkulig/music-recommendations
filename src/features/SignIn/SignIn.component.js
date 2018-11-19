@@ -24,12 +24,26 @@ const SignInComponent = ({ onSubmit, onTextChange, email, password }) => {
             <Form onSubmit={onSubmit}>
               <FormGroup>
                 <Label for="email">Email</Label>
-                <Input invalid type="email" name="email" id="email" placeholder="devil@hell.com" onChange={onTextChange} value={email}/>
+                <Input 
+                  type="email" 
+                  name="email" 
+                  id="email" 
+                  placeholder="devil@hell.com" 
+                  onChange={onTextChange} 
+                  value={email}
+                />
                 <FormFeedback>This e-mail doesn't exists.</FormFeedback>
               </FormGroup>
               <FormGroup>
                 <Label for="password">Password</Label>
-                <Input invalid type="password" name="password" id="password" placeholder="must have at least 6 characters" onChange={onTextChange} value={password}/>
+                <Input 
+                  type="password" 
+                  name="password" 
+                  id="password" 
+                  placeholder="must have at least 6 characters" 
+                  onChange={onTextChange} 
+                  value={password}
+                />
                 <FormFeedback>Wrong password.</FormFeedback>
               </FormGroup>
               <Button color="primary" className="float-right">Submit</Button>
