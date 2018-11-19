@@ -4,7 +4,6 @@ import SignIn from './SignIn.component';
 
 import { signIn } from '../../state/actions/signIn.actions';
 
-
 class SignInContainer extends Component {
   state = {
     email: '',
