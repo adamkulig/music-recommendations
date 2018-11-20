@@ -2,9 +2,9 @@ const routes = {
   'Main': '/',
   'SignIn': '/signin',
   'SignUp': '/signup',
-  'RecommendationAdd': 'new',
-  'RecommendationList': 'recommendations',
-  'RecommendationDetails': 'recommendations/:id',
+  'ReviewNew': '/new',
+  'ReviewList': '/reviews',
+  'ReviewDetails': '/reviews/:id',
 }
 
 export default routes;

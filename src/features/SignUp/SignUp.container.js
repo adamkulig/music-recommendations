@@ -4,33 +4,32 @@ import SignUp from './SignUp.component';
 
 import { signUp } from '../../state/actions/signUp.actions';
 
-
 class SignUpContainer extends Component {
   state = {
-    email: '',
-    password: '',
-    confirmPassword: ''
+    credentials: {
+      email: '',
+      password: '',
+      confirmPassword: ''
+    }
   }
 
   onTextChange = event => 
   this.setState({
+    ...this.state.credentials,
     [event.target.id]: event.target.value  
   });
 
   onSubmit = event => {
     event.preventDefault();
-    this.props.onSignUp(this.state)
+    this.props.onSignUp(this.state.credentials)
   }
 
   render() {
-    const { email, password, confirmPassword } = this.state;
     return (
       <SignUp 
         onSubmit={this.onSubmit} 
         onTextChange={this.onTextChange} 
-        email={email} 
-        password={password} 
-        confirmPassword={confirmPassword}
+        data={this.state.credentials} 
       />
     );
   }

@@ -14,7 +14,7 @@ import {
   Input 
 } from 'reactstrap';
 
-const SignUpComponent = ({ onSubmit, onTextChange, email, password, confirmPassword }) => {
+const SignUpComponent = ({ onSubmit, onTextChange, data }) => {
   return (
     <Row>
       <Col md={{ size: 8, offset: 2 }}>
@@ -30,7 +30,7 @@ const SignUpComponent = ({ onSubmit, onTextChange, email, password, confirmPassw
                   id="email" 
                   placeholder="devil@hell.com" 
                   onChange={onTextChange} 
-                  value={email}
+                  value={data.email}
                   invalid 
                 />
                 <FormFeedback>This e-mail already exists.</FormFeedback>
@@ -43,7 +43,7 @@ const SignUpComponent = ({ onSubmit, onTextChange, email, password, confirmPassw
                   id="password" 
                   placeholder="must have at least 6 characters" 
                   onChange={onTextChange} 
-                  value={password}
+                  value={data.password}
                 />
                 <FormFeedback>To weak password.</FormFeedback>
               </FormGroup>
@@ -54,7 +54,7 @@ const SignUpComponent = ({ onSubmit, onTextChange, email, password, confirmPassw
                   name="confirmPassword" 
                   id="confirmPassword" 
                   onChange={onTextChange} 
-                  value={confirmPassword}
+                  value={data.confirmPassword}
                 />
                 <FormFeedback>Passwords don't match.</FormFeedback>
               </FormGroup>
@@ -70,9 +70,11 @@ const SignUpComponent = ({ onSubmit, onTextChange, email, password, confirmPassw
 SignUpComponent.propTypes = {
   onSubmit: PropTypes.func,
   onTextChange: PropTypes.func,
-  email: PropTypes.string,
-  password: PropTypes.string,
-  confirmPassword: PropTypes.string
+  data: PropTypes.shape({
+    email: PropTypes.string,
+    password: PropTypes.string,
+    confirmPassword: PropTypes.string
+  })
 }
 
 export default SignUpComponent;

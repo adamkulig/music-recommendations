@@ -1,33 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// import { compose } from 'redux';
+// import { firestoreConnect } from 'react-redux-firebase';
 import SignIn from './SignIn.component';
-
 import { signIn } from '../../state/actions/signIn.actions';
 
 class SignInContainer extends Component {
   state = {
-    email: '',
-    password: ''
+    credentials: {
+      email: '',
+      password: ''
+    }
   }
 
   onTextChange = event => 
   this.setState({
-    [event.target.id]: event.target.value  
+    credentials: {
+      ...this.state.credentials,
+      [event.target.id]: event.target.value  
+    }
   });
 
   onSubmit = event => {
     event.preventDefault();
-    this.props.onSignIn(this.state)
+    this.props.onSignIn(this.state.credentials)
   }
 
   render() {
-    const { email, password } = this.state;
     return (
       <SignIn 
         onSubmit={this.onSubmit} 
         onTextChange={this.onTextChange} 
-        email={email} 
-        password={password}
+        data={this.state.credentials}
       />
     );
   }
