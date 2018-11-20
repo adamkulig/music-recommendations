@@ -7,6 +7,7 @@ import Footer from '../components/Footer/Footer.component';
 import Main from '../features/Main/Main.container';
 import SignIn from '../features/SignIn/SignIn.container';
 import SignUp from '../features/SignUp/SignUp.container';
+import ReviewNew from '../features/ReviewNew/ReviewNew.container';
 
 import {
   BrowserRouter,
@@ -17,7 +18,6 @@ import { Container } from 'reactstrap';
 
 class App extends Component {
   render() {
-
     return (
       <BrowserRouter basename={process.env.PUBLIC_URL}>
       <div className="App">
@@ -27,6 +27,7 @@ class App extends Component {
             <Route exact path={routes.Main} component={Main} />
             <Route path={routes.SignIn} component={SignIn} />
             <Route path={routes.SignUp} component={SignUp} />
+            <Route path={routes.ReviewNew} component={ReviewNew} />
           </Switch>
         </Container>
         <Footer />

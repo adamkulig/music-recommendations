@@ -29,8 +29,8 @@ class NavComponent extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <LinkContainer to={routes.RecommendationAdd}>
-                  <NavLink>Add</NavLink>
+                <LinkContainer to={routes.ReviewNew}>
+                  <NavLink>New</NavLink>
                 </LinkContainer>
               </NavItem>
               <NavItem>

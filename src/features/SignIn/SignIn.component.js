@@ -14,7 +14,7 @@ import {
   Input 
 } from 'reactstrap';
 
-const SignInComponent = ({ onSubmit, onTextChange, email, password }) => {
+const SignInComponent = ({ onSubmit, onTextChange, data }) => {
   return (
     <Row>
       <Col md={{ size: 8, offset: 2 }}>
@@ -30,7 +30,7 @@ const SignInComponent = ({ onSubmit, onTextChange, email, password }) => {
                   id="email" 
                   placeholder="devil@hell.com" 
                   onChange={onTextChange} 
-                  value={email}
+                  value={data.email}
                 />
                 <FormFeedback>This e-mail doesn't exists.</FormFeedback>
               </FormGroup>
@@ -42,7 +42,7 @@ const SignInComponent = ({ onSubmit, onTextChange, email, password }) => {
                   id="password" 
                   placeholder="must have at least 6 characters" 
                   onChange={onTextChange} 
-                  value={password}
+                  value={data.password}
                 />
                 <FormFeedback>Wrong password.</FormFeedback>
               </FormGroup>
@@ -58,8 +58,10 @@ const SignInComponent = ({ onSubmit, onTextChange, email, password }) => {
 SignInComponent.propTypes = {
   onSubmit: PropTypes.func,
   onTextChange: PropTypes.func,
-  email: PropTypes.string,
-  password: PropTypes.string
+  data: PropTypes.shape({
+    email: PropTypes.string,
+    password: PropTypes.string
+  })
 }
 
 export default SignInComponent;
