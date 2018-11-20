@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import { compose } from 'redux';
-// import { firestoreConnect } from 'react-redux-firebase';
-import ReviewNew  from './ReviewNew.component';
+import { connect } from 'react-redux';
+import ReviewNew from './ReviewNew.component';
+import { createReview } from '../../state/actions/createReview.actions';
 import { TYPES, RATING, GENRES } from '../../variables/review.variables';
 
 class ReviewNewContainer extends Component {
@@ -30,11 +29,10 @@ class ReviewNewContainer extends Component {
 
   onSubmit = event => {
     event.preventDefault();
-    this.props.onSignIn(this.state.data)
+    this.props.onCreateReview(this.state.data)
   }
 
   render() {
-    console.log(this.state)
     return (
       <ReviewNew 
         onSubmit={this.onSubmit} 
@@ -48,9 +46,8 @@ class ReviewNewContainer extends Component {
   }
 }
 
-// const mapDispatchToProps = {
-//   onCreateReview: createReview
-// }
+const mapDispatchToProps = {
+  onCreateReview: createReview
+}
 
-// export default connect(null, mapDispatchToProps)(ReviewNewContainer);
-export default (ReviewNewContainer);
+export default connect(null, mapDispatchToProps)(ReviewNewContainer);

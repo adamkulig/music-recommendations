@@ -12,10 +12,6 @@ import {
   FormFeedback, 
   Label, 
   Input, 
-  Dropdown, 
-  DropdownToggle, 
-  DropdownMenu, 
-  DropdownItem
 } from 'reactstrap';
 
 const ReviewNewComponent = ({ onSubmit, onChange, data, types, genres, rating }) => {
@@ -195,11 +191,11 @@ ReviewNewComponent.propTypes = {
     band: PropTypes.string,
     album: PropTypes.string,
     track: PropTypes.string,
-    genre: PropTypes.array,
+    genre: PropTypes.string,
     link: PropTypes.string,
     rating: PropTypes.string,
     text: PropTypes.string,
-    similar: PropTypes.array
+    similar: PropTypes.string
   }),
   types: PropTypes.array,
   genres: PropTypes.array,
