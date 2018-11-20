@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import routes from '../config/routes';
+import '../styles/App.scss';
 
 import Nav from '../components/Nav/Nav.component';
+import Footer from '../components/Footer/Footer.component';
 import Main from '../features/Main/Main.container';
 import SignIn from '../features/SignIn/SignIn.container';
 import SignUp from '../features/SignUp/SignUp.container';
@@ -21,13 +23,13 @@ class App extends Component {
       <div className="App">
         <Nav />
         <Container>
-        <Switch>
-
-          <Route exact path={routes.Main} component={Main} />
-          <Route path={routes.SignIn} component={SignIn} />
-          <Route path={routes.SignUp} component={SignUp} />
-        </Switch>
+          <Switch>
+            <Route exact path={routes.Main} component={Main} />
+            <Route path={routes.SignIn} component={SignIn} />
+            <Route path={routes.SignUp} component={SignUp} />
+          </Switch>
         </Container>
+        <Footer />
       </div>
     </BrowserRouter>
     );
