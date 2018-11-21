@@ -23,7 +23,7 @@ class NavComponent extends Component {
       <Navbar color="primary" dark expand="sm">
         <Container>
           <LinkContainer to={routes.Main}>
-            <NavbarBrand >Brutal Recommendations</NavbarBrand>
+            <NavbarBrand >Music Recommendations</NavbarBrand>
           </LinkContainer>
           <NavbarToggler onClick={this.toggleNavbar} />
           <Collapse isOpen={this.state.isOpen} navbar>
