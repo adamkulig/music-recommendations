@@ -13,7 +13,7 @@ class ReviewNewContainer extends Component {
       track: '',
       genre: '',
       link: '',
-      rating: '',
+      rating: null,
       text: '',
       similar: ''
     },

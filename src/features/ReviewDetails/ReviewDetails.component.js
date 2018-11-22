@@ -10,13 +10,7 @@ import {
   CardTitle,
   CardSubtitle,
   CardText,
-  CardLink,
-  Button, 
-  Form, 
-  FormGroup, 
-  FormFeedback, 
-  Label, 
-  Input 
+  CardLink 
 } from 'reactstrap';
 
 const ReviewDetailsComponent = ({ data }) => {
