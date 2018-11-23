@@ -12,8 +12,10 @@ class NavContainer extends Component {
     
   toggleNavbar = () => this.setState({ isOpen: !this.state.isOpen });
 
-  onSignOut = () => this.props.onSignOut();
+  onSignOut = () => console.log('click') || this.props.onSignOut();
+
   render() {
+    console.log(this.state);
     return (
       <Nav
         onToggleNavbar={this.onToggleNavbar} 

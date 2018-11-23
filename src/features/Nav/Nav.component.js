@@ -12,12 +12,11 @@ import { LinkContainer } from 'react-router-bootstrap';
 import routes from '../../config/routes';
 
 const NavComponent = ({ onToggleNavbar, onSignOut, navIsOpen }) => {
-  
   return (
     <Navbar color="primary" dark expand="sm">
       <Container>
         <LinkContainer to={routes.Main}>
-          <NavbarBrand >Music Recommendations</NavbarBrand>
+          <NavbarBrand>Music Recommendations</NavbarBrand>
         </LinkContainer>
         <NavbarToggler onClick={onToggleNavbar} />
         <Collapse isOpen={navIsOpen} navbar>
@@ -38,8 +37,8 @@ const NavComponent = ({ onToggleNavbar, onSignOut, navIsOpen }) => {
               </LinkContainer>
             </NavItem>
             <NavItem>
-              <LinkContainer exact to={routes.Main}>
-                <NavLink onClick={onSignOut}>Sign Out</NavLink>
+              <LinkContainer to='#' >
+                <NavLink onClick={() => onSignOut()}>Sign Out</NavLink>
               </LinkContainer>
             </NavItem>
             <NavItem>

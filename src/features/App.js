@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import routes from '../config/routes';
 import '../styles/App.scss';
 
-import Nav from '../components/Nav/Nav.component';
+import Nav from '../features/Nav/Nav.component';
 import Footer from '../components/Footer/Footer.component';
 import Main from '../features/Main/Main.container';
 import SignIn from '../features/SignIn/SignIn.container';
