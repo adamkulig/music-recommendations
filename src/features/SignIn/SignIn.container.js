@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 // import { compose } from 'redux';
 // import { firestoreConnect } from 'react-redux-firebase';
 import SignIn from './SignIn.component';
-import { signIn } from '../../state/actions/signIn.actions';
+import { signIn } from '../../state/actions/auth.actions';
 
 class SignInContainer extends Component {
   state = {

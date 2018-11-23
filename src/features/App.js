@@ -8,6 +8,8 @@ import Main from '../features/Main/Main.container';
 import SignIn from '../features/SignIn/SignIn.container';
 import SignUp from '../features/SignUp/SignUp.container';
 import ReviewNew from '../features/ReviewNew/ReviewNew.container';
+import ReviewList from '../features/ReviewList/ReviewList.container';
+import ReviewDetails from '../features/ReviewDetails/ReviewDetails.container';
 
 import {
   BrowserRouter,
@@ -28,6 +30,8 @@ class App extends Component {
             <Route path={routes.SignIn} component={SignIn} />
             <Route path={routes.SignUp} component={SignUp} />
             <Route path={routes.ReviewNew} component={ReviewNew} />
+            <Route path={routes.ReviewList} component={ReviewList} />
+            <Route path={routes.ReviewDetails} component={ReviewDetails} />
           </Switch>
         </Container>
         <Footer />

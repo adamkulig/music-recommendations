@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
+import { Link } from 'react-router-dom';
+import routes from '../../../config/routes';
 import './ReviewItem.scss';
 import { 
   Row, 
@@ -33,7 +35,9 @@ const ReviewItemComponent = ({ data }) => (
             </div>
             <div className='d-flex justify-content-between align-items-center'>
               <div className="small">{data.type} review rated <strong>{data.rating}</strong> by <strong>{data.user}</strong> </div>
-              <Button color="primary btn-sm" >More</Button>
+              <Link to={`/review/${data.id}`}>
+                <Button color="primary btn-sm" >More</Button>
+              </Link>
             </div>
           </CardBody>
         </Card>

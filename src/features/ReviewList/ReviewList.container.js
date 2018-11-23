@@ -9,7 +9,6 @@ import { firestoreConnect } from 'react-redux-firebase';
 class ReviewListContainer extends Component {
   render() {
     const { recommendations } = this.props;
-    console.log(recommendations)
     return (
       <ReviewList recommendations={recommendations}/>
     );

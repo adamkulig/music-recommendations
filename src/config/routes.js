@@ -4,7 +4,7 @@ const routes = {
   'SignUp': '/signup',
   'ReviewNew': '/new',
   'ReviewList': '/reviews',
-  'ReviewDetails': '/reviews/:id',
+  'ReviewDetails': '/review/:id',
 }
 
 export default routes;
