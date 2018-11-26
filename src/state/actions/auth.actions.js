@@ -1,8 +1,8 @@
 const ACTIONS = {
   SIGN_IN: 'SIGN_IN',
   SIGN_IN_ERROR: 'SIGN_IN_ERROR',
-  SING_OUT: 'SIGN_IN',
-  SING_OUT_ERROR: 'SIGN_IN_ERROR'
+  SIGN_OUT: 'SIGN_OUT',
+  SIGN_OUT_ERROR: 'SIGN_IN_ERROR'
 }
 
 // { getFirebase, getFirestore } are available thanks for thunk.withExtraArgument({...})
@@ -29,11 +29,11 @@ const signOut = () => (dispatch, getState, { getFirebase }) => {
   firebase.auth().signOut()
   .then(() => {
     dispatch({
-      type: ACTIONS.SING_OUT
+      type: ACTIONS.SIGN_OUT
     })
   }).catch((error) => {
     dispatch({
-      type: ACTIONS.SING_OUT_ERROR,
+      type: ACTIONS.SIGN_OUT_ERROR,
       error
     })
   })

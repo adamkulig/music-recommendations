@@ -9,25 +9,31 @@ class NavContainer extends Component {
   state = {
     isOpen: false
   };
-    
+ 
   toggleNavbar = () => this.setState({ isOpen: !this.state.isOpen });
 
-  onSignOut = () => console.log('click') || this.props.onSignOut();
-
+  onSignOut = () => {
+    this.props.onSignOut();
+  }
   render() {
-    console.log(this.state);
+    const { isEmpty } = this.props.auth;
     return (
       <Nav
-        onToggleNavbar={this.onToggleNavbar} 
+        onToggleNavbar={this.toggleNavbar} 
         onSignOut={this.onSignOut} 
         navIsOpen={this.state.isOpen}
+        isLoggedIn={!isEmpty}
       />
     );
   }
 }
 
+const mapStateToProps = state => ({
+  auth: state.firebase.auth
+});
+
 const mapDispatchToProps = {
   onSignOut: signOut
-}
+};
 
-export default connect(null, mapDispatchToProps)(NavContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(NavContainer);

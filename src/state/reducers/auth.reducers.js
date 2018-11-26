@@ -5,7 +5,7 @@ const initialState = {
   password: '',
 }
 
-const signInReducer = (state = initialState, action ) => {
+const authReducer = (state = initialState, action ) => {
   switch (action.type) {
     case ACTIONS.SIGN_IN: {
       const { email, password } = action.payload;
@@ -18,9 +18,16 @@ const signInReducer = (state = initialState, action ) => {
       console.log(action.error);
       return state;
     }
+    case ACTIONS.SIGN_OUT: {
+      return initialState;
+    }
+    case ACTIONS.SIGN_OUT_ERROR: {
+      console.log(action.error);
+      return state;
+    }
     default:
       return state;
   }
 }
 
-export default signInReducer;
+export default authReducer;

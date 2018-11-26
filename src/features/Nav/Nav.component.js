@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Fragment } from 'react';
 import {
   Container,
   Collapse,
@@ -11,7 +11,7 @@ import {
 import { LinkContainer } from 'react-router-bootstrap';
 import routes from '../../config/routes';
 
-const NavComponent = ({ onToggleNavbar, onSignOut, navIsOpen }) => {
+const NavComponent = ({ onToggleNavbar, onSignOut, navIsOpen, isLoggedIn }) => {
   return (
     <Navbar color="primary" dark expand="sm">
       <Container>
@@ -20,7 +20,7 @@ const NavComponent = ({ onToggleNavbar, onSignOut, navIsOpen }) => {
         </LinkContainer>
         <NavbarToggler onClick={onToggleNavbar} />
         <Collapse isOpen={navIsOpen} navbar>
-          <Nav className="ml-auto" navbar>
+          <Nav className="ml-auto" navbar onClick={onToggleNavbar}>
             <NavItem>
               <LinkContainer to={routes.ReviewNew}>
                 <NavLink>New</NavLink>
@@ -31,21 +31,27 @@ const NavComponent = ({ onToggleNavbar, onSignOut, navIsOpen }) => {
                 <NavLink>Reviews</NavLink>
               </LinkContainer>
             </NavItem>
+            {!isLoggedIn && (
+              <Fragment>
+                <NavItem>
+                  <LinkContainer to={routes.SignIn}>
+                    <NavLink>Sign In</NavLink>
+                  </LinkContainer>
+                </NavItem>
+                <NavItem>
+                  <LinkContainer to={routes.SignUp}>
+                    <NavLink>Sign Up</NavLink>
+                  </LinkContainer>
+                </NavItem>
+              </Fragment>
+            )}
+            {isLoggedIn && (
             <NavItem>
-              <LinkContainer to={routes.SignIn}>
-                <NavLink>Sign In</NavLink>
+              <LinkContainer to='#'>
+                <NavLink onClick={onSignOut}>Sign Out</NavLink>
               </LinkContainer>
             </NavItem>
-            <NavItem>
-              <LinkContainer to='#' >
-                <NavLink onClick={() => onSignOut()}>Sign Out</NavLink>
-              </LinkContainer>
-            </NavItem>
-            <NavItem>
-              <LinkContainer to={routes.SignUp}>
-                <NavLink>Sign Up</NavLink>
-              </LinkContainer>
-            </NavItem>
+            )}
           </Nav>
         </Collapse>
       </Container>
