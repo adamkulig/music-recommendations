@@ -10,6 +10,7 @@ import SignUp from '../features/SignUp/SignUp.container';
 import ReviewNew from '../features/ReviewNew/ReviewNew.container';
 import ReviewList from '../features/ReviewList/ReviewList.container';
 import ReviewDetails from '../features/ReviewDetails/ReviewDetails.container';
+import ProfileDetails from '../features/ProfileDetails/ProfileDetails.container';
 
 import {
   BrowserRouter,
@@ -32,6 +33,7 @@ class App extends Component {
             <Route path={routes.ReviewNew} component={ReviewNew} />
             <Route path={routes.ReviewList} component={ReviewList} />
             <Route path={routes.ReviewDetails} component={ReviewDetails} />
+            <Route path={routes.ProfileDetails} component={ProfileDetails} />
           </Switch>
         </Container>
         <Footer />

@@ -1,27 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SignUp from './SignUp.component';
-
-import { signUp } from '../../state/actions/signUp.actions';
+import { signUp } from '../../state/actions/auth.actions';
 
 class SignUpContainer extends Component {
   state = {
-    credentials: {
+    registrationData: {
       email: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      nickname: ''
     }
   }
 
   onTextChange = event => 
   this.setState({
-    ...this.state.credentials,
-    [event.target.id]: event.target.value  
+    registrationData: {
+    ...this.state.registrationData,
+    [event.target.id]: event.target.value
+    }  
   });
 
   onSubmit = event => {
     event.preventDefault();
-    this.props.onSignUp(this.state.credentials)
+    this.props.onSignUp(this.state.registrationData)
   }
 
   render() {
@@ -29,7 +31,7 @@ class SignUpContainer extends Component {
       <SignUp 
         onSubmit={this.onSubmit} 
         onTextChange={this.onTextChange} 
-        data={this.state.credentials} 
+        data={this.state.registrationData} 
       />
     );
   }

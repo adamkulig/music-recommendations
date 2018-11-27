@@ -58,6 +58,17 @@ const SignUpComponent = ({ onSubmit, onTextChange, data }) => {
                 />
                 <FormFeedback>Passwords don't match.</FormFeedback>
               </FormGroup>
+              <FormGroup>
+                <Label for="nickname">Nickname</Label>
+                <Input 
+                  type="text" 
+                  name="nickname" 
+                  id="nickname" 
+                  onChange={onTextChange} 
+                  value={data.nickname}
+                />
+                <FormFeedback>Nickname is to short.</FormFeedback>
+              </FormGroup>
               <Button color="primary" className="float-right">Submit</Button>
             </Form>
           </CardBody>

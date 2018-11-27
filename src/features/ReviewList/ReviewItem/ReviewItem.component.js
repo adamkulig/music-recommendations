@@ -17,7 +17,7 @@ const ReviewItemComponent = ({ data }) => (
   <div className='review-item'>
     <Row>
       <Col lg={{ size: 8, offset: 2 }}>
-        <Card className="my-2 mx-auto">
+        <Card className='my-2 mx-auto'>
           <CardHeader>
             <h5 className='mb-0'><span className='text-muted'>band: </span>{data.band}</h5>
           </CardHeader>
@@ -36,7 +36,7 @@ const ReviewItemComponent = ({ data }) => (
             <div className='d-flex justify-content-between align-items-center'>
               <div className="small">{data.type} review rated <strong>{data.rating}</strong> by <strong>{data.user}</strong> </div>
               <Link to={`/review/${data.id}`}>
-                <Button color="primary btn-sm" >More</Button>
+                <Button color='primary btn-sm'>More</Button>
               </Link>
             </div>
           </CardBody>

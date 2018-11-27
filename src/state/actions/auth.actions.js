@@ -2,7 +2,9 @@ const ACTIONS = {
   SIGN_IN: 'SIGN_IN',
   SIGN_IN_ERROR: 'SIGN_IN_ERROR',
   SIGN_OUT: 'SIGN_OUT',
-  SIGN_OUT_ERROR: 'SIGN_IN_ERROR'
+  SIGN_OUT_ERROR: 'SIGN_OUT_ERROR',
+  SIGN_UP: 'SIGN_UP',
+  SIGN_UP_ERROR: 'SIGN_UP_ERROR'
 }
 
 // { getFirebase, getFirestore } are available thanks for thunk.withExtraArgument({...})
@@ -39,4 +41,26 @@ const signOut = () => (dispatch, getState, { getFirebase }) => {
   })
 }
 
-export { ACTIONS, signIn, signOut };
+const signUp = registrationData => (dispatch, getState, { getFirebase }) => {
+  const firebase = getFirebase();
+  firebase.auth().createUserWithEmailAndPassword(
+    registrationData.email,
+    registrationData.password
+  ).then(resp => {
+    resp.user.updateProfile({
+      displayName: registrationData.nickname
+    })
+  }).then(() => {
+    dispatch({
+      type: ACTIONS.SIGN_UP,
+      payload: registrationData
+    })
+  }).catch((error) => {
+    dispatch({
+      type: ACTIONS.SIGN_UP_ERROR,
+      error
+    })
+  })
+}
+
+export { ACTIONS, signIn, signOut, signUp };

@@ -1,29 +1,40 @@
 import { ACTIONS } from '../actions/auth.actions';
 
 const initialState = {
-  email: '',
-  password: '',
+  authErrorMessage: null
 }
 
 const authReducer = (state = initialState, action ) => {
   switch (action.type) {
     case ACTIONS.SIGN_IN: {
-      const { email, password } = action.payload;
-      return {
-        email,
-        password
-      }
+      console.log('SIGN_IN')
+      return state;
     }
     case ACTIONS.SIGN_IN_ERROR: {
-      console.log(action.error);
-      return state;
+      return {
+        ...state,
+        authErrorMessage: action.error
+      }
     }
     case ACTIONS.SIGN_OUT: {
-      return initialState;
+      console.log('SIGN_OUT')
+      return state;
     }
     case ACTIONS.SIGN_OUT_ERROR: {
-      console.log(action.error);
+      return {
+        ...state,
+        authErrorMessage: action.error
+      }
+    }
+    case ACTIONS.SIGN_UP: {
+      console.log('SIGN_UP')
       return state;
+    }
+    case ACTIONS.SIGN_UP_ERROR: {
+      return {
+        ...state,
+        authErrorMessage: action.error
+      }
     }
     default:
       return state;

@@ -11,7 +11,7 @@ import {
 import { LinkContainer } from 'react-router-bootstrap';
 import routes from '../../config/routes';
 
-const NavComponent = ({ onToggleNavbar, onSignOut, navIsOpen, isLoggedIn }) => {
+const NavComponent = ({ onToggleNavbar, onSignOut, navIsOpen, isLoggedIn, nickname }) => {
   return (
     <Navbar color="primary" dark expand="sm">
       <Container>
@@ -46,11 +46,18 @@ const NavComponent = ({ onToggleNavbar, onSignOut, navIsOpen, isLoggedIn }) => {
               </Fragment>
             )}
             {isLoggedIn && (
-            <NavItem>
-              <LinkContainer to='#'>
-                <NavLink onClick={onSignOut}>Sign Out</NavLink>
-              </LinkContainer>
-            </NavItem>
+              <Fragment>
+                <NavItem>
+                  <LinkContainer to='#'>
+                    <NavLink onClick={onSignOut}>Sign Out</NavLink>
+                  </LinkContainer>
+                </NavItem>
+                <NavItem>
+                  <LinkContainer to={routes.ProfileDetails}>
+                    <NavLink>{nickname}</NavLink>
+                  </LinkContainer>
+                </NavItem>
+              </Fragment>
             )}
           </Nav>
         </Collapse>

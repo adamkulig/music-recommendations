@@ -16,13 +16,14 @@ class NavContainer extends Component {
     this.props.onSignOut();
   }
   render() {
-    const { isEmpty } = this.props.auth;
+    const { isEmpty, displayName } = this.props.auth;
     return (
       <Nav
         onToggleNavbar={this.toggleNavbar} 
         onSignOut={this.onSignOut} 
         navIsOpen={this.state.isOpen}
         isLoggedIn={!isEmpty}
+        nickname={displayName}
       />
     );
   }
