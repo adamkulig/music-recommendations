@@ -11,5 +11,6 @@ export const GENRES = [
   'deathcore',
   'beatdown',
   'sludge',
+  'melodic death metal',
   'other'
 ];

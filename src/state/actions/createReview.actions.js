@@ -11,7 +11,7 @@ const ACTIONS = {
     firestore.collection('recommendations').add({
       ...data,
       user: displayName,
-      date: new Date()
+      createdAt: new Date()
     }).then(() => {
       dispatch({
         type: ACTIONS.CREATE_REVIEW,

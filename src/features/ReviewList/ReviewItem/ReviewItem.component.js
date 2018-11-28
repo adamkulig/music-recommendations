@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 import routes from '../../../config/routes';
 import './ReviewItem.scss';
@@ -34,7 +35,8 @@ const ReviewItemComponent = ({ data }) => (
               <ReactPlayer className='player-wrapper__player' width='100%' height='100%' url={data.link}/>
             </div>
             <div className='d-flex justify-content-between align-items-center'>
-              <div className="small">{data.type} review rated <strong>{data.rating}</strong> by <strong>{data.user}</strong> </div>
+              <div className='small'>{data.type} review rated <strong>{data.rating}</strong> by <strong>{data.user}</strong> </div>
+              <div className='small text-muted'>{moment(data.createdAt.toDate()).fromNow()}</div>
               <Link to={`/review/${data.id}`}>
                 <Button color='primary btn-sm'>More</Button>
               </Link>

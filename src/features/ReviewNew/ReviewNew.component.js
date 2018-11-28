@@ -193,7 +193,7 @@ ReviewNewComponent.propTypes = {
     track: PropTypes.string,
     genre: PropTypes.string,
     link: PropTypes.string,
-    rating: PropTypes.number,
+    rating: PropTypes.string,
     text: PropTypes.string,
     similar: PropTypes.string
   }),

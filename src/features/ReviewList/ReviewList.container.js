@@ -22,6 +22,6 @@ const mapStateToProps = state => ({
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([
-    { collection: 'recommendations' }
+    { collection: 'recommendations', orderBy: ['createdAt', 'desc'] }
   ])
 )(ReviewListContainer)

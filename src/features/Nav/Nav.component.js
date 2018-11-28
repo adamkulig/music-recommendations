@@ -11,7 +11,7 @@ import {
 import { LinkContainer } from 'react-router-bootstrap';
 import routes from '../../config/routes';
 
-const NavComponent = ({ onToggleNavbar, onSignOut, navIsOpen, isLoggedIn, nickname }) => {
+const NavComponent = ({ onToggleNavbar, onCloseNavbar, onSignOut, navIsOpen, isLoggedIn, nickname }) => {
   return (
     <Navbar color="primary" dark expand="sm">
       <Container>
@@ -20,26 +20,26 @@ const NavComponent = ({ onToggleNavbar, onSignOut, navIsOpen, isLoggedIn, nickna
         </LinkContainer>
         <NavbarToggler onClick={onToggleNavbar} />
         <Collapse isOpen={navIsOpen} navbar>
-          <Nav className="ml-auto" navbar onClick={onToggleNavbar}>
+          <Nav className="ml-auto" navbar>
             <NavItem>
-              <LinkContainer to={routes.ReviewNew}>
+              <LinkContainer to={routes.ReviewNew} onClick={onCloseNavbar}>
                 <NavLink>New</NavLink>
               </LinkContainer>
             </NavItem>
             <NavItem>
-              <LinkContainer to={routes.ReviewList}>
+              <LinkContainer to={routes.ReviewList} onClick={onCloseNavbar}>
                 <NavLink>Reviews</NavLink>
               </LinkContainer>
             </NavItem>
             {!isLoggedIn && (
               <Fragment>
                 <NavItem>
-                  <LinkContainer to={routes.SignIn}>
+                  <LinkContainer to={routes.SignIn} onClick={onCloseNavbar}>
                     <NavLink>Sign In</NavLink>
                   </LinkContainer>
                 </NavItem>
                 <NavItem>
-                  <LinkContainer to={routes.SignUp}>
+                  <LinkContainer to={routes.SignUp} onClick={onCloseNavbar}>
                     <NavLink>Sign Up</NavLink>
                   </LinkContainer>
                 </NavItem>
@@ -48,12 +48,12 @@ const NavComponent = ({ onToggleNavbar, onSignOut, navIsOpen, isLoggedIn, nickna
             {isLoggedIn && (
               <Fragment>
                 <NavItem>
-                  <LinkContainer to='#'>
+                  <LinkContainer to='#' onClick={onCloseNavbar}>
                     <NavLink onClick={onSignOut}>Sign Out</NavLink>
                   </LinkContainer>
                 </NavItem>
                 <NavItem>
-                  <LinkContainer to={routes.ProfileDetails}>
+                  <LinkContainer to={routes.ProfileDetails} onClick={onCloseNavbar}>
                     <NavLink>{nickname}</NavLink>
                   </LinkContainer>
                 </NavItem>
