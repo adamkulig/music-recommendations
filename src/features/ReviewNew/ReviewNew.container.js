@@ -15,7 +15,8 @@ class ReviewNewContainer extends Component {
       link: '',
       rating: '',
       text: '',
-      similar: ''
+      similar: '',
+      likes: []
     },
   }
 

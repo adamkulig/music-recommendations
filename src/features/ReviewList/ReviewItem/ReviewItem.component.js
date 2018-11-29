@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
 import moment from 'moment';
+import LikeButton from '../../LikeButton/LikeButton.container';
 import { Link } from 'react-router-dom';
 import routes from '../../../config/routes';
 import './ReviewItem.scss';
@@ -38,8 +39,12 @@ const ReviewItemComponent = ({ data }) => (
               <div className='small'>{data.type} review rated <strong>{data.rating}</strong> by <strong>{data.user}</strong> </div>
               <div className='small text-muted'>{moment(data.createdAt.toDate()).fromNow()}</div>
               <Link to={`/review/${data.id}`}>
-                <Button color='primary btn-sm'>More</Button>
+                <Button color='primary' className='btn-sm'>More</Button>
               </Link>
+            </div>
+            <div>
+              <LikeButton isLikeButton={true} likes={data.likes} reviewId={data.id}/>
+              <LikeButton isLikeButton={false} likes={data.likes} reviewId={data.id}/>
             </div>
           </CardBody>
         </Card>

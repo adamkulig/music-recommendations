@@ -12,6 +12,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-icons": "^3.2.2",
     "react-player": "^1.7.0",
     "react-redux": "^5.1.1",
     "react-redux-firebase": "^2.2.1",
