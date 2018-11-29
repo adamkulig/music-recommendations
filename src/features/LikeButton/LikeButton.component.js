@@ -5,7 +5,7 @@ import './LikeButton.scss'
 
 const LikeButtonComponent = ({ count, isLikeButton, onClick }) => {
   return (
-    <div className='d-flex align-items-center'>
+    <div className='d-flex align-items-center mx-2'>
       <div className='pr-2 thumb' onClick={onClick}>{ isLikeButton ? <GoThumbsup /> : <GoThumbsdown />} </div>
       <div className='small'>{count}</div>
     </div>

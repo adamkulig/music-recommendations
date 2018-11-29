@@ -42,7 +42,7 @@ const ReviewItemComponent = ({ data }) => (
                 <Button color='primary' className='btn-sm'>More</Button>
               </Link>
             </div>
-            <div>
+            <div className='d-flex'>
               <LikeButton isLikeButton={true} likes={data.likes} reviewId={data.id}/>
               <LikeButton isLikeButton={false} likes={data.likes} reviewId={data.id}/>
             </div>
