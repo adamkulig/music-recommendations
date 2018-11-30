@@ -4,7 +4,7 @@ const ACTIONS = {
   ADD_VOTE: 'ADD_VOTE',
   ADD_VOTE_ERROR: 'ADD_VOTE_ERROR',
   DELETE_VOTE: 'DELETE_VOTE',
-  DELETE_VOTE: 'DELETE_VOTE',
+  DELETE_VOTE_ERROR: 'DELETE_VOTE_ERROR',
 }
 
 // { getFirebase, getFirestore } are available thanks for thunk.withExtraArgument({...})
