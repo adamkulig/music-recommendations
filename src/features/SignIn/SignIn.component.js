@@ -14,7 +14,7 @@ import {
   Input 
 } from 'reactstrap';
 
-const SignInComponent = ({ onSubmit, onTextChange, data }) => {
+const SignInComponent = ({ onSubmit, onTextChange, credentials, validation }) => {
   return (
     <Row>
       <Col md={{ size: 8, offset: 2 }}>
@@ -25,14 +25,16 @@ const SignInComponent = ({ onSubmit, onTextChange, data }) => {
               <FormGroup>
                 <Label for="email">Email</Label>
                 <Input 
-                  type="email" 
+                  type="text" 
                   name="email" 
                   id="email" 
                   placeholder="devil@hell.com" 
                   onChange={onTextChange} 
-                  value={data.email}
+                  value={credentials.email}
+                  valid={validation.email.isValid}
+                  invalid={validation.email.isValid === false}
                 />
-                <FormFeedback>This e-mail doesn't exists.</FormFeedback>
+                <FormFeedback>{validation.email.message}</FormFeedback>
               </FormGroup>
               <FormGroup>
                 <Label for="password">Password</Label>
@@ -42,9 +44,11 @@ const SignInComponent = ({ onSubmit, onTextChange, data }) => {
                   id="password" 
                   placeholder="must have at least 6 characters" 
                   onChange={onTextChange} 
-                  value={data.password}
+                  value={credentials.password}
+                  valid={validation.password.isValid}
+                  invalid={validation.password.isValid === false}
                 />
-                <FormFeedback>Wrong password.</FormFeedback>
+                <FormFeedback>{validation.password.message}</FormFeedback>
               </FormGroup>
               <Button color="primary" className="float-right">Submit</Button>
             </Form>
@@ -58,7 +62,11 @@ const SignInComponent = ({ onSubmit, onTextChange, data }) => {
 SignInComponent.propTypes = {
   onSubmit: PropTypes.func,
   onTextChange: PropTypes.func,
-  data: PropTypes.shape({
+  credentials: PropTypes.shape({
+    email: PropTypes.string,
+    password: PropTypes.string
+  }),
+  validation: PropTypes.shape({
     email: PropTypes.string,
     password: PropTypes.string
   })

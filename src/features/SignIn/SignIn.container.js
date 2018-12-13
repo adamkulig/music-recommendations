@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { isNil } from 'lodash';
+import messages from '../../variables/messages';
 import SignIn from './SignIn.component';
 import { signIn } from '../../state/actions/auth.actions';
 import routes from '../../config/routes';
@@ -10,6 +12,44 @@ class SignInContainer extends Component {
     credentials: {
       email: '',
       password: ''
+    },
+    validation: {
+      email: {
+        isValid: null,
+        message: ''
+      },
+      password: {
+        isValid: null,
+        message: ''
+      }
+    }
+  }
+
+  static getDerivedStateFromProps = (props, state) => {
+    if(!isNil(props.authError)) {
+      const { code } = props.authError;
+      const { validation } = state;
+      if (code === 'auth/wrong-password') {
+        return {
+          validation: {
+            ...validation,
+            password: {
+              isValid: false,
+              message: messages.wrongPassword
+            }
+          }
+        } 
+      } else if (code === 'auth/user-not-found') {
+        return {
+            validation: {
+            ...validation,
+            email: {
+              isValid: false,
+              message: messages.wrongPassword
+            }
+          }
+        };
+      }
     }
   }
 
@@ -35,7 +75,8 @@ class SignInContainer extends Component {
       <SignIn 
         onSubmit={this.onSubmit} 
         onTextChange={this.onTextChange} 
-        data={this.state.credentials}
+        credentials={this.state.credentials}
+        validation={this.state.validation}
       />
     );
   }

@@ -41,16 +41,15 @@ const signOut = () => (dispatch, getState, { getFirebase }) => {
   })
 }
 
-const signUp = registrationData => (dispatch, getState, { getFirebase }) => {
+const signUp = registrationData => (dispatch, getState, { getFirebase, getFirestore }) => {
   const firebase = getFirebase();
+  const firestore = getFirestore();
   firebase.auth().createUserWithEmailAndPassword(
     registrationData.email,
     registrationData.password
-  ).then(resp => {
-    resp.user.updateProfile({
-      displayName: registrationData.nickname
-    })
-  }).then(() => {
+  ).then(resp => firestore.collection('users').doc(resp.user.uid).set({
+    nickname: registrationData.nickname
+  })).then(() => {
     dispatch({
       type: ACTIONS.SIGN_UP,
       payload: registrationData

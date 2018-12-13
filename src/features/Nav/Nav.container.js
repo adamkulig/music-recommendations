@@ -19,24 +19,24 @@ class NavContainer extends Component {
   }
 
   render() {
-    const { isEmpty, displayName } = this.props.auth;
-    // const nicknameInitial = displayName.charAt(0).toUpperCase();
-    return (
+    const { isEmpty } = this.props.auth;
+    const { nickname } = this.props.profile;
+     return (
       <Nav
         onToggleNavbar={this.toggleNavbar} 
         onCloseNavbar={this.closeNavbar}
         onSignOut={this.onSignOut} 
         navIsOpen={this.state.isOpen}
         isLoggedIn={!isEmpty}
-        nickname={displayName}
-        // nicknameInitial={nicknameInitial}
+        nickname={nickname}
       />
     );
   }
 }
 
 const mapStateToProps = state => ({
-  auth: state.firebase.auth
+  auth: state.firebase.auth,
+  profile: state.firebase.profile
 });
 
 const mapDispatchToProps = {

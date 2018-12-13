@@ -6,7 +6,7 @@ import SignUp from './SignUp.component';
 import { signUp } from '../../state/actions/auth.actions';
 import routes from '../../config/routes';
 import { isEmailValid, isPasswordValid, isNicknameValid } from '../../helpers/regexHelpers';
-import message from '../../variables/messages';
+import messages from '../../variables/messages';
 
 class SignUpContainer extends Component {
   state = {
@@ -38,16 +38,15 @@ class SignUpContainer extends Component {
 
   static getDerivedStateFromProps = (props, state) => {
     if(!isNil(props.authError)) {
-      const { code, message } = props.authError;
+      const { code } = props.authError;
       const { validation } = state;
-      console.log('getDerivedStateFromProps')
-      if (code === 'auth/email-already-in-use') {
+       if (code === 'auth/email-already-in-use') {
         return {
            validation: {
             ...validation,
             email: {
               isValid: false,
-              message: message
+              message: messages.emailIsUsed
             }
           }
         };
@@ -69,13 +68,13 @@ class SignUpContainer extends Component {
 
   invalidMessage = form => {
     if (form === 'email') {
-      return message.invalidEmail;
+      return messages.invalidEmail;
     } else if (form === 'password') {
-      return message.invalidPassword;
+      return messages.invalidPassword;
     } else if (form === 'confirmPassword') {
-      return message.invalidConfirmPassword;
+      return messages.invalidConfirmPassword;
     } else if (form === 'nickname') {
-      return message.invalidNickname;
+      return messages.invalidNickname;
     }
   }
   

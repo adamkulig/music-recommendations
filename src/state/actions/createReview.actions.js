@@ -7,10 +7,10 @@ const ACTIONS = {
   const createReview = data => (dispatch, getState, { getFirebase, getFirestore }) => {
     // place for async call to database
     const firestore = getFirestore();
-    const { displayName } = getState().firebase.auth
+    const { nickname } = getState().firebase.profile
     firestore.collection('recommendations').add({
       ...data,
-      user: displayName,
+      user: nickname,
       createdAt: new Date()
     }).then(() => {
       dispatch({
