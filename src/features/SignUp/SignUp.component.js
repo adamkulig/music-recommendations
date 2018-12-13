@@ -14,7 +14,7 @@ import {
   Input 
 } from 'reactstrap';
 
-const SignUpComponent = ({ onSubmit, onTextChange, data }) => {
+const SignUpComponent = ({ onSubmit, onTextChange, registrationData, validation }) => {
   return (
     <Row>
       <Col md={{ size: 8, offset: 2 }}>
@@ -25,15 +25,16 @@ const SignUpComponent = ({ onSubmit, onTextChange, data }) => {
               <FormGroup>
                 <Label for="email">Email</Label>
                 <Input 
-                  type="email" 
+                  type="text" 
                   name="email" 
                   id="email" 
                   placeholder="devil@hell.com" 
                   onChange={onTextChange} 
-                  value={data.email}
-                  invalid 
-                />
-                <FormFeedback>This e-mail already exists.</FormFeedback>
+                  value={registrationData.email}
+                  valid={validation.email.isValid}
+                  invalid={validation.email.isValid === false}
+                  />
+                <FormFeedback>{validation.email.message}</FormFeedback>
               </FormGroup>
               <FormGroup>
                 <Label for="password">Password</Label>
@@ -43,9 +44,11 @@ const SignUpComponent = ({ onSubmit, onTextChange, data }) => {
                   id="password" 
                   placeholder="must have at least 6 characters" 
                   onChange={onTextChange} 
-                  value={data.password}
+                  value={registrationData.password}
+                  valid={validation.password.isValid}
+                  invalid={validation.password.isValid === false}
                 />
-                <FormFeedback>To weak password.</FormFeedback>
+                <FormFeedback>{validation.password.message}</FormFeedback>
               </FormGroup>
               <FormGroup>
                 <Label for="confirmPassword">Confirm Password</Label>
@@ -54,9 +57,11 @@ const SignUpComponent = ({ onSubmit, onTextChange, data }) => {
                   name="confirmPassword" 
                   id="confirmPassword" 
                   onChange={onTextChange} 
-                  value={data.confirmPassword}
+                  value={registrationData.confirmPassword}
+                  valid={validation.confirmPassword.isValid}
+                  invalid={validation.confirmPassword.isValid === false}
                 />
-                <FormFeedback>Passwords don't match.</FormFeedback>
+                <FormFeedback>{validation.confirmPassword.message}</FormFeedback>
               </FormGroup>
               <FormGroup>
                 <Label for="nickname">Nickname</Label>
@@ -65,9 +70,11 @@ const SignUpComponent = ({ onSubmit, onTextChange, data }) => {
                   name="nickname" 
                   id="nickname" 
                   onChange={onTextChange} 
-                  value={data.nickname}
+                  value={registrationData.nickname}
+                  valid={validation.nickname.isValid}
+                  invalid={validation.nickname.isValid === false}
                 />
-                <FormFeedback>Nickname is to short.</FormFeedback>
+                <FormFeedback>{validation.nickname.message}</FormFeedback>
               </FormGroup>
               <Button color="primary" className="float-right">Submit</Button>
             </Form>
@@ -81,10 +88,17 @@ const SignUpComponent = ({ onSubmit, onTextChange, data }) => {
 SignUpComponent.propTypes = {
   onSubmit: PropTypes.func,
   onTextChange: PropTypes.func,
-  data: PropTypes.shape({
+  registrationData: PropTypes.shape({
     email: PropTypes.string,
     password: PropTypes.string,
-    confirmPassword: PropTypes.string
+    confirmPassword: PropTypes.string,
+    nickname: PropTypes.string
+  }),
+  validation: PropTypes.shape({
+    email: PropTypes.object,
+    password: PropTypes.object,
+    confirmPassword: PropTypes.object,
+    nickname: PropTypes.object
   })
 }
 
