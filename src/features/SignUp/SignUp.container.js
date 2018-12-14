@@ -107,7 +107,6 @@ class SignUpContainer extends Component {
   }
 
   render() {
-    console.log(this.state.validation)
     const { isEmpty } = this.props.auth;
     if (!isEmpty) {
       return <Redirect push to={routes.Main} />

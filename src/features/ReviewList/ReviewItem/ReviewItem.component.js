@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
 import moment from 'moment';
-import LikeButton from '../../LikeButton/LikeButton.container';
+import VoteButton from '../../VoteButton/VoteButton.container';
 import { Link } from 'react-router-dom';
-import routes from '../../../config/routes';
 import './ReviewItem.scss';
 import { 
   Row, 
@@ -43,8 +42,8 @@ const ReviewItemComponent = ({ data }) => (
               </Link>
             </div>
             <div className='d-flex'>
-              <LikeButton isLikeButton={true} likes={data.likes} reviewId={data.id}/>
-              <LikeButton isLikeButton={false} likes={data.likes} reviewId={data.id}/>
+              <VoteButton likes={data.likes} reviewId={data.id} isLikeButton />
+              <VoteButton likes={data.likes} reviewId={data.id}/>
             </div>
           </CardBody>
         </Card>

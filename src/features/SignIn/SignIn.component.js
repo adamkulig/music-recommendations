@@ -28,7 +28,6 @@ const SignInComponent = ({ onSubmit, onTextChange, credentials, validation }) =>
                   type="text" 
                   name="email" 
                   id="email" 
-                  placeholder="devil@hell.com" 
                   onChange={onTextChange} 
                   value={credentials.email}
                   valid={validation.email.isValid}
@@ -42,7 +41,6 @@ const SignInComponent = ({ onSubmit, onTextChange, credentials, validation }) =>
                   type="password" 
                   name="password" 
                   id="password" 
-                  placeholder="must have at least 6 characters" 
                   onChange={onTextChange} 
                   value={credentials.password}
                   valid={validation.password.isValid}

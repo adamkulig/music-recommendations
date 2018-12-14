@@ -49,6 +49,17 @@ class SignInContainer extends Component {
             }
           }
         };
+      } else if (code === 'auth/invalid-email') {
+        // testowo z firebase a nie z mojego regex
+        return {
+            validation: {
+            ...validation,
+            email: {
+              isValid: false,
+              message: messages.invalidEmail
+            }
+          }
+        };
       }
     }
   }
@@ -60,6 +71,8 @@ class SignInContainer extends Component {
       [event.target.id]: event.target.value  
     }
   });
+
+
 
   onSubmit = event => {
     event.preventDefault();
@@ -83,7 +96,8 @@ class SignInContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.firebase.auth
+  auth: state.firebase.auth,
+  authError: state.auth.authErrorMessage
 });
 
 const mapDispatchToProps = {

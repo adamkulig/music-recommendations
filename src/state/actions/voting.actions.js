@@ -39,12 +39,12 @@ const deleteVote = data => (dispatch, getState, { getFirebase, getFirestore }) =
     })
   }).then(() => {
     dispatch({
-      type: ACTIONS.ADD_VOTE,
+      type: ACTIONS.DELETE_VOTE,
       payload: data
     })
   }).catch((error) => {
     dispatch({
-      type: ACTIONS.ADD_VOTE_ERROR,
+      type: ACTIONS.DELETE_VOTE_ERROR,
       error
     })
   })
