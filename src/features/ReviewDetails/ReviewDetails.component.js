@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { map } from 'lodash';
+// import { map } from 'lodash';
 import ReactPlayer from 'react-player';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { 
   Row, 
   Col, 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import ReviewDetails from './ReviewDetails.component';
-import { firestore } from 'firebase';
+// import { firestore } from 'firebase';
 import { firestoreConnect } from 'react-redux-firebase';
 
 

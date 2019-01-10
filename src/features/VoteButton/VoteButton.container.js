@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
+// import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import LikeButton from './LikeButton.component';
 import DislikeButton from './DislikeButton.component';
-import { firestore } from 'firebase';
-import { firestoreConnect, getFirebase } from 'react-redux-firebase';
+// import { firestore } from 'firebase';
+// import { firestoreConnect, getFirebase } from 'react-redux-firebase';
 import { addVote, deleteVote } from '../../state/actions/voting.actions';
 import { get } from 'lodash';
 
