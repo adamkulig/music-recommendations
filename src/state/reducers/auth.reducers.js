@@ -1,7 +1,7 @@
 import { ACTIONS } from '../actions/auth.actions';
 
 const initialState = {
-  authErrorMessage: null
+  
 }
 
 const authReducer = (state = initialState, action ) => {
@@ -11,30 +11,21 @@ const authReducer = (state = initialState, action ) => {
       return initialState;
     }
     case ACTIONS.SIGN_IN_ERROR: {
-      return {
-        ...state,
-        authErrorMessage: action.error
-      }
+      return initialState;
     }
     case ACTIONS.SIGN_OUT: {
       console.log('SIGN_OUT')
       return initialState;
     }
     case ACTIONS.SIGN_OUT_ERROR: {
-      return {
-        ...state,
-        authErrorMessage: action.error
-      }
+      return initialState;
     }
     case ACTIONS.SIGN_UP: {
       console.log('SIGN_UP')
       return initialState;
     }
     case ACTIONS.SIGN_UP_ERROR: {
-      return {
-        ...state,
-        authErrorMessage: action.error
-      }
+      return initialState;
     }
     default:
       return state;
