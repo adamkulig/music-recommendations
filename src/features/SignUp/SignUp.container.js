@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
+
 import SignUp from './SignUp.component';
 import { signUp } from '../../state/actions/auth.actions';
 import routes from '../../config/routes';
 import validate from './SignUp.validators';
 import asyncValidate from './SignUp.asyncValidators';
-import { firestoreConnect } from 'react-redux-firebase';
-import { compose } from 'redux';
-
 
 class SignUpContainer extends Component {
   render() {

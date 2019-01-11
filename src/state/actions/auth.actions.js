@@ -1,3 +1,6 @@
+import { SubmissionError } from 'redux-form';
+import messages from '../../variables/messages';
+
 const ACTIONS = {
   SIGN_IN: 'SIGN_IN',
   SIGN_IN_ERROR: 'SIGN_IN_ERROR',
@@ -19,10 +22,19 @@ const signIn = credentials => (dispatch, getState, { getFirebase }) => {
       payload: credentials
     })
   }).catch((error) => {
-    dispatch({
-      type: ACTIONS.SIGN_IN_ERROR,
-      error
-    })
+    let message;
+    if(error.code === 'auth/wrong-password') {
+      throw new SubmissionError({
+        password: messages.wrongPassword
+      });
+    } else if (error.code === 'auth/user-not-found') {
+      throw new SubmissionError({
+        email: messages.emailNotFound
+      });
+    } else {
+      message = 'chuj wie ocb';
+    }
+    
   })
 }
 
