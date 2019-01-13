@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import routes from '../config/routes';
+import routes from '../variables/routes';
 import '../styles/App.scss';
 
 import Nav from '../features/Nav/Nav.container';
@@ -11,6 +11,7 @@ import ReviewNew from '../features/ReviewNew/ReviewNew.container';
 import ReviewList from '../features/ReviewList/ReviewList.container';
 import ReviewDetails from '../features/ReviewDetails/ReviewDetails.container';
 import ProfileDetails from '../features/ProfileDetails/ProfileDetails.container';
+import NotFound from '../components/NotFound/NotFound.component'
 
 import {
   BrowserRouter,
@@ -34,6 +35,7 @@ class App extends Component {
             <Route path={routes.ReviewList} component={ReviewList} />
             <Route path={routes.ReviewDetails} component={ReviewDetails} />
             <Route path={routes.ProfileDetails} component={ProfileDetails} />
+            <Route component={NotFound} />
           </Switch>
         </Container>
         <Footer />

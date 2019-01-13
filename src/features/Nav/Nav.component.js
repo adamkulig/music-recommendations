@@ -9,7 +9,7 @@ import {
   NavItem,
   NavLink } from 'reactstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import routes from '../../config/routes';
+import routes from '../../variables/routes';
 
 const NavComponent = ({ onToggleNavbar, onCloseNavbar, onSignOut, navIsOpen, isLoggedIn, nickname }) => {
   return (

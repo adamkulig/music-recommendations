@@ -11,18 +11,17 @@ const ACTIONS = {
 }
 
 // { getFirebase, getFirestore } are available thanks for thunk.withExtraArgument({...})
-const signIn = credentials => (dispatch, getState, { getFirebase }) => {
+const signIn = data => (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
-  firebase.auth().signInWithEmailAndPassword(
-    credentials.email,
-    credentials.password
+  return firebase.auth().signInWithEmailAndPassword(
+    data.email,
+    data.password
   ).then(() => {
     dispatch({
       type: ACTIONS.SIGN_IN,
-      payload: credentials
+      payload: data
     })
   }).catch((error) => {
-    let message;
     if(error.code === 'auth/wrong-password') {
       throw new SubmissionError({
         password: messages.wrongPassword
@@ -32,25 +31,26 @@ const signIn = credentials => (dispatch, getState, { getFirebase }) => {
         email: messages.emailNotFound
       });
     } else {
-      message = 'chuj wie ocb';
+      throw new SubmissionError({
+        email: 'chuj wie ocb'
+      });
     }
-    
   })
 }
 
 const signOut = () => (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
   firebase.auth().signOut()
-  .then(() => {
-    dispatch({
-      type: ACTIONS.SIGN_OUT
+    .then(() => {
+      dispatch({
+        type: ACTIONS.SIGN_OUT
+      })
+    }).catch((error) => {
+      dispatch({
+        type: ACTIONS.SIGN_OUT_ERROR,
+        error
+      })
     })
-  }).catch((error) => {
-    dispatch({
-      type: ACTIONS.SIGN_OUT_ERROR,
-      error
-    })
-  })
 }
 
 const signUp = data => (dispatch, getState, { getFirebase, getFirestore }) => {

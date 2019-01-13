@@ -7,7 +7,7 @@ import { compose } from 'redux';
 
 import SignUp from './SignUp.component';
 import { signUp } from '../../state/actions/auth.actions';
-import routes from '../../config/routes';
+import routes from '../../variables/routes';
 import validate from './SignUp.validators';
 import asyncValidate from './SignUp.asyncValidators';
 
