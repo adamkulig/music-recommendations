@@ -8,21 +8,20 @@ import { firestoreConnect } from 'react-redux-firebase';
 
 class ReviewListContainer extends Component {
   render() {
-    // const { recommendations } = this.props;
+    const { recommendations } = this.props;
     return (
-      // <ReviewList recommendations={recommendations}/>
-      null
+      <ReviewList recommendations={recommendations}/>
     );
   }
 }
 
-// const mapStateToProps = state => ({
-//   recommendations: state.firestore.ordered.recommendations
-// })
+const mapStateToProps = state => ({
+  recommendations: state.firestore.ordered.recommendations
+})
 
 export default compose(
-  // connect(mapStateToProps),
-  // firestoreConnect([
-  //   { collection: 'recommendations', orderBy: ['createdAt', 'desc'] }
-  // ])
+  connect(mapStateToProps),
+  firestoreConnect([
+    { collection: 'recommendations', orderBy: ['createdAt', 'desc'] }
+  ])
 )(ReviewListContainer)

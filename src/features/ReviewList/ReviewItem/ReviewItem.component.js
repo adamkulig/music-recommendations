@@ -61,7 +61,7 @@ const ReviewItemComponent = ({ data }) => (
 )
 
 ReviewItemComponent.propTypes = {
-  recommendations: PropTypes.object
+  data: PropTypes.object
 }
 
 export default ReviewItemComponent;
