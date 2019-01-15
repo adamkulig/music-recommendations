@@ -7,7 +7,9 @@ const ACTIONS = {
   SIGN_OUT: 'SIGN_OUT',
   SIGN_OUT_ERROR: 'SIGN_OUT_ERROR',
   SIGN_UP: 'SIGN_UP',
-  SIGN_UP_ERROR: 'SIGN_UP_ERROR'
+  SIGN_UP_ERROR: 'SIGN_UP_ERROR',
+  RESET_PASSWORD: 'RESET_PASSWORD',
+  RESET_PASSWORD_ERROR: 'RESET_PASSWORD_ERROR'
 }
 
 // { getFirebase, getFirestore } are available thanks for thunk.withExtraArgument({...})
@@ -75,4 +77,7 @@ const signUp = data => (dispatch, getState, { getFirebase, getFirestore }) => {
   })
 }
 
-export { ACTIONS, signIn, signOut, signUp };
+const resetPassword = () => dispatch => {
+  console.log('reset')
+}
+export { ACTIONS, signIn, signOut, signUp, resetPassword };

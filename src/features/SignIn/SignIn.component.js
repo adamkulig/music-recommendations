@@ -13,7 +13,7 @@ import {
 import InputField from '../../components/InputField/InputField.component'
 
 
-const SignInComponent = ({ handleSubmit, submitting }) => {
+const SignInComponent = ({ handleSubmit, submitting, handleResetPassword }) => {
   return (
     <Row>
       <Col md={{ size: 8, offset: 2 }}>
@@ -33,6 +33,9 @@ const SignInComponent = ({ handleSubmit, submitting }) => {
                 component={InputField} 
                 label="Password" 
               />
+              <Button color="link" type="submit" disabled={submitting} onClick={handleResetPassword}>
+                Forgot your password?
+              </Button>
               <Button color="primary" className="float-right" type="submit" disabled={submitting}>
                 Submit
               </Button>

@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
 
 import SignIn from './SignIn.component';
-import { signIn } from '../../state/actions/auth.actions';
+import { signIn, resetPassword } from '../../state/actions/auth.actions';
 import routes from '../../variables/routes';
 import validate from './SignIn.validators';
 // import asyncValidate from './SignIn.asyncValidators';
@@ -12,7 +12,7 @@ import validate from './SignIn.validators';
 class SignInContainer extends Component {
  
   render() {
-    const { handleSubmit, submitting, signIn } = this.props;
+    const { handleSubmit, submitting, signIn, resetPassword } = this.props;
     const { isEmpty } = this.props.auth;
     if (!isEmpty) {
       return <Redirect to={routes.Main} />
@@ -21,6 +21,7 @@ class SignInContainer extends Component {
       <SignIn 
         handleSubmit={handleSubmit(signIn)} 
         submitting={submitting}
+        handleResetPassword={resetPassword}
       />
     );
   }
@@ -31,7 +32,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  signIn
+  signIn,
+  resetPassword
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
