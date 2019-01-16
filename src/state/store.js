@@ -5,16 +5,7 @@ import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import { reduxFirestore, getFirestore } from 'redux-firestore';
 import firebaseConfig from '../config/firebase.config';
 
-// const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-// const store = createStore(
-//   rootReducer, 
-//   compose(
-//     applyMiddleware(thunk),
-//     devTools 
-//   )
-// );
 
 const store = createStore(
   rootReducer,

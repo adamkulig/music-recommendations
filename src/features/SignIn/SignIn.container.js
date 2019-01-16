@@ -1,107 +1,47 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { isNil } from 'lodash';
-import messages from '../../variables/messages';
+import { reduxForm } from 'redux-form';
+
 import SignIn from './SignIn.component';
-import { signIn } from '../../state/actions/auth.actions';
-import routes from '../../config/routes';
+import ForgotPasswordModal from './components/ForgotPasswordModal.container';
+import { signIn, toggleResetPasswordModal } from '../../state/actions/auth.actions';
+import routes from '../../variables/routes';
+import validate from './SignIn.validators';
 
 class SignInContainer extends Component {
-  state = {
-    credentials: {
-      email: '',
-      password: ''
-    },
-    validation: {
-      email: {
-        isValid: null,
-        message: ''
-      },
-      password: {
-        isValid: null,
-        message: ''
-      }
-    }
-  }
-
-  static getDerivedStateFromProps = (props, state) => {
-    if(!isNil(props.authError)) {
-      const { code } = props.authError;
-      const { validation } = state;
-      if (code === 'auth/wrong-password') {
-        return {
-          validation: {
-            ...validation,
-            password: {
-              isValid: false,
-              message: messages.wrongPassword
-            }
-          }
-        } 
-      } else if (code === 'auth/user-not-found') {
-        return {
-            validation: {
-            ...validation,
-            email: {
-              isValid: false,
-              message: messages.wrongPassword
-            }
-          }
-        };
-      } else if (code === 'auth/invalid-email') {
-        // testowo z firebase a nie z mojego regex
-        return {
-            validation: {
-            ...validation,
-            email: {
-              isValid: false,
-              message: messages.invalidEmail
-            }
-          }
-        };
-      }
-    }
-  }
-
-  onTextChange = event => 
-  this.setState({
-    credentials: {
-      ...this.state.credentials,
-      [event.target.id]: event.target.value  
-    }
-  });
-
-
-
-  onSubmit = event => {
-    event.preventDefault();
-    this.props.onSignIn(this.state.credentials);
-  }
-
   render() {
-    const { isEmpty } = this.props.auth;
+    const { handleSubmit, submitting, signIn, toggleResetPasswordModal, auth, firebaseAuth } = this.props;
+    const { isEmpty } = firebaseAuth;
+    const { message } = auth;
     if (!isEmpty) {
       return <Redirect to={routes.Main} />
     }
     return (
-      <SignIn 
-        onSubmit={this.onSubmit} 
-        onTextChange={this.onTextChange} 
-        credentials={this.state.credentials}
-        validation={this.state.validation}
-      />
+      <Fragment>
+        <SignIn 
+          handleSubmit={handleSubmit(signIn)} 
+          submitting={submitting}
+          handleOpenModal={toggleResetPasswordModal}
+          message={message}
+        />
+        <ForgotPasswordModal />
+      </Fragment>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  auth: state.firebase.auth,
-  authError: state.auth.authErrorMessage
+  firebaseAuth: state.firebase.auth,
+  auth: state.auth
 });
 
 const mapDispatchToProps = {
-  onSignIn: signIn
+  signIn,
+  toggleResetPasswordModal
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignInContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
+  form: 'signIn',
+  validate
+})(SignInContainer));
