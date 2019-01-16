@@ -8,8 +8,9 @@ const ACTIONS = {
   SIGN_OUT_ERROR: 'SIGN_OUT_ERROR',
   SIGN_UP: 'SIGN_UP',
   SIGN_UP_ERROR: 'SIGN_UP_ERROR',
+  TOGGLE_RESET_PASSWORD_MODAL: 'TOGGLE_RESET_PASSWORD_MODAL',
   RESET_PASSWORD: 'RESET_PASSWORD',
-  RESET_PASSWORD_ERROR: 'RESET_PASSWORD_ERROR'
+  RESET_PASSWORD_ERROR: 'RESET_PASSWORD_ERROR',
 }
 
 // { getFirebase, getFirestore } are available thanks for thunk.withExtraArgument({...})
@@ -69,7 +70,7 @@ const signUp = data => (dispatch, getState, { getFirebase, getFirestore }) => {
       type: ACTIONS.SIGN_UP,
       payload: data
     })
-  }).catch((error) => {
+  }).catch(error => {
     dispatch({
       type: ACTIONS.SIGN_UP_ERROR,
       error
@@ -77,7 +78,23 @@ const signUp = data => (dispatch, getState, { getFirebase, getFirestore }) => {
   })
 }
 
-const resetPassword = () => dispatch => {
-  console.log('reset')
+const resetPassword = data => (dispatch, getState, { getFirebase }) => {
+  console.log(data.email)
+  const firebase = getFirebase();
+  firebase.auth().sendPasswordResetEmail(data.email).then(
+    dispatch({
+      type: ACTIONS.RESET_PASSWORD
+    })
+  ).catch(error => {
+    dispatch({
+      type: ACTIONS.RESET_PASSWORD_ERROR,
+      error
+    })
+  });
 }
-export { ACTIONS, signIn, signOut, signUp, resetPassword };
+
+const toggleResetPasswordModal = () => ({
+  type: ACTIONS.TOGGLE_RESET_PASSWORD_MODAL
+})
+
+export { ACTIONS, signIn, signOut, signUp, resetPassword, toggleResetPasswordModal };

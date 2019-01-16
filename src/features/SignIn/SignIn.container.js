@@ -1,39 +1,44 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
 
 import SignIn from './SignIn.component';
-import { signIn, resetPassword } from '../../state/actions/auth.actions';
+import ForgotPasswordModal from './components/ForgotPasswordModal.container';
+import { signIn, toggleResetPasswordModal } from '../../state/actions/auth.actions';
 import routes from '../../variables/routes';
 import validate from './SignIn.validators';
-// import asyncValidate from './SignIn.asyncValidators';
 
 class SignInContainer extends Component {
- 
   render() {
-    const { handleSubmit, submitting, signIn, resetPassword } = this.props;
-    const { isEmpty } = this.props.auth;
+    const { handleSubmit, submitting, signIn, toggleResetPasswordModal, auth, firebaseAuth } = this.props;
+    const { isEmpty } = firebaseAuth;
+    const { message } = auth;
     if (!isEmpty) {
       return <Redirect to={routes.Main} />
     }
     return (
-      <SignIn 
-        handleSubmit={handleSubmit(signIn)} 
-        submitting={submitting}
-        handleResetPassword={resetPassword}
-      />
+      <Fragment>
+        <SignIn 
+          handleSubmit={handleSubmit(signIn)} 
+          submitting={submitting}
+          handleOpenModal={toggleResetPasswordModal}
+          message={message}
+        />
+        <ForgotPasswordModal />
+      </Fragment>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  auth: state.firebase.auth
+  firebaseAuth: state.firebase.auth,
+  auth: state.auth
 });
 
 const mapDispatchToProps = {
   signIn,
-  resetPassword
+  toggleResetPasswordModal
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
