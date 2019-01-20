@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { BrowserRouter } from 'react-router-dom';
+
 import App from './features/App';
 import * as serviceWorker from './serviceWorker.js';
 import './styles/base.scss';
@@ -11,7 +13,9 @@ import store from './state/store';
 store.firebaseAuthIsReady.then(() => {
   ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <App />
+      </BrowserRouter>
     </Provider>,
     document.getElementById('root')
   );

@@ -12,17 +12,12 @@ import ReviewDetails from '../features/ReviewDetails/ReviewDetails.container';
 import ProfileDetails from '../features/ProfileDetails/ProfileDetails.container';
 import NotFound from '../components/NotFound/NotFound.component'
 
-import {
-  BrowserRouter,
-  Route,
-  Switch
-} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Container } from 'reactstrap';
 
 class App extends Component {
   render() {
     return (
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
       <div className="App">
         <Nav />
         <Container>
@@ -39,7 +34,6 @@ class App extends Component {
         </Container>
         <Footer />
       </div>
-    </BrowserRouter>
     );
   }
 }

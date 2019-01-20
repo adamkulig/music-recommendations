@@ -4,7 +4,6 @@ import ReactPlayer from 'react-player';
 import moment from 'moment';
 import VoteButton from '../../VoteButton/VoteButton.container';
 import { Link } from 'react-router-dom';
-import './ReviewItem.scss';
 import { 
   Row, 
   Col, 

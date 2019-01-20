@@ -17,7 +17,7 @@ const SignInComponent = ({ handleSubmit, submitting, handleOpenModal, message })
   return (
     <Row>
       <Col md={{ size: 8, offset: 2 }}>
-        <Card className="my-5 mx-auto">
+        <Card className="my-3 mx-auto">
           <CardHeader>Sign In</CardHeader>
           <CardBody>
             <Form onSubmit={handleSubmit} autoComplete="off">
