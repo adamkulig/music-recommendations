@@ -6,7 +6,7 @@ import InputField from '../../../components/InputField/InputField.component'
 
 const ForgotPasswordModalComponent = ({ isOpen, toggle, handleSubmit }) => {
 	return (
-		<Modal isOpen={isOpen} toggle={toggle} className='mt-5'>
+		<Modal isOpen={isOpen} toggle={toggle}>
 			<ModalHeader>Forgot your password?</ModalHeader>
 			<Form onSubmit={handleSubmit} autoComplete="off">
 				<ModalBody>
