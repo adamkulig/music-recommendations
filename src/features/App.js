@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import routes from '../variables/routes';
-import '../styles/App.scss';
 
 import Nav from '../features/Nav/Nav.container';
 import Footer from '../components/Footer/Footer.component';
