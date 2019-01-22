@@ -13,7 +13,7 @@ import {
 import InputField from '../../components/InputField/InputField.component'
 
 
-const SignInComponent = ({ handleSubmit, submitting, handleOpenModal, message }) => {
+const SignInComponent = ({ handleSubmit, submitting, handleOpenModal, message, history }) => {
   return (
     <Row>
       <Col md={{ size: 8, offset: 2 }}>
@@ -38,6 +38,9 @@ const SignInComponent = ({ handleSubmit, submitting, handleOpenModal, message })
               </Button>
               <Button color="primary" className="float-right" type="submit" disabled={submitting}>
                 Submit
+              </Button>
+              <Button color="secondary" className="float-right mr-1" disabled={submitting} onClick={history.goBack}>
+                Go Back
               </Button>
             </Form>
             <div className=" my-2 text-center">

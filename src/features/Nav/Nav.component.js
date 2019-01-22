@@ -46,7 +46,7 @@ const NavComponent = ({ onToggleNavbar, onCloseNavbar, onSignOut, navIsOpen, isL
               </Fragment>
             )}
             {isLoggedIn && (
-              <Fragment>
+              <Fragment> 
                 <NavItem>
                   <LinkContainer to='#' onClick={onCloseNavbar}>
                     <NavLink onClick={onSignOut}>Sign Out</NavLink>

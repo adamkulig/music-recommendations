@@ -13,7 +13,7 @@ import asyncValidate from './SignUp.asyncValidators';
 
 class SignUpContainer extends Component {
   render() {
-    const { handleSubmit, submitting, signUp } = this.props;
+    const { handleSubmit, submitting, signUp, history } = this.props;
     const { isEmpty } = this.props.auth;
     if (!isEmpty) {
       return <Redirect push to={routes.Main} />
@@ -22,6 +22,7 @@ class SignUpContainer extends Component {
       <SignUp 
         handleSubmit={handleSubmit(signUp)} 
         submitting={submitting}
+        history={history}
       />
     );
   }

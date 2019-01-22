@@ -12,7 +12,7 @@ import {
 } from 'reactstrap';
 import InputField from '../../components/InputField/InputField.component'
 
-const SignUpComponent = ({ handleSubmit, submitting }) => {
+const SignUpComponent = ({ handleSubmit, submitting, history }) => {
   return (
     <Row>
       <Col md={{ size: 8, offset: 2 }}>
@@ -46,6 +46,9 @@ const SignUpComponent = ({ handleSubmit, submitting }) => {
               />
               <Button color="primary" className="float-right" type="submit" disabled={submitting}>
                 Submit
+              </Button>
+              <Button color="secondary" className="float-right mr-1" disabled={submitting} onClick={history.goBack}>
+                Go Back
               </Button>
             </Form>
           </CardBody>

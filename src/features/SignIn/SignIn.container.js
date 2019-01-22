@@ -11,7 +11,7 @@ import validate from './SignIn.validators';
 
 class SignInContainer extends Component {
   render() {
-    const { handleSubmit, submitting, signIn, toggleResetPasswordModal, auth, firebaseAuth } = this.props;
+    const { handleSubmit, submitting, signIn, toggleResetPasswordModal, auth, firebaseAuth, history } = this.props;
     const { isEmpty } = firebaseAuth;
     const { message } = auth;
     if (!isEmpty) {
@@ -24,6 +24,7 @@ class SignInContainer extends Component {
           submitting={submitting}
           handleOpenModal={toggleResetPasswordModal}
           message={message}
+          history={history}
         />
         <ForgotPasswordModal />
       </Fragment>
