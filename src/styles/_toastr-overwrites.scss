@@ -1,0 +1,14 @@
+.redux-toastr .toastr {
+  &.rrt-success {
+    background-color: $success;
+    .rrt-progressbar {
+      background-color: darken($success, 15%);
+    }
+  }
+  &.rrt-error {
+    background-color: $danger;
+    .rrt-progressbar {
+      background-color: darken($danger, 15%);
+    }
+  }
+}
