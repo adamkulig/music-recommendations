@@ -12,7 +12,7 @@ html {
   cursor: pointer;
 }
 
-.btn-link:hover {
+.btn-link:hover, .btn-link:focus {
   text-decoration: none;
 }
 

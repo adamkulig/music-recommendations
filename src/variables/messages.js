@@ -10,7 +10,8 @@ const messages = {
   emailIsUsed: 'This email is already used by another account.',
   nicknameIsUsed: 'This nickname is already used by another account.',
   wrongPassword: 'Password is wrong.',
-  emailNotFound: 'User is not found.'
+  emailNotFound: 'User is not found.',
+  unknownProblem: 'Unknown problem.'
 }
 
 export default messages;

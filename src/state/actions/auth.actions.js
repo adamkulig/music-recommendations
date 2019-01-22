@@ -35,7 +35,7 @@ const signIn = data => (dispatch, getState, { getFirebase }) => {
       });
     } else {
       throw new SubmissionError({
-        email: 'chuj wie ocb'
+        email: messages.unknownProblem
       });
     }
   })
