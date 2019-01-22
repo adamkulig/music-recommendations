@@ -11,7 +11,12 @@ const messages = {
   nicknameIsUsed: 'This nickname is already used by another account.',
   wrongPassword: 'Password is wrong.',
   emailNotFound: 'User is not found.',
-  unknownProblem: 'Unknown problem.'
+  unknownProblem: 'Unknown problem.',
+  toastrSuccess: 'Success!',
+  toastrError: 'Error!',
+  toastrSuccessSignIn: 'You are logged in.',
+  toastrSuccessSignOut: 'You are logged out.',
+  toastrSuccessSignUp: 'You are registered and logged in.',
 }
 
 export default messages;

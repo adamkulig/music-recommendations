@@ -1,4 +1,5 @@
 import { SubmissionError } from 'redux-form';
+import { toastr } from 'react-redux-toastr';
 import messages from '../../variables/messages';
 
 const ACTIONS = {
@@ -23,7 +24,7 @@ const signIn = data => (dispatch, getState, { getFirebase }) => {
     dispatch({
       type: ACTIONS.SIGN_IN,
       payload: data
-    })
+    }).then(toastr.success(messages.toastrSuccess, messages.toastrSuccessSignIn))
   }).catch((error) => {
     if(error.code === 'auth/wrong-password') {
       throw new SubmissionError({
@@ -47,7 +48,7 @@ const signOut = () => (dispatch, getState, { getFirebase }) => {
     .then(() => {
       dispatch({
         type: ACTIONS.SIGN_OUT
-      })
+      }).then(toastr.success(messages.toastrSuccess, messages.toastrSuccessSignOut))
     }).catch((error) => {
       dispatch({
         type: ACTIONS.SIGN_OUT_ERROR,
@@ -69,7 +70,7 @@ const signUp = data => (dispatch, getState, { getFirebase, getFirestore }) => {
     dispatch({
       type: ACTIONS.SIGN_UP,
       payload: data
-    })
+    }).then(toastr.success(messages.toastrSuccess, messages.toastrSuccessSignUp))
   }).catch(error => {
     dispatch({
       type: ACTIONS.SIGN_UP_ERROR,
@@ -79,7 +80,6 @@ const signUp = data => (dispatch, getState, { getFirebase, getFirestore }) => {
 }
 
 const resetPassword = data => (dispatch, getState, { getFirebase }) => {
-  console.log(data.email)
   const firebase = getFirebase();
   firebase.auth().sendPasswordResetEmail(data.email).then(
     dispatch({
