@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import ReviewNew from './ReviewNew.component';
 import { createReview } from '../../state/actions/createReview.actions';
+import { firestoreConnect } from 'react-redux-firebase';
 import { TYPES, RATING, GENRES } from '../../variables/review.variables';
+
 
 class ReviewNewContainer extends Component {
   state = {
@@ -34,6 +37,7 @@ class ReviewNewContainer extends Component {
   }
 
   render() {
+    console.log(this.props.genres)
     return (
       <ReviewNew 
         onSubmit={this.onSubmit} 
@@ -47,8 +51,17 @@ class ReviewNewContainer extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  genres: state.firestore.ordered.genres
+})
+
 const mapDispatchToProps = {
   onCreateReview: createReview
 }
 
-export default connect(null, mapDispatchToProps)(ReviewNewContainer);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect([
+    { collection: 'genres' }
+  ])
+)(ReviewNewContainer)

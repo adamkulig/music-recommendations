@@ -12,6 +12,7 @@ import {
   Label, 
   Input, 
 } from 'reactstrap';
+import Select from 'react-select';
 
 const ReviewNewComponent = ({ onSubmit, onChange, data, types, genres, rating }) => {
   return (
@@ -91,20 +92,13 @@ const ReviewNewComponent = ({ onSubmit, onChange, data, types, genres, rating })
                 <FormGroup row>
                   <Label for="genre" sm={3} md={2}>Genre*</Label>
                   <Col>
-                    <Input 
-                      type="select" 
-                      name="genre" 
-                      id="genre"
-                      sm={9}
-                      md={10}
-                      value={data.genre} 
-                      onChange={onChange}
-                    >
-                      <option value=''>-choose genre-</option>
-                      {genres.map(genre => (
-                        <option key={genre} value={genre}>{genre}</option>
-                      ))}
-                    </Input>
+                    <Select
+                      isMulti
+                      name="genres"
+                      options={genres}
+                      className="basic-multi-select"
+                      // classNamePrefix="select"
+                    />
                   </Col>
                 </FormGroup>
                 <FormGroup row>
