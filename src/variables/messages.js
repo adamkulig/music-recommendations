@@ -17,6 +17,7 @@ const messages = {
   toastrSuccessSignIn: 'You are logged in.',
   toastrSuccessSignOut: 'You are logged out.',
   toastrSuccessSignUp: 'You are registered and logged in.',
+  toastrSuccessResetPassword: 'E-mail was send.',
 }
 
 export default messages;

@@ -84,7 +84,7 @@ const resetPassword = data => (dispatch, getState, { getFirebase }) => {
   firebase.auth().sendPasswordResetEmail(data.email).then(
     dispatch({
       type: ACTIONS.RESET_PASSWORD
-    })
+    }).then(toastr.success(messages.toastrSuccess, messages.toastrSuccessResetPassword))
   ).catch(error => {
     dispatch({
       type: ACTIONS.RESET_PASSWORD_ERROR,
