@@ -16,7 +16,7 @@ const NavComponent = ({ onToggleNavbar, onCloseNavbar, onSignOut, navIsOpen, isL
     <Navbar color="primary" dark expand="sm">
       <Container>
         <LinkContainer to={routes.Main}>
-          <NavbarBrand>Music Recommendations</NavbarBrand>
+          <NavbarBrand>Brutal Recommendations</NavbarBrand>
         </LinkContainer>
         <NavbarToggler onClick={onToggleNavbar} />
         <Collapse isOpen={navIsOpen} navbar>
