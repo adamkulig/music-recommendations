@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import ReviewNew from './ReviewNew.component';
 import { createReview } from '../../state/actions/createReview.actions';
 import { firestoreConnect } from 'react-redux-firebase';
-import { TYPES, RATING, GENRES } from '../../variables/review.variables';
+import { TYPES, RATING, GENRES } from '../../variables/reviews';
 
 
 class ReviewNewContainer extends Component {
@@ -37,7 +37,6 @@ class ReviewNewContainer extends Component {
   }
 
   render() {
-    console.log(this.props.genres)
     return (
       <ReviewNew 
         onSubmit={this.onSubmit} 

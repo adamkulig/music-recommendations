@@ -21,7 +21,7 @@ const ReviewNewComponent = ({ onSubmit, onChange, data, types, genres, rating })
         <Card className="my-5 mx-auto">
           <CardHeader>New recommendation</CardHeader>
           <CardBody>
-            <Form onSubmit={onSubmit}>
+            <Form onSubmit={onSubmit} autoComplete='false'>
               <FormGroup row>
                 <Label for="type" sm={3} md={2}>Type*</Label>
                 <Col>
@@ -96,8 +96,9 @@ const ReviewNewComponent = ({ onSubmit, onChange, data, types, genres, rating })
                       isMulti
                       name="genres"
                       options={genres}
-                      className="basic-multi-select"
-                      // classNamePrefix="select"
+                      placeholder="choose genres..."
+                      className="multi-select"
+                      classNamePrefix="multi-select__item"
                     />
                   </Col>
                 </FormGroup>

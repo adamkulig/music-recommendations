@@ -7,15 +7,26 @@ import { resetPassword, toggleResetPasswordModal } from '../../../state/actions/
 import validate from './ForgotPasswordModal.validators';
 
 class ForgotPasswordModalContainer extends Component {
+
+  onToggleResetPasswordModal = () => {
+    const { toggleResetPasswordModal, destroy, reset, initialize } = this.props;
+    // destroy();
+    // reset();
+    // initialize();
+    toggleResetPasswordModal();
+  }
+  
   render() {
-    const { handleSubmit, submitting, resetPassword, auth, toggleResetPasswordModal} = this.props;
+    const { handleSubmit, submitting, resetPassword, auth, toggleResetPasswordModal, reset} = this.props;
     const { modalIsOpen } = auth;
+    console.log(this.props)
       return (
         <ForgotPasswordModal 
           isOpen={modalIsOpen} 
           handleSubmit={handleSubmit(resetPassword)} 
           submitting={submitting}
-          toggle={toggleResetPasswordModal}
+          toggle={this.onToggleResetPasswordModal}
+          reset={reset}
         />
     );
   }
