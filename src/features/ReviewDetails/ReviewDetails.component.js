@@ -16,7 +16,7 @@ const ReviewDetailsComponent = ({ data }) => {
     <div className='review-details'>
       { data && (
         <Row>
-        <Col lg={{ size: 8, offset: 2 }}>
+        <Col md={{ size: 10, offset: 1 }} lg={{ size: 8, offset: 2 }}>
           <Card className="my-3">
             <CardHeader>
               <h5 className='mb-0'><span className='text-muted'>band: </span>{data.band}</h5>

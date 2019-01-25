@@ -50,17 +50,8 @@ class ReviewNewContainer extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  genres: state.firestore.ordered.genres
-})
-
 const mapDispatchToProps = {
   onCreateReview: createReview
 }
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  firestoreConnect([
-    { collection: 'genres' }
-  ])
-)(ReviewNewContainer)
+export default connect(null, mapDispatchToProps)(ReviewNewContainer)

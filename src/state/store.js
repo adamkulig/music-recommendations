@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import rootReducer from './reducers/index';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import { reduxFirestore, getFirestore } from 'redux-firestore';
@@ -10,7 +11,6 @@ import firebaseConfig from '../config/firebase.config';
 //   useFirestoreForProfile: true,
 //   userProfile: 'users'
 // }
-
 // const configureStore = preloadedState => {
 //   const middlewares = [
 //     thunk.withExtraArgument({
@@ -19,30 +19,23 @@ import firebaseConfig from '../config/firebase.config';
 //     })
 //   ]
 //   const middlewareEnhancer = applyMiddleware(...middlewares);
-  
 //   const storeEnhancers = [middlewareEnhancer];
-  
 //   const composeEnhancer = composeWithDevTools(
 //     ...storeEnhancers,
 //     reduxFirestore(firebaseConfig),
 //     reactReduxFirebase(firebaseConfig, reactReduxFirebaseConfig)
 //   );
-  
 //   const store = createStore(
 //     rootReducer,
 //     preloadedState,
 //     composeEnhancer
 //   );
 // }
-
-// export default configureStore;
-
-
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   rootReducer,
-  composeEnhancer(
+  composeWithDevTools(
     applyMiddleware(thunk.withExtraArgument({
       getFirebase,
       getFirestore
@@ -55,5 +48,14 @@ const store = createStore(
     })
   ),
 );
+
+// if (process.env.NODE.ENV !== 'production') {
+//   if(module.hot) {
+//     module.hot.accept('./reducers/rootReducer/index', () => {
+//       const newRootReducer = require('./reducers/rootReducer/index').default;
+//       store.replaceReducer(newRootReducer);
+//     });
+//   }
+// }
 
 export default store;

@@ -7,7 +7,7 @@ const asyncValidateSignUp = (values, dispatch, props) => {
     map(users, user => {
       if (user.email === values.email) {
         reject({ email: messages.emailIsUsed });
-      } else if (user.nickname === values.nickname) {
+      } else if (user.displayName === values.nickname) {
         reject({ nickname: messages.nicknameIsUsed });
       }
     })

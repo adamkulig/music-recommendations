@@ -1,5 +1,5 @@
 html {
-  @media only screen and (max-width: 576px) {
+  @include media-breakpoint-down(xs) {
     font-size: 14px;
   }
 }
@@ -12,7 +12,7 @@ html {
   cursor: pointer;
 }
 
-.btn-link:hover, .btn-link:focus {
+.btn-link:hover, .btn-link:focus, a:hover, a:focus {
   text-decoration: none;
 }
 
@@ -28,4 +28,13 @@ html {
 
 .modal-dialog {
   margin-top: 5rem;
+}
+
+.dropdown-toggle:after {
+  margin-left: 0.5em;
+  padding-left: 1px;
+}
+
+.nav-link {
+  text-align: center;
 }

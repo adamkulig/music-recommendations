@@ -9,7 +9,7 @@ import SignUp from '../features/SignUp/SignUp.container';
 import ReviewNew from '../features/ReviewNew/ReviewNew.container';
 import ReviewList from '../features/ReviewList/ReviewList.container';
 import ReviewDetails from '../features/ReviewDetails/ReviewDetails.container';
-import ProfileDetails from '../features/ProfileDetails/ProfileDetails.container';
+import ProfileSettings from '../features/ProfileSettings/ProfileSettings.container';
 import NotFound from '../components/NotFound/NotFound.component'
 
 import { Route, Switch } from 'react-router-dom';
@@ -28,7 +28,7 @@ class App extends Component {
             <Route path={routes.ReviewNew} component={ReviewNew} />
             <Route path={routes.ReviewList} component={ReviewList} />
             <Route path={routes.ReviewDetails} component={ReviewDetails} />
-            <Route path={routes.ProfileDetails} component={ProfileDetails} />
+            <Route path={routes.ProfileSettings} component={ProfileSettings} />
             <Route component={NotFound} />
           </Switch>
         </Container>

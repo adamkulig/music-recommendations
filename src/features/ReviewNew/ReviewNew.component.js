@@ -17,7 +17,7 @@ import Select from 'react-select';
 const ReviewNewComponent = ({ onSubmit, onChange, data, types, genres, rating }) => {
   return (
     <Row>
-      <Col lg={{ size: 8, offset: 2 }}>
+      <Col md={{ size: 10, offset: 1 }} lg={{ size: 8, offset: 2 }}>
         <Card className="my-5 mx-auto">
           <CardHeader>New recommendation</CardHeader>
           <CardBody>

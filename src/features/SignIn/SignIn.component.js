@@ -7,7 +7,8 @@ import {
   Card, 
   CardBody, 
   CardHeader, 
-  Button, 
+  Button,
+  ButtonGroup, 
   Form
 } from 'reactstrap';
 import InputField from '../../components/InputField/InputField.component'
@@ -33,15 +34,17 @@ const SignInComponent = ({ handleSubmit, submitting, handleOpenModal, message, h
                 component={InputField} 
                 label="Password" 
               />
-              <Button color="link" disabled={submitting} onClick={handleOpenModal}>
+              <Button color="link" disabled={submitting} onClick={handleOpenModal} className='px-0'>
                 Forgot your password?
               </Button>
-              <Button color="primary" className="float-right" type="submit" disabled={submitting}>
-                Submit
-              </Button>
-              <Button color="secondary" className="float-right mr-1" disabled={submitting} onClick={history.goBack}>
-                Go Back
-              </Button>
+              <ButtonGroup className="float-right">
+                <Button color="secondary" disabled={submitting} className='mr-2' onClick={history.goBack}>
+                  Go Back
+                </Button>
+                <Button color="primary"type="submit" disabled={submitting}>
+                  Submit
+                </Button>
+              </ButtonGroup>
             </Form>
             <div className=" my-2 text-center">
               <span className="text-success">{message}</span>

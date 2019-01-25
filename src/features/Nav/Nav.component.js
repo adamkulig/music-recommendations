@@ -1,63 +1,44 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import {
   Container,
   Collapse,
   Navbar,
   NavbarToggler,
   NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink } from 'reactstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+  Nav } from 'reactstrap';
+import NavForLoggedIn from './components/NavForLoggedIn.component';
+import NavForNotLoggedIn from './components/NavForNotLoggedIn.component';
 import routes from '../../variables/routes';
 
-const NavComponent = ({ onToggleNavbar, onCloseNavbar, onSignOut, navIsOpen, isLoggedIn, nickname }) => {
+const NavComponent = ({ 
+  dropdownIsOpen,
+  navIsOpen,
+  onToggleDropdown,
+  onToggleNavbar,
+  onCloseNavbar,
+  onSignOut,
+  isLoggedIn,
+  displayName
+}) => {
   return (
     <Navbar color="primary" dark expand="sm">
       <Container>
-        <LinkContainer to={routes.Main}>
-          <NavbarBrand>Brutal Recommendations</NavbarBrand>
-        </LinkContainer>
+        <NavbarBrand href={routes.Main}>Brutal Recommendations</NavbarBrand>
         <NavbarToggler onClick={onToggleNavbar} />
         <Collapse isOpen={navIsOpen} navbar>
-          <Nav className="ml-auto" navbar>
-            <NavItem>
-              <LinkContainer to={routes.ReviewNew} onClick={onCloseNavbar}>
-                <NavLink>New</NavLink>
-              </LinkContainer>
-            </NavItem>
-            <NavItem>
-              <LinkContainer to={routes.ReviewList} onClick={onCloseNavbar}>
-                <NavLink>Reviews</NavLink>
-              </LinkContainer>
-            </NavItem>
-            {!isLoggedIn && (
-              <Fragment>
-                <NavItem>
-                  <LinkContainer to={routes.SignIn} onClick={onCloseNavbar}>
-                    <NavLink>Sign In</NavLink>
-                  </LinkContainer>
-                </NavItem>
-                <NavItem>
-                  <LinkContainer to={routes.SignUp} onClick={onCloseNavbar}>
-                    <NavLink>Sign Up</NavLink>
-                  </LinkContainer>
-                </NavItem>
-              </Fragment>
-            )}
+          <Nav className='ml-auto' navbar>
             {isLoggedIn && (
-              <Fragment> 
-                <NavItem>
-                  <LinkContainer to='#' onClick={onCloseNavbar}>
-                    <NavLink onClick={onSignOut}>Sign Out</NavLink>
-                  </LinkContainer>
-                </NavItem>
-                <NavItem>
-                  <LinkContainer to={routes.ProfileDetails} onClick={onCloseNavbar}>
-                    <NavLink>{nickname}</NavLink>
-                  </LinkContainer>
-                </NavItem>
-              </Fragment>
+              <NavForLoggedIn
+              onToggleDropdown={onToggleDropdown}
+              onSignOut={onSignOut}
+              dropdownIsOpen={dropdownIsOpen}
+              displayName={displayName}
+              />
+            )}
+            {!isLoggedIn && (
+              <NavForNotLoggedIn
+                onCloseNavbar={onCloseNavbar}
+              />
             )}
           </Nav>
         </Collapse>

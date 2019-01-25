@@ -17,7 +17,7 @@ import {
 const ReviewItemComponent = ({ data }) => (
   <div className='review-item'>
     <Row>
-      <Col lg={{ size: 8, offset: 2 }}>
+      <Col md={{ size: 10, offset: 1 }} lg={{ size: 8, offset: 2 }}>
         <Card className='my-2 mx-auto'>
           <CardHeader>
             <div className='small text-muted d-flex justify-content-between mb-1'>

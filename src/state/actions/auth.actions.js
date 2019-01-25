@@ -14,18 +14,15 @@ const ACTIONS = {
   RESET_PASSWORD_ERROR: 'RESET_PASSWORD_ERROR',
 }
 
-// { getFirebase, getFirestore } are available thanks for thunk.withExtraArgument({...})
-const signIn = data => (dispatch, getState, { getFirebase }) => {
+const signIn = creds => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
-  return firebase.auth().signInWithEmailAndPassword(
-    data.email,
-    data.password
-  ).then(() => {
-    dispatch({
-      type: ACTIONS.SIGN_IN,
-      payload: data
-    }).then(toastr.success(messages.toastrSuccess, messages.toastrSuccessSignIn))
-  }).catch((error) => {
+  try {
+    await firebase.auth().signInWithEmailAndPassword(
+      creds.email,
+      creds.password
+    )
+    toastr.success(messages.toastrSuccess, messages.toastrSuccessSignIn)
+  } catch(error) {
     if(error.code === 'auth/wrong-password') {
       throw new SubmissionError({
         password: messages.wrongPassword
@@ -39,62 +36,73 @@ const signIn = data => (dispatch, getState, { getFirebase }) => {
         email: messages.unknownProblem
       });
     }
-  })
+  }
 }
 
-const signOut = () => (dispatch, getState, { getFirebase }) => {
+const signOut = () => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
-  firebase.auth().signOut()
-    .then(() => {
-      dispatch({
-        type: ACTIONS.SIGN_OUT
-      }).then(toastr.success(messages.toastrSuccess, messages.toastrSuccessSignOut))
-    }).catch((error) => {
-      dispatch({
-        type: ACTIONS.SIGN_OUT_ERROR,
-        error
-      })
-    })
+  try {
+    await firebase.auth().signOut();
+    toastr.success(messages.toastrSuccess, messages.toastrSuccessSignOut)
+  } catch(error) {
+    console.log(error);
+    toastr.error(messages.toastrError, messages.unknownError);
+  }
 }
 
-const signUp = data => (dispatch, getState, { getFirebase, getFirestore }) => {
+const signUp = creds => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const firebase = getFirebase();
   const firestore = getFirestore();
-  firebase.auth().createUserWithEmailAndPassword(
-    data.email,
-    data.password
-  ).then(resp => firestore.collection('users').doc(resp.user.uid).set({
-    nickname: data.nickname,
-    email: data.email
-  })).then(() => {
-    dispatch({
-      type: ACTIONS.SIGN_UP,
-      payload: data
-    }).then(toastr.success(messages.toastrSuccess, messages.toastrSuccessSignUp))
-  }).catch(error => {
-    dispatch({
-      type: ACTIONS.SIGN_UP_ERROR,
-      error
+  try {
+    let createdUser = await firebase
+      .auth()
+      .createUserWithEmailAndPassword(
+        creds.email,
+        creds.password
+    )
+    await createdUser.user.updateProfile({
+      displayName: creds.nickname
     })
-  })
+    await firestore.collection('users').doc(createdUser.user.uid).set({
+      displayName: creds.nickname,
+      email: creds.email
+    })
+    toastr.success(messages.toastrSuccess, messages.toastrSuccessSignUp);
+  } catch(error) {
+    console.log(error);
+    toastr.error(messages.toastrError, messages.unknownError);
+  }
 }
 
-const resetPassword = data => (dispatch, getState, { getFirebase }) => {
+const resetPassword = data => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
-  firebase.auth().sendPasswordResetEmail(data.email).then(
-    dispatch({
-      type: ACTIONS.RESET_PASSWORD
-    }).then(toastr.success(messages.toastrSuccess, messages.toastrSuccessResetPassword))
-  ).catch(error => {
-    dispatch({
-      type: ACTIONS.RESET_PASSWORD_ERROR,
-      error
-    })
-  });
+  try {
+    await firebase.auth().sendPasswordResetEmail(data.email)
+    toastr.success(messages.toastrSuccess, messages.toastrSuccessResetPassword)
+  } catch(error) {
+    console.log(error);
+    if (error.code === 'auth/user-not-found') {
+      throw new SubmissionError({
+        email: messages.emailNotFound
+      });
+    }
+  }
 }
 
 const toggleResetPasswordModal = () => ({
   type: ACTIONS.TOGGLE_RESET_PASSWORD_MODAL
 })
 
-export { ACTIONS, signIn, signOut, signUp, resetPassword, toggleResetPasswordModal };
+const changePassword = () => (
+  console.log('changepassword')
+)
+
+export { 
+  ACTIONS, 
+  signIn, 
+  signOut, 
+  signUp, 
+  resetPassword, 
+  toggleResetPasswordModal, 
+  changePassword 
+};

@@ -7,12 +7,15 @@ import { signOut } from '../../state/actions/auth.actions';
 
 class NavContainer extends Component {
   state = {
-    isOpen: false
+    navIsOpen: false,
+    dropdownIsOpen: false
   };
  
-  toggleNavbar = () => this.setState({ isOpen: !this.state.isOpen });
+  toggleNavbar = () => this.setState({ navIsOpen: !this.state.navIsOpen });
 
-  closeNavbar = () => this.setState({ isOpen: false });
+  toggleDropdown = () => this.setState({ dropdownIsOpen: !this.state.dropdownIsOpen });
+  
+  closeNavbar = () => this.setState({ navIsOpen: false });
 
   onSignOut = () => {
     this.props.onSignOut();
@@ -20,15 +23,17 @@ class NavContainer extends Component {
 
   render() {
     const { isEmpty } = this.props.auth;
-    const { nickname } = this.props.profile;
+    const { displayName } = this.props.profile;
      return (
       <Nav
-        onToggleNavbar={this.toggleNavbar} 
+        onToggleNavbar={this.toggleNavbar}
+        onToggleDropdown={this.toggleDropdown}
         onCloseNavbar={this.closeNavbar}
         onSignOut={this.onSignOut} 
-        navIsOpen={this.state.isOpen}
+        navIsOpen={this.state.navIsOpen}
+        dropdownIsOpen={this.state.dropdownIsOpen}
         isLoggedIn={!isEmpty}
-        nickname={nickname}
+        displayName={displayName}
       />
     );
   }
@@ -40,7 +45,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  onSignOut: signOut
+  onSignOut: signOut 
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavContainer);

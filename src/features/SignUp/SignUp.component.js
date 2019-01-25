@@ -7,7 +7,8 @@ import {
   Card, 
   CardBody, 
   CardHeader, 
-  Button, 
+  Button,
+  ButtonGroup,
   Form
 } from 'reactstrap';
 import InputField from '../../components/InputField/InputField.component'
@@ -44,12 +45,14 @@ const SignUpComponent = ({ handleSubmit, submitting, history }) => {
                 component={InputField} 
                 label="Nickname" 
               />
-              <Button color="primary" className="float-right" type="submit" disabled={submitting}>
-                Submit
-              </Button>
-              <Button color="secondary" className="float-right mr-1" disabled={submitting} onClick={history.goBack}>
-                Go Back
-              </Button>
+              <ButtonGroup className="float-right">
+                <Button color="secondary" disabled={submitting} className='mr-2' onClick={history.goBack}>
+                  Go Back
+                </Button>
+                <Button color="primary"type="submit" disabled={submitting}>
+                  Submit
+                </Button>
+              </ButtonGroup>
             </Form>
           </CardBody>
         </Card>
