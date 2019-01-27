@@ -6,15 +6,14 @@
 @import "toastr-overwrites";
 @import "app";
 
-.multi-select {
+.select, .single-select {
   color: $gray-700;
 }
 
-.multi-select.multi-select__item__value-container {
+.select.select__item__value-container {
   padding-left: 0.75rem;  
-
 }
 
-.multi-select__item__placeholder {
+.select__item__placeholder {
   color: $gray-600 !important;
 }

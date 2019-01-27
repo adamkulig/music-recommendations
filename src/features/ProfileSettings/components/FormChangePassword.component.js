@@ -11,8 +11,10 @@ import {
   Form
 } from 'reactstrap';
 import InputField from '../../../components/InputField/InputField.component'
+import SubmitCancelButtons from '../../../components/SubmitCancelButtons/SubmitCancelButtons.component'
+import routes from '../../../variables/routes'
 
-const FormChangePassword = ({ handleSubmit, submitting }) => {
+const FormChangePassword = ({ handleSubmit, submitting, history }) => {
   return (
     <Form onSubmit={handleSubmit} autoComplete="off">
       <Field
@@ -27,9 +29,7 @@ const FormChangePassword = ({ handleSubmit, submitting }) => {
         component={InputField} 
         label="Confirm Password" 
       />
-      <Button color="primary" type="submit" disabled={submitting}>
-        Submit
-      </Button>
+      <SubmitCancelButtons disabled={submitting} onCancel={() => history.push(routes.Main)}/>
     </Form>
   )
 }

@@ -1,8 +1,8 @@
 const messages = {
-  emptyEmail: 'Email is required.',
-  emptyPassword: 'Password is required.',
-  emptyConfirmPassword: 'Confirm password is required.',
-  emptyNickname: 'Nickname is required.',
+  emptyField: 'This field is required.',
+  // emptyPassword: 'Password is required.',
+  // emptyConfirmPassword: 'Confirm password is required.',
+  // emptyNickname: 'Nickname is required.',
   invalidEmail: 'It is not an email address.',  
   invalidPassword: 'Password should contain at least 6 characters, including 1 digit.',  
   invalidConfirmPassword: 'Passwords does not match.',  
@@ -18,6 +18,7 @@ const messages = {
   toastrSuccessSignOut: 'You are logged out.',
   toastrSuccessSignUp: 'You are registered and logged in.',
   toastrSuccessResetPassword: 'E-mail was send.',
+  toastrSuccessUpdatePassword: 'Password has been changed.',
   unknownError: 'Something went wrong.',
 }
 

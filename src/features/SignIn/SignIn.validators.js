@@ -5,13 +5,13 @@ const syncValidate = values => {
     const errors = {};
 
     if (!values.email) {
-        errors.email = messages.emptyEmail;
+        errors.email = messages.emptyField;
     } else if (isEmailInvalid(values.email)) {
         errors.email = messages.invalidEmail;
     }
 
     if (!values.password) {
-        errors.password = messages.emptyPassword
+        errors.password = messages.emptyField
     } 
 
     return errors;

@@ -11,7 +11,7 @@ class ForgotPasswordModalContainer extends Component {
   onToggleResetPasswordModal = () => {
     const { toggleResetPasswordModal, destroy, reset, initialize } = this.props;
     // destroy();
-    // reset('resetPassword');
+    reset('resetPassword');
     // initialize();
     toggleResetPasswordModal();
   }

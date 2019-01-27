@@ -3,8 +3,9 @@ import React from 'react';
 import { Field } from 'redux-form';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form } from 'reactstrap';
 import InputField from '../../../components/InputField/InputField.component'
+import SubmitCancelButtons from '../../../components/SubmitCancelButtons/SubmitCancelButtons.component'
 
-const ForgotPasswordModalComponent = ({ isOpen, toggle, handleSubmit, reset }) => {
+const ForgotPasswordModalComponent = ({ isOpen, toggle, handleSubmit, reset, submitting }) => {
 	return (
 		<Modal isOpen={isOpen} toggle={toggle} onReset={reset}>
 			<ModalHeader>Forgot your password?</ModalHeader>
@@ -19,8 +20,7 @@ const ForgotPasswordModalComponent = ({ isOpen, toggle, handleSubmit, reset }) =
 					/>
 				</ModalBody>
 				<ModalFooter>
-					<Button color="primary" className="mr-2" type="submit">Send</Button>
-					<Button color="secondary" onClick={toggle} type="reset">Cancel</Button>
+				<SubmitCancelButtons disabled={submitting} onCancel={toggle}/>
 				</ModalFooter>
 			</Form>
 		</Modal>

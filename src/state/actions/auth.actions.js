@@ -1,4 +1,4 @@
-import { SubmissionError } from 'redux-form';
+import { SubmissionError, reset } from 'redux-form';
 import { toastr } from 'react-redux-toastr';
 import messages from '../../variables/messages';
 
@@ -74,11 +74,11 @@ const signUp = creds => async (dispatch, getState, { getFirebase, getFirestore }
   }
 }
 
-const resetPassword = data => async (dispatch, getState, { getFirebase }) => {
+const resetPassword = creds => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
   try {
-    await firebase.auth().sendPasswordResetEmail(data.email)
-    toastr.success(messages.toastrSuccess, messages.toastrSuccessResetPassword)
+    await firebase.auth().sendPasswordResetEmail(creds.email);
+    toastr.success(messages.toastrSuccess, messages.toastrSuccessResetPassword);
   } catch(error) {
     console.log(error);
     if (error.code === 'auth/user-not-found') {
@@ -93,9 +93,23 @@ const toggleResetPasswordModal = () => ({
   type: ACTIONS.TOGGLE_RESET_PASSWORD_MODAL
 })
 
-const changePassword = () => (
-  console.log('changepassword')
-)
+const changePassword = creds => async (dispatch, getState, { getFirebase }) => {
+  const firebase = getFirebase();
+  const user = firebase.auth().currentUser;
+  try {
+    await user.updatePassword(creds.password);
+    // console.log(reset)
+    await dispatch(reset('changePassword'));
+    toastr.success(messages.toastrSuccess, messages.toastrSuccessUpdatePassword)
+  } catch(error) {
+    console.log(error);
+    // if (error.code === 'auth/user-not-found') {
+    //   throw new SubmissionError({
+    //     email: messages.emailNotFound
+    //   });
+    // }
+  }
+}
 
 export { 
   ACTIONS, 

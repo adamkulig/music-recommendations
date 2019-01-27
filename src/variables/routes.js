@@ -2,7 +2,7 @@ const routes = {
   'Main': '/',
   'SignIn': '/signin',
   'SignUp': '/signup',
-  'ReviewNew': '/new',
+  'NewRecoForm': '/new-recommendation',
   'ReviewList': '/reviews',
   'ReviewDetails': '/review/:id',
   'ProfileDetails': '/profile/:id',

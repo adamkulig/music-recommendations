@@ -5,7 +5,7 @@ const syncValidate = values => {
     const errors = {};
 
     if (!values.email) {
-      errors.email = messages.emptyEmail;
+      errors.email = messages.emptyField;
     } else if (isEmailInvalid(values.email)) {
         errors.email = messages.invalidEmail;
     }

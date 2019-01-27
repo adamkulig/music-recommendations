@@ -13,14 +13,14 @@ const NavForLoggedIn = ({ onSignOut, displayName }) => {
       <DropdownMenu right className='text-center'>
         <DropdownItem header>{displayName}</DropdownItem>
         <DropdownItem>
-          <Link to={routes.ReviewNew} className='d-block'>New</Link>
+          <Link to={routes.NewRecoForm} className='d-block nav-link'>New Reco</Link>
         </DropdownItem>
         <DropdownItem>
-          <Link to={routes.ProfileSettings} className='d-block'>Settings</Link>
+          <Link to={routes.ProfileSettings} className='d-block nav-link'>Settings</Link>
         </DropdownItem>
         <DropdownItem divider />
         <DropdownItem onClick={onSignOut}>
-          <Link to={routes.Main} className='d-block'>Sign Out</Link>
+          <Link to={routes.Main} className='d-block nav-link'>Sign Out</Link>
         </DropdownItem>
       </DropdownMenu>
     </UncontrolledDropdown>

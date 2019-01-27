@@ -12,6 +12,8 @@ import {
   Form
 } from 'reactstrap';
 import InputField from '../../components/InputField/InputField.component'
+import SubmitCancelButtons from '../../components/SubmitCancelButtons/SubmitCancelButtons.component'
+import routes from '../../variables/routes';
 
 const SignUpComponent = ({ handleSubmit, submitting, history }) => {
   return (
@@ -45,14 +47,7 @@ const SignUpComponent = ({ handleSubmit, submitting, history }) => {
                 component={InputField} 
                 label="Nickname" 
               />
-              <ButtonGroup className="float-right">
-                <Button color="secondary" disabled={submitting} className='mr-2' onClick={history.goBack}>
-                  Go Back
-                </Button>
-                <Button color="primary"type="submit" disabled={submitting}>
-                  Submit
-                </Button>
-              </ButtonGroup>
+              <SubmitCancelButtons disabled={submitting} onCancel={() => history.push(routes.Main)}/>
             </Form>
           </CardBody>
         </Card>

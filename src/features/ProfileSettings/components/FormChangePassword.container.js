@@ -4,7 +4,6 @@ import { reduxForm } from 'redux-form';
 
 import FormChangePassword from './FormChangePassword.component';
 import { changePassword } from '../../../state/actions/auth.actions';
-// import routes from '../../variables/routes';
 import validate from './FormChangePassword.validators';
 
 class FormChangePasswordContainer extends Component {

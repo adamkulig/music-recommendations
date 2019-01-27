@@ -49,13 +49,4 @@ const store = createStore(
   ),
 );
 
-// if (process.env.NODE.ENV !== 'production') {
-//   if(module.hot) {
-//     module.hot.accept('./reducers/rootReducer/index', () => {
-//       const newRootReducer = require('./reducers/rootReducer/index').default;
-//       store.replaceReducer(newRootReducer);
-//     });
-//   }
-// }
-
 export default store;

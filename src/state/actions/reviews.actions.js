@@ -1,10 +1,10 @@
 const ACTIONS = {
-    CREATE_REVIEW: 'CREATE_REVIEW',
-    CREATE_REVIEW_ERROR: 'CREATE_REVIEW_ERROR'
+    CREATE_RECOMMENDATION: 'CREATE_RECOMMENDATION',
+    CREATE_RECOMMENDATION_ERROR: 'CREATE_RECOMMENDATION_ERROR'
   }
   
   // { getFirebase, getFirestore } are available thanks for thunk.withExtraArgument({...})
-  const createReview = data => (dispatch, getState, { getFirebase, getFirestore }) => {
+  const createRecommendation = data => (dispatch, getState, { getFirebase, getFirestore }) => {
     // place for async call to database
     const firestore = getFirestore();
     const { nickname } = getState().firebase.profile
@@ -25,5 +25,5 @@ const ACTIONS = {
     })
   }
   
-  export { ACTIONS, createReview };
+  export { ACTIONS, createRecommendation };
   

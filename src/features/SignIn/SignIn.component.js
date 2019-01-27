@@ -12,12 +12,13 @@ import {
   Form
 } from 'reactstrap';
 import InputField from '../../components/InputField/InputField.component'
-
+import SubmitCancelButtons from '../../components/SubmitCancelButtons/SubmitCancelButtons.component'
+import routes from '../../variables/routes';
 
 const SignInComponent = ({ handleSubmit, submitting, handleOpenModal, message, history }) => {
   return (
     <Row>
-      <Col md={{ size: 8, offset: 2 }}>
+      <Col md={{ size: 10, offset: 1 }} lg={{ size: 8, offset: 2 }}>
         <Card className="my-3 mx-auto">
           <CardHeader>Sign In</CardHeader>
           <CardBody>
@@ -37,14 +38,7 @@ const SignInComponent = ({ handleSubmit, submitting, handleOpenModal, message, h
               <Button color="link" disabled={submitting} onClick={handleOpenModal} className='px-0'>
                 Forgot your password?
               </Button>
-              <ButtonGroup className="float-right">
-                <Button color="secondary" disabled={submitting} className='mr-2' onClick={history.goBack}>
-                  Go Back
-                </Button>
-                <Button color="primary"type="submit" disabled={submitting}>
-                  Submit
-                </Button>
-              </ButtonGroup>
+              <SubmitCancelButtons disabled={submitting} onCancel={() => history.push(routes.Main)} />
             </Form>
             <div className=" my-2 text-center">
               <span className="text-success">{message}</span>

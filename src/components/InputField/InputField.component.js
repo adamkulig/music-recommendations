@@ -10,7 +10,9 @@ const InputField = ({
   input,
   label,
   type,
-  meta: { touched, error, valid, asyncValidating }
+  meta: { touched, error, valid },
+  placeholder,
+  ...props
 }) => {
   const isValid = touched && valid;
   const isInvalid = touched && !valid;
@@ -22,10 +24,16 @@ const InputField = ({
         type={type}
         valid={isValid}
         invalid={isInvalid}
+        placeholder={placeholder}
+        {...props}
       />
       <FormFeedback>{error}</FormFeedback>
     </FormGroup>
   )
 };
+
+InputField.defaultProps = {
+  placeholder: ''
+}
 
 export default InputField;
