@@ -7,19 +7,27 @@ const ACTIONS = {
   const createRecommendation = data => (dispatch, getState, { getFirebase, getFirestore }) => {
     // place for async call to database
     const firestore = getFirestore();
-    const { nickname } = getState().firebase.profile
-    firestore.collection('recommendations').add({
+    const { displayName } = getState().firebase.profile
+    console.log(data);
+    console.log(displayName);
+    const newReco = {
       ...data,
-      user: nickname,
+      country: data.country.label,
+      rating: data.country.label,
+      genres: Object.assign({}, ...data.genres.map(item => ({[item.label]: item.value }))),
+      likes: {},
+      user: displayName,
       createdAt: new Date()
-    }).then(() => {
+    }
+    console.log(newReco)
+    firestore.collection('recommendations').add(newReco).then(() => {
       dispatch({
-        type: ACTIONS.CREATE_REVIEW,
+        type: ACTIONS.CREATE_RECOMMENDATION,
         payload: data
       })
     }).catch((error) => {
       dispatch({
-        type: ACTIONS.CREATE_REVIEW_ERROR,
+        type: ACTIONS.CREATE_RECOMMENDATION_ERROR,
         error
       })
     })

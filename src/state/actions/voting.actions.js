@@ -1,4 +1,4 @@
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
 
 const ACTIONS = {
   ADD_VOTE: 'ADD_VOTE',
@@ -7,47 +7,15 @@ const ACTIONS = {
   DELETE_VOTE_ERROR: 'DELETE_VOTE_ERROR',
 }
 
-// { getFirebase, getFirestore } are available thanks for thunk.withExtraArgument({...})
-const addVote = data => (dispatch, getState, { getFirebase, getFirestore }) => {
+const vote = data => (dispatch, getState, { getFirebase, getFirestore }) => {
+  const { reviewId, userId, like } = data;
   const firestore = getFirestore();
-  const review = firestore.collection('recommendations').doc(data.reviewId)
+  const review = firestore.collection('recommendations').doc(reviewId)
   review.update({
-    likes: firebase.firestore.FieldValue.arrayUnion({
-      userId: data.userId,
-      like: data.like
-    })
-  }).then(() => {
-    dispatch({
-      type: ACTIONS.ADD_VOTE,
-      payload: data
-    })
-  }).catch((error) => {
-    dispatch({
-      type: ACTIONS.ADD_VOTE_ERROR,
-      error
-    })
+    likes: {
+      [userId]: like
+    }
   })
 }
 
-const deleteVote = data => (dispatch, getState, { getFirebase, getFirestore }) => {
-  const firestore = getFirestore();
-  const review = firestore.collection('recommendations').doc(data.reviewId)
-  review.update({
-    likes: firebase.firestore.FieldValue.arrayRemove({
-      userId: data.userId,
-      like: data.like
-    })
-  }).then(() => {
-    dispatch({
-      type: ACTIONS.DELETE_VOTE,
-      payload: data
-    })
-  }).catch((error) => {
-    dispatch({
-      type: ACTIONS.DELETE_VOTE_ERROR,
-      error
-    })
-  })
-}
-
-export { ACTIONS, addVote, deleteVote };
+export { ACTIONS, vote };

@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const rofileDetailsComponentP = () => {
+const ProfileDetailsComponent = () => {
 	return (
 		<div>cbnjascdfbhnasj</div>
 	);

@@ -49,4 +49,6 @@ const store = createStore(
   ),
 );
 
+// { getFirebase, getFirestore } in actions are available thanks for thunk.withExtraArgument({...})
+
 export default store;

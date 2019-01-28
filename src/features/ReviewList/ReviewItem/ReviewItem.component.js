@@ -44,8 +44,8 @@ const ReviewItemComponent = ({ data }) => (
           <CardFooter>
             <div className='d-flex justify-content-between align-items-center'>
               <div className='d-flex'>
-                <VoteButton likes={data.likes} reviewId={data.id} isLikeButton />
-                <VoteButton likes={data.likes} reviewId={data.id}/>
+                <VoteButton likes={data.likes} reviewId={data.id} isLikeButton={true} />
+                <VoteButton likes={data.likes} reviewId={data.id} isLikeButton={false}/>
               </div>
               <Link to={`/review/${data.id}`}>
                 <Button color='primary' className='btn-sm'>More</Button>

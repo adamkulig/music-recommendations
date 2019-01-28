@@ -12,7 +12,6 @@ const WrappedSelectField = ({
   options,
   placeholder,
   isMulti,
-  // value,
   input
 }) => {
   const isInvalid = touched && !valid;
@@ -31,6 +30,7 @@ const WrappedSelectField = ({
         value={input.value}
         onChange={(value) => input.onChange(value)}
         onBlur={() => input.onBlur(input.value)}
+        openMenuOnClick={false}
       />
       <div className={`select-feedback ${isInvalid ? 'select-feedback--is-invalid' : '' }`}>{error}</div>
     </FormGroup>

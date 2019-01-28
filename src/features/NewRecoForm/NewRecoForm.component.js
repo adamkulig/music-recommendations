@@ -24,7 +24,7 @@ const NewRecoComponent = ({ handleSubmit, submitting, countries, history }) => {
         <Card className="mt-3 mb-5">
           <CardHeader>New recommendation</CardHeader>
           <CardBody>
-            <Form onSubmit={handleSubmit} autoComplete='false'>
+            <Form onSubmit={handleSubmit} autoComplete="off">
               <Field
                 name="band" 
                 type="text" 
