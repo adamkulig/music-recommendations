@@ -12,3 +12,8 @@ export const isNicknameInvalid = nickname => {
   const nicknameRegex = /(\w){3,}/;
   return !nicknameRegex.test(nickname);
 }
+
+export const isYoutubeUrlInvalid = url => {
+  const youtubeUrlRegex = /^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+/;
+  return !youtubeUrlRegex.test(url);
+}
