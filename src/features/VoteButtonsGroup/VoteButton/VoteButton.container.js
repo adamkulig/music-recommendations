@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { compose } from 'redux';
 import PropTypes from 'prop-types';
-import LikeButton from './LikeButton.component';
-import DislikeButton from './DislikeButton.component';
-import { vote } from '../../state/actions/voting.actions';
+import VoteButtonLike from './VoteButtonLike.component';
+import VoteButtonDislike from './VoteButtonDislike.component';
+import { vote } from '../../../state/actions/voting.actions';
 import { get, some, reduce } from 'lodash';
 import { toastr } from 'react-redux-toastr';
-import messages from '../../variables/messages';
+import messages from '../../../variables/messages';
 
 class VoteButtonContainer extends Component {
 
@@ -30,8 +30,7 @@ class VoteButtonContainer extends Component {
     const { likes, isLikeButton, auth } = this.props;
     const uid = get(auth, 'uid', null);
     const countVoting = reduce(likes, (count, vote) => 
-    vote === isLikeButton ? count += 1 : count
-    , 0);
+    vote === isLikeButton ? count += 1 : count, 0);
   
     const isLikeVoted = some(likes, (vote, key) => key === uid && vote === true);
     const isDislikeVoted = some(likes, (vote, key) => key === uid && vote === false);
@@ -39,9 +38,9 @@ class VoteButtonContainer extends Component {
     return (
       <React.Fragment>
         { isLikeButton ? (
-          <LikeButton count={countVoting} onClick={this.onVote} isVoted={isLikeVoted}/>
+          <VoteButtonLike count={countVoting} onClick={this.onVote} isVoted={isLikeVoted}/>
         ) : ( 
-          <DislikeButton count={countVoting} onClick={this.onVote} isVoted={isDislikeVoted}/> 
+          <VoteButtonDislike count={countVoting} onClick={this.onVote} isVoted={isDislikeVoted}/> 
         )}
       </React.Fragment>
     );
