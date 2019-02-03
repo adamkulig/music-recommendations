@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 
 import App from './features/App';
 import * as serviceWorker from './serviceWorker.js';
+import history from './history';
 import './styles/base.scss';
 //redux
 import { Provider } from 'react-redux';
@@ -14,7 +15,7 @@ import store from './state/store';
 store.firebaseAuthIsReady.then(() => {
   ReactDOM.render(
     <Provider store={store}>
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <Router basename={process.env.PUBLIC_URL} history={history}>
         <Fragment>
           <ReduxToastr
             position='bottom-right'  
@@ -26,21 +27,10 @@ store.firebaseAuthIsReady.then(() => {
           />
           <App />
         </Fragment>
-      </BrowserRouter>
+      </Router>
     </Provider>,
     document.getElementById('root')
   );
 })
 
 serviceWorker.unregister();
-
-
-// export const selectUserDeliveryOption = state =>
-// 	get(state, 'user.deliveryOption');
-// export const getShopNumber = state => get(state, 'shop.shopNumber');
-// export const getShopFullName = state => {
-// 	const currentShop = get(state, 'shop.data[0]', null);
-// 	return isNil(currentShop)
-// 		? 'Wybierz drogerię'
-// 		: currentShop.City + ' ' + currentShop.Street;
-// };

@@ -20,7 +20,7 @@ class NewRecoFormContainer extends Component {
   }
 
   render() {
-    const { handleSubmit, submitting, createRecommendation, history } = this.props;
+    const { handleSubmit, submitting, createRecommendation } = this.props;
     const { isEmpty } = this.props.auth;
     if (isEmpty) {
       return <Redirect push to={routes.Main} />
@@ -30,7 +30,6 @@ class NewRecoFormContainer extends Component {
         handleSubmit={handleSubmit(createRecommendation)} 
         submitting={submitting}
         countries={this.state.countries}
-        history={history}
       />
     );
   }

@@ -100,7 +100,7 @@ const changePassword = creds => async (dispatch, getState, { getFirebase }) => {
     await user.updatePassword(creds.password);
     // console.log(reset)
     await dispatch(reset('changePassword'));
-    toastr.success(messages.toastrSuccess, messages.toastrSuccessUpdatePassword)
+    toastr.success(messages.toastrSuccess, messages.toastrSuccessUpdatePassword);
   } catch(error) {
     console.log(error);
     // if (error.code === 'auth/user-not-found') {
@@ -108,6 +108,8 @@ const changePassword = creds => async (dispatch, getState, { getFirebase }) => {
     //     email: messages.emailNotFound
     //   });
     // }
+    //https://medium.com/@ericmorgan1/change-user-email-password-in-firebase-and-react-native-d0abc8d21618
+    //https://github.com/firebase/firebaseui-web/issues/52
   }
 }
 

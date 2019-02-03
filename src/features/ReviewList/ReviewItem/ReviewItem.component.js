@@ -13,6 +13,7 @@ import {
   CardFooter,
   Button 
 } from 'reactstrap';
+import { collectionToString } from '../../../helpers/collections.helpers';
 
 const ReviewItemComponent = ({ data }) => (
   <div className='review-item'>
@@ -29,16 +30,16 @@ const ReviewItemComponent = ({ data }) => (
           <CardBody>
             <div className='d-flex flex-column'>
               <div className='mb-1'>
-                <span className='text-muted small d-inline-block mr-1'>similar:&nbsp;</span>
-                <span>{data.similar}</span>
+                <span className='text-muted small d-inline-block mr-1'>country:&nbsp;</span>
+                <span>{data.country}</span>
               </div>
               <div className='mb-1'>
-                <span className='text-muted small d-inline-block mr-1'>genre:&nbsp;</span>
-                <span>{data.genre}</span>
+                <span className='text-muted small d-inline-block mr-1'>genres:&nbsp;</span>
+                <span>{collectionToString(data.genres)}</span>
               </div>
             </div>
             <div className='player-wrapper mb-1'>
-              <ReactPlayer className='player-wrapper__player' width='100%' height='100%' url={data.link} controls />
+              <ReactPlayer className='player-wrapper__player' width='100%' height='100%' url={data.youtubeLink} controls />
             </div>
           </CardBody>
           <CardFooter>

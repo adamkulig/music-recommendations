@@ -6,6 +6,8 @@ import LikeButton from './LikeButton.component';
 import DislikeButton from './DislikeButton.component';
 import { vote } from '../../state/actions/voting.actions';
 import { get, some, reduce } from 'lodash';
+import { toastr } from 'react-redux-toastr';
+import messages from '../../variables/messages';
 
 class VoteButtonContainer extends Component {
 
@@ -19,6 +21,8 @@ class VoteButtonContainer extends Component {
         userId: auth.uid,
         like: (currentVote === newVote) ? null : newVote
       })
+    } else {
+      toastr.error(messages.toastrError, messages.toastrErrorVote);
     }
   }
 

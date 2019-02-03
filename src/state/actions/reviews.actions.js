@@ -1,3 +1,8 @@
+import history from '../../history';
+import routes from '../../variables/routes';
+import { toastr } from 'react-redux-toastr';
+import messages from '../../variables/messages';
+
 const ACTIONS = {
     CREATE_RECOMMENDATION: 'CREATE_RECOMMENDATION',
     CREATE_RECOMMENDATION_ERROR: 'CREATE_RECOMMENDATION_ERROR'
@@ -5,21 +10,19 @@ const ACTIONS = {
   
   // { getFirebase, getFirestore } are available thanks for thunk.withExtraArgument({...})
   const createRecommendation = data => (dispatch, getState, { getFirebase, getFirestore }) => {
-    // place for async call to database
     const firestore = getFirestore();
     const { displayName } = getState().firebase.profile
-    console.log(data);
-    console.log(displayName);
     const newReco = {
       ...data,
       country: data.country.label,
-      rating: data.country.label,
+      rating: data.rating.label,
       genres: Object.assign({}, ...data.genres.map(item => ({[item.label]: item.value }))),
       likes: {},
       user: displayName,
       createdAt: new Date()
     }
-    console.log(newReco)
+    history.push(routes.Main)
+    toastr.success(messages.toastrSuccess, messages.toastrSuccessNewRecoAdded)
     firestore.collection('recommendations').add(newReco).then(() => {
       dispatch({
         type: ACTIONS.CREATE_RECOMMENDATION,

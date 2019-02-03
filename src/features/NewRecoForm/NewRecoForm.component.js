@@ -7,17 +7,17 @@ import {
   Col, 
   Card, 
   CardBody, 
-  CardHeader, 
-  Button, 
+  CardHeader,
   Form, 
 } from 'reactstrap';
 // import WrappedInputField from '../../components/InputField/WrappedInputField.component';
 import InputField from '../../components/InputField/InputField.component';
 import SelectField from '../../components/SelectField/SelectField.component';
 import SubmitCancelButtons from '../../components/SubmitCancelButtons/SubmitCancelButtons.component'
+import history from '../../history';
 import routes from '../../variables/routes';
 
-const NewRecoComponent = ({ handleSubmit, submitting, countries, history }) => {
+const NewRecoComponent = ({ handleSubmit, submitting, countries }) => {
   return (
     <Row>
       <Col md={{ size: 10, offset: 1 }} lg={{ size: 8, offset: 2 }}>
@@ -54,7 +54,7 @@ const NewRecoComponent = ({ handleSubmit, submitting, countries, history }) => {
                 placeholder='choose genres...'
               />
               <Field
-                name="link" 
+                name="youtubeLink" 
                 type="text" 
                 component={InputField} 
                 label="Link*" 
@@ -68,7 +68,7 @@ const NewRecoComponent = ({ handleSubmit, submitting, countries, history }) => {
                 placeholder='separate band names with a comma...' 
               />
               <Field
-                name="facebook link" 
+                name="facebookLink" 
                 type="text" 
                 component={InputField} 
                 label="FB link"
@@ -82,6 +82,7 @@ const NewRecoComponent = ({ handleSubmit, submitting, countries, history }) => {
                 placeholder='your opinion...'
                 rows="5"
               />
+              <p className='small text-muted'>* fields are required.</p>
              <SubmitCancelButtons disabled={submitting} onCancel={() => history.push(routes.Main)}/>
             </Form>
           </CardBody>
