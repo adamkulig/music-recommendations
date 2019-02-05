@@ -5,7 +5,10 @@ html {
 }
 
 .App {
-  min-height: 100vh;  
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .c-pointer {
@@ -24,10 +27,6 @@ html {
   top: 0;
   left: 0;
   }
-}
-
-.modal-dialog {
-  margin-top: 5rem;
 }
 
 .dropdown-toggle:after {

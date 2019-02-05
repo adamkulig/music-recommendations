@@ -18,8 +18,8 @@ import routes from '../../variables/routes';
 const SignUpComponent = ({ handleSubmit, submitting, history }) => {
   return (
     <Row>
-      <Col md={{ size: 8, offset: 2 }}>
-        <Card className="my-3 mx-auto">
+      <Col md={{ size: 10, offset: 1 }} lg={{ size: 8, offset: 2 }}>
+        <Card className="mx-auto">
           <CardHeader>Sign Up</CardHeader>
           <CardBody>
             <Form onSubmit={handleSubmit} autoComplete="off">

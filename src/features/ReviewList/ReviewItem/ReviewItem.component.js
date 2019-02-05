@@ -24,7 +24,7 @@ const ReviewItemComponent = ({ data }) => {
   <div className='review-item'>
     <Row>
       <Col md={{ size: 10, offset: 1 }} lg={{ size: 8, offset: 2 }}>
-        <Card className='my-2 mx-auto'>
+        <Card className='mb-3 mx-auto'>
           <CardHeader>
             <RecoItemHeader user={user} createdAt={createdAt} band={band} />
           </CardHeader>
