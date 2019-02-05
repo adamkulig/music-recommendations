@@ -21,19 +21,20 @@ const ACTIONS = {
       user: displayName,
       createdAt: new Date()
     }
+    // firestore.collection('recommendations').add(newReco).then(() => {
+      //   dispatch({
+        //     type: ACTIONS.CREATE_RECOMMENDATION,
+        //     payload: data
+        //   })
+        // }).catch((error) => {
+          //   dispatch({
+            //     type: ACTIONS.CREATE_RECOMMENDATION_ERROR,
+            //     error
+            //   })
+            // })
+    firestore.collection('recommendations').add(newReco)
     history.push(routes.Main)
     toastr.success(messages.toastrSuccess, messages.toastrSuccessNewRecoAdded)
-    firestore.collection('recommendations').add(newReco).then(() => {
-      dispatch({
-        type: ACTIONS.CREATE_RECOMMENDATION,
-        payload: data
-      })
-    }).catch((error) => {
-      dispatch({
-        type: ACTIONS.CREATE_RECOMMENDATION_ERROR,
-        error
-      })
-    })
   }
   
   export { ACTIONS, createRecommendation };

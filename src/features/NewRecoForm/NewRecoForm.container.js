@@ -12,11 +12,8 @@ import routes from '../../variables/routes';
 import validate from './NewRecoForm.validators';
 
 class NewRecoFormContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      countries: countryList().getData()
-    }
+  state = {
+    countries: countryList().getData()
   }
 
   render() {
