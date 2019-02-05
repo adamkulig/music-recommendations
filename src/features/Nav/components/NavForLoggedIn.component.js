@@ -16,7 +16,7 @@ const NavForLoggedIn = ({ onSignOut, displayName }) => {
           <Link to={routes.NewRecoForm} className='d-block nav-link'>New Reco</Link>
         </DropdownItem>
         <DropdownItem>
-          <Link to={routes.ProfileSettings} className='d-block nav-link'>Settings</Link>
+          <Link to={routes.Profile} className='d-block nav-link'>Settings</Link>
         </DropdownItem>
         <DropdownItem divider />
         <DropdownItem onClick={onSignOut}>
