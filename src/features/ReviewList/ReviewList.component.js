@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReviewItem from './ReviewItem/ReviewItem.component';
 
-const ReviewListComponent = ({ recommendations }) => {
+const ReviewListComponent = ({ recos }) => {
   return (
     <div className='review-list'>
-      {recommendations && recommendations.map(item => (
+      {recos.map(item => (
         <ReviewItem key={item.id} data={item}/>
       ))}
     </div>
@@ -13,7 +13,7 @@ const ReviewListComponent = ({ recommendations }) => {
 }
 
 ReviewListComponent.propTypes = {
-  recommendations: PropTypes.array
+  recos: PropTypes.array
 }
 
 export default ReviewListComponent;

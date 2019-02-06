@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import VoteButtonLike from './VoteButtonLike.component';
 import VoteButtonDislike from './VoteButtonDislike.component';
-import { vote } from '../../../state/actions/voting.actions';
+import { vote } from '../../../state/actions/recommendations.actions';
 import { get, some, reduce } from 'lodash';
 import { toastr } from 'react-redux-toastr';
 import messages from '../../../variables/messages';

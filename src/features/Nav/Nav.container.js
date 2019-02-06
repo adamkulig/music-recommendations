@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { compose } from 'redux';
-// import { firestoreConnect } from 'react-redux-firebase';
 import Nav from './Nav.component';
-import { signOut } from '../../state/actions/auth.actions';
+import { signOut } from 'state/actions/auth.actions';
+import { getAuth, getProfile } from 'state/selectors/firebase.selectors';
 
 class NavContainer extends Component {
   state = {
@@ -40,8 +39,8 @@ class NavContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.firebase.auth,
-  profile: state.firebase.profile
+  auth: getAuth(state),
+  profile: getProfile(state)
 });
 
 const mapDispatchToProps = {

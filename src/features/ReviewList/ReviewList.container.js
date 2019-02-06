@@ -4,19 +4,20 @@ import { compose } from 'redux';
 import ReviewList from './ReviewList.component';
 // import { firestore } from 'firebase';
 import { firestoreConnect } from 'react-redux-firebase';
+import { getAllRecos } from 'state/selectors/firestore.selectors'
 
 
 class ReviewListContainer extends Component {
   render() {
-    const { recommendations } = this.props;
+    const { recos } = this.props;
     return (
-      <ReviewList recommendations={recommendations}/>
+      <ReviewList recos={recos}/>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  recommendations: state.firestore.ordered.recommendations
+  recos: getAllRecos(state)
 })
 
 export default compose(

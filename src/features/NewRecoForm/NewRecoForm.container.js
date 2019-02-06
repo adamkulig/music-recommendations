@@ -7,9 +7,10 @@ import { compose } from 'redux';
 import countryList from 'react-select-country-list';
 
 import NewRecoForm from './NewRecoForm.component';
-import { createRecommendation } from '../../state/actions/reviews.actions';
+import { createRecommendation } from '../../state/actions/recommendations.actions';
 import routes from '../../variables/routes';
 import validate from './NewRecoForm.validators';
+import { getAuth } from 'state/selectors/firebase.selectors';
 
 class NewRecoFormContainer extends Component {
   state = {
@@ -17,8 +18,8 @@ class NewRecoFormContainer extends Component {
   }
 
   render() {
-    const { handleSubmit, submitting, createRecommendation } = this.props;
-    const { isEmpty } = this.props.auth;
+    const { handleSubmit, submitting, createRecommendation, auth } = this.props;
+    const { isEmpty } = auth;
     if (isEmpty) {
       return <Redirect push to={routes.Main} />
     }
@@ -33,8 +34,7 @@ class NewRecoFormContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.firebase.auth,
-  users: state.firestore.data.recommendations
+  auth: getAuth(state)
 });
 
 const mapDispatchToProps = {
@@ -47,7 +47,4 @@ export default compose(
     form: 'newReco',
     validate
   }),
-  firestoreConnect([
-    { collection: 'recommendations' }
-  ])
 )(NewRecoFormContainer);

@@ -19,6 +19,6 @@ export const isYoutubeUrlInvalid = url => {
 }
 
 export const isFacebookUrlInvalid = url => {
-  const youtubeUrlRegex = /(?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-]*)?/;
+  const youtubeUrlRegex = /(?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w-]*)?/;
   return !youtubeUrlRegex.test(url);
 }

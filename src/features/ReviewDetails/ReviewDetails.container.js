@@ -5,14 +5,15 @@ import ReviewDetails from './ReviewDetails.component';
 // import { firestore } from 'firebase';
 import { firestoreConnect } from 'react-redux-firebase';
 import { isNil } from 'lodash';
+import { getRecoById } from 'state/selectors/firestore.selectors'
 
 
 class ReviewDetailsContainer extends Component {
   render() {
-    const { reviewData } = this.props;
+    const { reco } = this.props;
     return (
-      !isNil(reviewData) ? (
-        <ReviewDetails data={reviewData} />
+      !isNil(reco) ? (
+        <ReviewDetails data={reco} />
       ) : (
         <span>Loading...</span>
       )
@@ -20,14 +21,9 @@ class ReviewDetailsContainer extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const id = ownProps.match.params.id;
-  const reviews = state.firestore.data.recommendations;
-  const review = reviews ? reviews[id] : null;
-  return {
-    reviewData: review
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+  reco: getRecoById(state, ownProps.match.params.id)
+})
 
 export default compose(
   connect(mapStateToProps),

@@ -5,10 +5,10 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form } from 'reacts
 import InputField from '../../../components/InputField/InputField.component'
 import SubmitCancelButtons from '../../../components/SubmitCancelButtons/SubmitCancelButtons.component'
 
-const ForgotPasswordModalComponent = ({ isOpen, toggle, handleSubmit, reset, submitting }) => {
+const ResetPasswordModalComponent = ({ isOpen, toggle, handleSubmit, reset, submitting }) => {
 	return (
 		<Modal isOpen={isOpen} toggle={toggle} onReset={reset} centered>
-			<ModalHeader>Forgot your password?</ModalHeader>
+			<ModalHeader>Reset your password?</ModalHeader>
 			<Form onSubmit={handleSubmit} autoComplete="off">
 				<ModalBody>
 					<p className='text-center'>Don't worry!<br />Write your e-mail below and I will send you new password.</p>
@@ -27,4 +27,4 @@ const ForgotPasswordModalComponent = ({ isOpen, toggle, handleSubmit, reset, sub
 	);
 }
 
-export default ForgotPasswordModalComponent;
+export default ResetPasswordModalComponent;

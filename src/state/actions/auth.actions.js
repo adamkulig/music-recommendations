@@ -1,18 +1,8 @@
 import { SubmissionError, reset } from 'redux-form';
 import { toastr } from 'react-redux-toastr';
-import messages from '../../variables/messages';
+import messages from 'variables/messages';
 
-const ACTIONS = {
-  SIGN_IN: 'SIGN_IN',
-  SIGN_IN_ERROR: 'SIGN_IN_ERROR',
-  SIGN_OUT: 'SIGN_OUT',
-  SIGN_OUT_ERROR: 'SIGN_OUT_ERROR',
-  SIGN_UP: 'SIGN_UP',
-  SIGN_UP_ERROR: 'SIGN_UP_ERROR',
-  TOGGLE_RESET_PASSWORD_MODAL: 'TOGGLE_RESET_PASSWORD_MODAL',
-  RESET_PASSWORD: 'RESET_PASSWORD',
-  RESET_PASSWORD_ERROR: 'RESET_PASSWORD_ERROR',
-}
+const ACTIONS = {};
 
 const signIn = creds => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
@@ -89,10 +79,6 @@ const resetPassword = creds => async (dispatch, getState, { getFirebase }) => {
   }
 }
 
-const toggleResetPasswordModal = () => ({
-  type: ACTIONS.TOGGLE_RESET_PASSWORD_MODAL
-})
-
 const changePassword = creds => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
   const user = firebase.auth().currentUser;
@@ -119,6 +105,5 @@ export {
   signOut, 
   signUp, 
   resetPassword, 
-  toggleResetPasswordModal, 
   changePassword 
 };

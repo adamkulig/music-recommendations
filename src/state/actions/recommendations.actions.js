@@ -37,5 +37,16 @@ const ACTIONS = {
     toastr.success(messages.toastrSuccess, messages.toastrSuccessNewRecoAdded)
   }
   
-  export { ACTIONS, createRecommendation };
+  const vote = data => (dispatch, getState, { getFirebase, getFirestore }) => {
+    const { reviewId, userId, like } = data;
+    const firestore = getFirestore();
+    const review = firestore.collection('recommendations').doc(reviewId)
+    review.update({
+      likes: {
+        [userId]: like
+      }
+    })
+  }
+
+  export { ACTIONS, createRecommendation, vote };
   
