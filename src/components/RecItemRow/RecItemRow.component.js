@@ -8,7 +8,7 @@ const RecItemRow = ({header, data, dataInLink = false}) => (
         {header}
       </span>
     </Col>
-    <Col>{dataInLink ? <a href={data} target='_blank' rel='noopener noreferrer'>{data}</a> : data}</Col>
+    <Col>{dataInLink ? <a href={data} target='_blank' rel='noopener noreferrer'>facebook</a> : data}</Col>
   </Row>
 );
 
