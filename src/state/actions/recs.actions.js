@@ -9,7 +9,7 @@ const ACTIONS = {}
   const createRec = data => (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     const { displayName } = getState().firebase.profile
-    const newReco = {
+    const newRec = {
       ...data,
       country: data.country.label,
       rating: data.rating.label,
@@ -29,15 +29,15 @@ const ACTIONS = {}
             //     error
             //   })
             // })
-    firestore.collection('recommendations').add(newReco)
+    firestore.collection('recommendations').add(newRec)
     history.push(routes.Main)
     toastr.success(messages.toastrSuccess, messages.toastrSuccessNewRecoAdded)
   }
   
   const vote = data => (dispatch, getState, { getFirebase, getFirestore }) => {
-    const { recoId, userId, like } = data;
+    const { recId, userId, like } = data;
     const firestore = getFirestore();
-    const review = firestore.collection('recommendations').doc(recoId)
+    const review = firestore.collection('recommendations').doc(recId)
     review.update({
       likes: {
         [userId]: like
