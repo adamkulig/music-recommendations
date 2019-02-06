@@ -85,7 +85,6 @@ const changePassword = creds => async (dispatch, getState, { getFirebase }) => {
   const user = firebase.auth().currentUser;
   try {
     await user.updatePassword(creds.password);
-    // console.log(reset)
     await dispatch(reset('changePassword'));
     toastr.success(messages.toastrSuccess, messages.toastrSuccessUpdatePassword);
   } catch(error) {

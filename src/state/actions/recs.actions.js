@@ -1,49 +1,49 @@
-import history from '../../history';
-import routes from '../../variables/routes';
 import { toastr } from 'react-redux-toastr';
-import messages from '../../variables/messages';
+
+import history from 'history.js';
+import routes from 'variables/routes';
+import messages from 'variables/messages';
 
 const ACTIONS = {}
   
-  // { getFirebase, getFirestore } are available thanks for thunk.withExtraArgument({...})
-  const createRec = data => (dispatch, getState, { getFirebase, getFirestore }) => {
-    const firestore = getFirestore();
-    const { displayName } = getState().firebase.profile
-    const newRec = {
-      ...data,
-      country: data.country.label,
-      rating: data.rating.label,
-      genres: Object.assign({}, ...data.genres.map(item => ({[item.label]: item.value }))),
-      likes: {},
-      user: displayName,
-      createdAt: new Date()
-    }
-    // firestore.collection('recommendations').add(newReco).then(() => {
-      //   dispatch({
-        //     type: ACTIONS.CREATE_RECOMMENDATION,
-        //     payload: data
-        //   })
-        // }).catch((error) => {
-          //   dispatch({
-            //     type: ACTIONS.CREATE_RECOMMENDATION_ERROR,
-            //     error
-            //   })
-            // })
-    firestore.collection('recommendations').add(newRec)
+const createRec = data => async (dispatch, getState, { getFirebase, getFirestore }) => {
+  const firestore = getFirestore();
+  const { displayName } = getState().firebase.profile;
+  const { country, rating, genres } = data;
+  const newRec = {
+    ...data,
+    country: country.label,
+    rating: rating.label,
+    genres: Object.assign({}, ...genres.map(item => ({[item.label]: item.value }))),
+    likes: {},
+    user: displayName,
+    createdAt: new Date()
+  }
+  try {
+    await firestore.collection('recommendations').add(newRec)
     history.push(routes.Main)
     toastr.success(messages.toastrSuccess, messages.toastrSuccessNewRecoAdded)
+  } catch(error) {
+    console.log(error);
+    toastr.error(messages.toastrError, messages.unknownError);
   }
-  
-  const vote = data => (dispatch, getState, { getFirebase, getFirestore }) => {
-    const { recId, userId, like } = data;
-    const firestore = getFirestore();
-    const review = firestore.collection('recommendations').doc(recId)
+}
+
+const vote = data => (dispatch, getState, { getFirebase, getFirestore }) => {
+  const { recId, userId, like } = data;
+  const firestore = getFirestore();
+  const review = firestore.collection('recommendations').doc(recId)
+  try {
     review.update({
       likes: {
         [userId]: like
       }
     })
+  } catch(error) {
+    console.log(error);
+    toastr.error(messages.toastrError, messages.unknownError);
   }
+}
 
-  export { ACTIONS, createRec, vote };
+export { ACTIONS, createRec, vote };
   

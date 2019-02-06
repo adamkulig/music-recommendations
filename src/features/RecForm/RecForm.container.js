@@ -18,14 +18,14 @@ class RecFormContainer extends Component {
   }
 
   render() {
-    const { handleSubmit, submitting, createRecmmendation, auth } = this.props;
+    const { handleSubmit, submitting, createRec, auth } = this.props;
     const { isEmpty } = auth;
     if (isEmpty) {
       return <Redirect push to={routes.Main} />
     }
     return (
       <RecForm 
-        handleSubmit={handleSubmit(createRecmmendation)} 
+        handleSubmit={handleSubmit(createRec)} 
         submitting={submitting}
         countries={this.state.countries}
       />
