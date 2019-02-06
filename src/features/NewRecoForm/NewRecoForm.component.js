@@ -13,7 +13,7 @@ import InputField from 'components/InputField/InputField.component';
 import SelectField from 'components/SelectField/SelectField.component';
 import SubmitCancelButtons from 'components/SubmitCancelButtons/SubmitCancelButtons.component'
 import history from 'history.js';
-import { GENRES, RATING } from 'variables/reviews';
+import { GENRES, RATING } from 'variables/recos';
 import routes from 'variables/routes';
 
 const NewRecoComponent = ({ handleSubmit, submitting, countries }) => {
