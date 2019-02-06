@@ -8,10 +8,8 @@ import {
   Card, 
   CardBody, 
   CardHeader, 
-  Button, 
   Form, 
 } from 'reactstrap';
-// import WrappedInputField from '../../components/InputField/WrappedInputField.component';
 import InputField from '../../components/InputField/InputField.component';
 import SelectField from '../../components/SelectField/SelectField.component';
 import SubmitCancelButtons from '../../components/SubmitCancelButtons/SubmitCancelButtons.component'
@@ -54,10 +52,10 @@ const NewRecoComponent = ({ handleSubmit, submitting, countries, history }) => {
                 placeholder='choose genres...'
               />
               <Field
-                name="link" 
+                name="youtubeLink" 
                 type="text" 
                 component={InputField} 
-                label="Link*" 
+                label="YT link*" 
                 placeholder='paste youtube link...'
               />
               <Field
@@ -68,7 +66,7 @@ const NewRecoComponent = ({ handleSubmit, submitting, countries, history }) => {
                 placeholder='separate band names with a comma...' 
               />
               <Field
-                name="facebook link" 
+                name="facebookLink" 
                 type="text" 
                 component={InputField} 
                 label="FB link"

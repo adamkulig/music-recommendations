@@ -20,6 +20,7 @@ const messages = {
   toastrSuccessResetPassword: 'E-mail was send.',
   toastrSuccessUpdatePassword: 'Password has been changed.',
   unknownError: 'Something went wrong.',
+  invalidYoutubeUrl: 'It is not a youtube url.',
 }
 
 export default messages;
