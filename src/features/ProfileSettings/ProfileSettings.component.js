@@ -7,7 +7,7 @@ import {
   CardHeader, 
 } from 'reactstrap';
 
-import FormChangePassword from './components/FormChangePassword.container';
+import ChangePasswordForm from './ChangePasswordForm/ChangePasswordForm.container';
 
 const ProfileSettingsComponent = () => {
   return (
@@ -16,7 +16,7 @@ const ProfileSettingsComponent = () => {
         <Card className="my-3 mx-auto">
           <CardHeader>Settings</CardHeader>
           <CardBody>
-            <FormChangePassword />
+            <ChangePasswordForm />
           </CardBody>
         </Card>
       </Col>

@@ -6,7 +6,7 @@ import InputField from 'components/InputField/InputField.component'
 import SubmitCancelButtons from 'components/SubmitCancelButtons/SubmitCancelButtons.component'
 import routes from 'variables/routes'
 
-const FormChangePassword = ({ handleSubmit, submitting, history }) => {
+const ChangePasswordForm = ({ handleSubmit, submitting, history }) => {
   return (
     <Form onSubmit={handleSubmit} autoComplete="off">
       <Field
@@ -26,4 +26,4 @@ const FormChangePassword = ({ handleSubmit, submitting, history }) => {
   )
 }
 
-export default FormChangePassword;
+export default ChangePasswordForm;

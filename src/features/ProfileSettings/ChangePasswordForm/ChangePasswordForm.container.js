@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
-import FormChangePassword from './FormChangePassword.component';
+import ChangePasswordForm from './ChangePasswordForm.component';
 import { changePassword } from 'state/actions/auth.actions';
 import { getAuth } from 'state/selectors/firebase.selectors.js';
-import validate from './FormChangePassword.validators';
+import validate from './ChangePasswordForm.validators';
 
-class FormChangePasswordContainer extends Component {
+class ChangePasswordFormContainer extends Component {
   render() {
     const { handleSubmit, submitting, changePassword } = this.props;
     return (
-      <FormChangePassword 
+      <ChangePasswordForm 
         handleSubmit={handleSubmit(changePassword)} 
         submitting={submitting}
       />
@@ -30,4 +30,4 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
   form: 'changePassword',
   validate
-})(FormChangePasswordContainer));
+})(ChangePasswordFormContainer));
