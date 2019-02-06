@@ -19,7 +19,6 @@ class ForgotPasswordModalContainer extends Component {
   render() {
     const { handleSubmit, submitting, resetPassword, auth, toggleResetPasswordModal, reset} = this.props;
     const { modalIsOpen } = auth;
-    // console.log(this.props)
       return (
         <ForgotPasswordModal 
           isOpen={modalIsOpen} 

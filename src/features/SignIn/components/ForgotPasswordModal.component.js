@@ -7,7 +7,7 @@ import SubmitCancelButtons from '../../../components/SubmitCancelButtons/SubmitC
 
 const ForgotPasswordModalComponent = ({ isOpen, toggle, handleSubmit, reset, submitting }) => {
 	return (
-		<Modal isOpen={isOpen} toggle={toggle} onReset={reset}>
+		<Modal isOpen={isOpen} toggle={toggle} onReset={reset} centered>
 			<ModalHeader>Forgot your password?</ModalHeader>
 			<Form onSubmit={handleSubmit} autoComplete="off">
 				<ModalBody>

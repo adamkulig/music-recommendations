@@ -1,0 +1,11 @@
+.select, .single-select {
+  color: $gray-700;
+}
+
+.select.select__item__value-container {
+  padding-left: 0.75rem;  
+}
+
+.select__item__placeholder {
+  color: $gray-600 !important;
+}

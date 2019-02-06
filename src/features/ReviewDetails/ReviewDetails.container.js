@@ -4,14 +4,19 @@ import { compose } from 'redux';
 import ReviewDetails from './ReviewDetails.component';
 // import { firestore } from 'firebase';
 import { firestoreConnect } from 'react-redux-firebase';
+import { isNil } from 'lodash';
 
 
 class ReviewDetailsContainer extends Component {
   render() {
     const { reviewData } = this.props;
     return (
-      <ReviewDetails data={reviewData}/>
-    );
+      !isNil(reviewData) ? (
+        <ReviewDetails data={reviewData} />
+      ) : (
+        <span>Loading...</span>
+      )
+    )
   }
 }
 

@@ -21,7 +21,7 @@ const NavComponent = ({
   displayName
 }) => {
   return (
-    <Navbar color="primary" dark expand="sm">
+    <Navbar color="primary" dark expand="sm" className='mb-3'>
       <Container>
         <NavbarBrand href={routes.Main}>Brutal Recommendations</NavbarBrand>
         <NavbarToggler onClick={onToggleNavbar} />

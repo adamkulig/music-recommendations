@@ -12,15 +12,12 @@ import routes from '../../variables/routes';
 import validate from './NewRecoForm.validators';
 
 class NewRecoFormContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      countries: countryList().getData()
-    }
+  state = {
+    countries: countryList().getData()
   }
 
   render() {
-    const { handleSubmit, submitting, createRecommendation, history } = this.props;
+    const { handleSubmit, submitting, createRecommendation } = this.props;
     const { isEmpty } = this.props.auth;
     if (isEmpty) {
       return <Redirect push to={routes.Main} />
@@ -30,7 +27,6 @@ class NewRecoFormContainer extends Component {
         handleSubmit={handleSubmit(createRecommendation)} 
         submitting={submitting}
         countries={this.state.countries}
-        history={history}
       />
     );
   }

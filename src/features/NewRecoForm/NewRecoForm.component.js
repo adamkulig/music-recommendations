@@ -1,5 +1,4 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { Field } from 'redux-form';
 import { GENRES, RATING } from '../../variables/reviews';
 import { 
@@ -13,9 +12,10 @@ import {
 import InputField from '../../components/InputField/InputField.component';
 import SelectField from '../../components/SelectField/SelectField.component';
 import SubmitCancelButtons from '../../components/SubmitCancelButtons/SubmitCancelButtons.component'
+import history from '../../history';
 import routes from '../../variables/routes';
 
-const NewRecoComponent = ({ handleSubmit, submitting, countries, history }) => {
+const NewRecoComponent = ({ handleSubmit, submitting, countries }) => {
   return (
     <Row>
       <Col md={{ size: 10, offset: 1 }} lg={{ size: 8, offset: 2 }}>
@@ -80,6 +80,7 @@ const NewRecoComponent = ({ handleSubmit, submitting, countries, history }) => {
                 placeholder='your opinion...'
                 rows="5"
               />
+              <p className='small text-muted'>* fields are required.</p>
              <SubmitCancelButtons disabled={submitting} onCancel={() => history.push(routes.Main)}/>
             </Form>
           </CardBody>

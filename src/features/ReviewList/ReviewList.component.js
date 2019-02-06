@@ -4,7 +4,7 @@ import ReviewItem from './ReviewItem/ReviewItem.component';
 
 const ReviewListComponent = ({ recommendations }) => {
   return (
-    <div className='review-list mt-3 mb-5'>
+    <div className='review-list'>
       {recommendations && recommendations.map(item => (
         <ReviewItem key={item.id} data={item}/>
       ))}

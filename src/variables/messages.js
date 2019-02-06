@@ -1,8 +1,5 @@
 const messages = {
   emptyField: 'This field is required.',
-  // emptyPassword: 'Password is required.',
-  // emptyConfirmPassword: 'Confirm password is required.',
-  // emptyNickname: 'Nickname is required.',
   invalidEmail: 'It is not an email address.',  
   invalidPassword: 'Password should contain at least 6 characters, including 1 digit.',  
   invalidConfirmPassword: 'Passwords does not match.',  
@@ -19,6 +16,8 @@ const messages = {
   toastrSuccessSignUp: 'You are registered and logged in.',
   toastrSuccessResetPassword: 'E-mail was send.',
   toastrSuccessUpdatePassword: 'Password has been changed.',
+  toastrSuccessNewRecoAdded: 'Your recommendation has beed added.',
+  toastrErrorVote: 'You must be logged in to vote.',
   unknownError: 'Something went wrong.',
   invalidYoutubeUrl: 'It is not a youtube url.',
 }
