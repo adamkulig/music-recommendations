@@ -5,16 +5,19 @@ import { reduxForm } from 'redux-form';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 
+import { signUp } from 'state/actions/auth.actions';
+import { getAuth } from 'state/selectors/firebase.selectors';
+import { getAllUsers } from 'state/selectors/firestore.selectors';
+
+import routes from 'variables/routes';
 import SignUp from './SignUp.component';
-import { signUp } from '../../state/actions/auth.actions';
-import routes from '../../variables/routes';
 import validate from './SignUp.validators';
 import asyncValidate from './SignUp.asyncValidators';
 
 class SignUpContainer extends Component {
   render() {
-    const { handleSubmit, submitting, signUp, history } = this.props;
-    const { isEmpty } = this.props.auth;
+    const { handleSubmit, submitting, signUp, history, auth } = this.props;
+    const { isEmpty } = auth;
     if (!isEmpty) {
       return <Redirect push to={routes.Main} />
     }
@@ -29,8 +32,8 @@ class SignUpContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.firebase.auth,
-  users: state.firestore.data.users
+  auth: getAuth(state),
+  users: getAllUsers(state)
 });
 
 const mapDispatchToProps = {

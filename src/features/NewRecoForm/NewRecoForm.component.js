@@ -1,6 +1,5 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import { GENRES, RATING } from '../../variables/reviews';
 import { 
   Row, 
   Col, 
@@ -9,17 +8,19 @@ import {
   CardHeader, 
   Form, 
 } from 'reactstrap';
-import InputField from '../../components/InputField/InputField.component';
-import SelectField from '../../components/SelectField/SelectField.component';
-import SubmitCancelButtons from '../../components/SubmitCancelButtons/SubmitCancelButtons.component'
-import history from '../../history';
-import routes from '../../variables/routes';
+
+import InputField from 'components/InputField/InputField.component';
+import SelectField from 'components/SelectField/SelectField.component';
+import SubmitCancelButtons from 'components/SubmitCancelButtons/SubmitCancelButtons.component'
+import history from 'history.js';
+import { GENRES, RATING } from 'variables/reviews';
+import routes from 'variables/routes';
 
 const NewRecoComponent = ({ handleSubmit, submitting, countries }) => {
   return (
     <Row>
       <Col md={{ size: 10, offset: 1 }} lg={{ size: 8, offset: 2 }}>
-        <Card className="mt-3 mb-5">
+        <Card>
           <CardHeader>New recommendation</CardHeader>
           <CardBody>
             <Form onSubmit={handleSubmit} autoComplete="off">
@@ -89,24 +90,5 @@ const NewRecoComponent = ({ handleSubmit, submitting, countries }) => {
     </Row>
   )
 };
-
-// ReviewNewComponent.propTypes = {
-//   onSubmit: PropTypes.func,
-//   onChange: PropTypes.func,
-//   data: PropTypes.shape({
-//     type: PropTypes.oneOf(['', 'band', 'album', 'track']),
-//     band: PropTypes.string,
-//     album: PropTypes.string,
-//     track: PropTypes.string,
-//     genre: PropTypes.string,
-//     link: PropTypes.string,
-//     rating: PropTypes.string,
-//     text: PropTypes.string,
-//     similar: PropTypes.string
-//   }),
-//   types: PropTypes.array,
-//   genres: PropTypes.array,
-//   rating: PropTypes.array
-// }
 
 export default NewRecoComponent;

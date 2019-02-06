@@ -1,5 +1,6 @@
 import { SubmissionError, reset } from 'redux-form';
 import { toastr } from 'react-redux-toastr';
+
 import messages from 'variables/messages';
 
 const ACTIONS = {};

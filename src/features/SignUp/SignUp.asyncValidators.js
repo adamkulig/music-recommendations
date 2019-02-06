@@ -1,5 +1,6 @@
-import messages from '../../variables/messages';
 import { map } from 'lodash';
+
+import messages from 'variables/messages';
   
 const asyncValidateSignUp = (values, dispatch, props) => {
   const { users } = props;

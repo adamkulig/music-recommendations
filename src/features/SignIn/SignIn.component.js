@@ -8,14 +8,14 @@ import {
   CardBody, 
   CardHeader, 
   Button,
-  ButtonGroup, 
   Form
 } from 'reactstrap';
-import InputField from '../../components/InputField/InputField.component'
-import SubmitCancelButtons from '../../components/SubmitCancelButtons/SubmitCancelButtons.component'
-import routes from '../../variables/routes';
 
-const SignInComponent = ({ handleSubmit, submitting, handleOpenModal, message, history }) => {
+import InputField from 'components/InputField/InputField.component'
+import SubmitCancelButtons from 'components/SubmitCancelButtons/SubmitCancelButtons.component'
+import routes from 'variables/routes';
+
+const SignInComponent = ({ handleSubmit, submitting, handleOpenModal, history }) => {
   return (
     <Row>
       <Col md={{ size: 10, offset: 1 }} lg={{ size: 8, offset: 2 }}>
@@ -40,9 +40,9 @@ const SignInComponent = ({ handleSubmit, submitting, handleOpenModal, message, h
               </Button>
               <SubmitCancelButtons disabled={submitting} onCancel={() => history.push(routes.Main)} />
             </Form>
-            <div className=" my-2 text-center">
+            {/* <div className=" my-2 text-center">
               <span className="text-success">{message}</span>
-            </div>
+            </div> */}
           </CardBody>
         </Card>
       </Col>

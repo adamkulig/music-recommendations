@@ -1,18 +1,10 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import { 
-  // Row, 
-  // Col, 
-  // Card, 
-  // CardBody, 
-  // CardHeader, 
-  // Button,
-  // ButtonGroup,
-  Form
-} from 'reactstrap';
-import InputField from '../../../components/InputField/InputField.component'
-import SubmitCancelButtons from '../../../components/SubmitCancelButtons/SubmitCancelButtons.component'
-import routes from '../../../variables/routes'
+import { Form } from 'reactstrap';
+
+import InputField from 'components/InputField/InputField.component'
+import SubmitCancelButtons from 'components/SubmitCancelButtons/SubmitCancelButtons.component'
+import routes from 'variables/routes'
 
 const FormChangePassword = ({ handleSubmit, submitting, history }) => {
   return (

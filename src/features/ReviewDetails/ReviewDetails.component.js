@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { map } from 'lodash';
 import ReactPlayer from 'react-player';
-import moment from 'moment';
 import VoteButtonsGroup from '../VoteButtonsGroup/VoteButtonsGroup.component';
 import { 
   Row, 
@@ -12,9 +10,10 @@ import {
   CardBody,
   CardFooter
 } from 'reactstrap';
-import { collectionToString } from '../../helpers/collections.helpers';
-import RecoItemRow from '../../components/RecoItemRow/RecoItemRow.component';
-import RecoItemHeader from '../../components/RecoItemHeader/RecoItemHeader.component';
+
+import { collectionToString } from 'helpers/collections.helpers';
+import RecoItemRow from 'components/RecoItemRow/RecoItemRow.component';
+import RecoItemHeader from 'components/RecoItemHeader/RecoItemHeader.component';
 
 const ReviewDetailsComponent = ({ data }) => {
   const { user, createdAt, band, country, genres, youtubeLink, likes, id, similar, facebookLink, opinion, rating } = data;
@@ -32,7 +31,7 @@ const ReviewDetailsComponent = ({ data }) => {
             <RecoItemRow header='facebook:' data={facebookLink} dataInLink />
             <RecoItemRow header='opinion:' data={opinion} />
             <RecoItemRow header='rating:' data={rating} />
-                      <div className='player-wrapper mt-2'>
+            <div className='player-wrapper mt-2'>
               <ReactPlayer className='player-wrapper__player' width='100%' height='100%' url={youtubeLink} controls />
             </div>
           </CardBody>

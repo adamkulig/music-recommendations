@@ -6,9 +6,10 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav } from 'reactstrap';
+  
 import NavForLoggedIn from './components/NavForLoggedIn.component';
 import NavForNotLoggedIn from './components/NavForNotLoggedIn.component';
-import routes from '../../variables/routes';
+import routes from 'variables/routes';
 
 const NavComponent = ({ 
   dropdownIsOpen,

@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { NavItem, NavLink } from 'reactstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import routes from '../../../variables/routes';
+
+import routes from 'variables/routes';
 
 const NavForNotLoggedIn = ({ onCloseNavbar }) => {
   return (

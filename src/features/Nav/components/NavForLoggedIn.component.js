@@ -1,8 +1,13 @@
 import React from 'react';
 import {
-  UncontrolledDropdown, DropdownItem, DropdownToggle, DropdownMenu } from 'reactstrap';
+  UncontrolledDropdown, 
+  DropdownItem, 
+  DropdownToggle, 
+  DropdownMenu 
+} from 'reactstrap';
 import { Link } from 'react-router-dom';
-import routes from '../../../variables/routes';
+
+import routes from 'variables/routes';
 
 const NavForLoggedIn = ({ onSignOut, displayName }) => {
   return (

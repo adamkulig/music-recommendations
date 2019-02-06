@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import ReviewItem from './ReviewItem/ReviewItem.component';
 
 const ReviewListComponent = ({ recos }) => {

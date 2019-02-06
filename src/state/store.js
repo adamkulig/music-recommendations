@@ -1,10 +1,11 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-import rootReducer from './reducers/index';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import { reduxFirestore, getFirestore } from 'redux-firestore';
-import firebaseConfig from '../config/firebase.config';
+
+import rootReducer from './reducers/index';
+import firebaseConfig from 'config/firebase.config';
 
 // const reactReduxFirebaseConfig = {
 //   attachAuthIsReady: true,

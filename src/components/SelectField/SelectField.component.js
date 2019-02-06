@@ -1,9 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
-import { 
-  FormGroup, 
-  Label
-} from 'reactstrap';
+import { FormGroup, Label } from 'reactstrap';
 
 const WrappedSelectField = ({ 
   name,

@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import routes from '../variables/routes';
-
-import Nav from '../features/Nav/Nav.container';
-import Footer from '../components/Footer/Footer.component';
-// import Main from '../features/Main/Main.container';
-import SignIn from '../features/SignIn/SignIn.container';
-import SignUp from '../features/SignUp/SignUp.container';
-import NewRecoForm from '../features/NewRecoForm/NewRecoForm.container';
-import ReviewList from '../features/ReviewList/ReviewList.container';
-import ReviewDetails from '../features/ReviewDetails/ReviewDetails.container';
-import ProfileSettings from '../features/ProfileSettings/ProfileSettings.container';
-import NotFound from '../components/NotFound/NotFound.component'
-
 import { Route, Switch } from 'react-router-dom';
 import { Container } from 'reactstrap';
+
+import Nav from 'features/Nav/Nav.container';
+import Footer from 'components/Footer/Footer.component';
+import SignIn from 'features/SignIn/SignIn.container';
+import SignUp from 'features/SignUp/SignUp.container';
+import NewRecoForm from 'features/NewRecoForm/NewRecoForm.container';
+import ReviewList from 'features/ReviewList/ReviewList.container';
+import ReviewDetails from 'features/ReviewDetails/ReviewDetails.container';
+import ProfileSettings from 'features/ProfileSettings/ProfileSettings.container';
+import NotFound from 'components/NotFound/NotFound.component'
+
+import routes from 'variables/routes';
 
 class App extends Component {
   render() {

@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { compose } from 'redux';
 import PropTypes from 'prop-types';
-import VoteButtonLike from './VoteButtonLike.component';
-import VoteButtonDislike from './VoteButtonDislike.component';
-import { vote } from '../../../state/actions/recommendations.actions';
 import { get, some, reduce } from 'lodash';
 import { toastr } from 'react-redux-toastr';
-import messages from '../../../variables/messages';
+
+import { vote } from 'state/actions/recommendations.actions';
+import { getAuth } from 'state/selectors/firebase.selectors';
+
+import VoteButtonLike from './VoteButtonLike.component';
+import messages from 'variables/messages';
+import VoteButtonDislike from './VoteButtonDislike.component';
 
 class VoteButtonContainer extends Component {
-
   onVote = () => {
     const isLoggedIn = !this.props.auth.isEmpty;
     if (isLoggedIn) {
@@ -48,7 +49,7 @@ class VoteButtonContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.firebase.auth
+  auth: getAuth(state)
 });
 
 const mapDispatchToProps = {

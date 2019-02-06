@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
-import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import countryList from 'react-select-country-list';
 
-import NewRecoForm from './NewRecoForm.component';
-import { createRecommendation } from '../../state/actions/recommendations.actions';
-import routes from '../../variables/routes';
-import validate from './NewRecoForm.validators';
 import { getAuth } from 'state/selectors/firebase.selectors';
+import { createRecommendation } from 'state/actions/recommendations.actions';
+
+import NewRecoForm from './NewRecoForm.component';
+import validate from './NewRecoForm.validators';
+import routes from 'variables/routes';
 
 class NewRecoFormContainer extends Component {
   state = {

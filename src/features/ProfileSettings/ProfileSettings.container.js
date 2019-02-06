@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ProfileSettings from './ProfileSettings.component';
 import { Redirect } from 'react-router-dom';
+
+import { getAuth } from 'state/selectors/firebase.selectors';
+
+import ProfileSettings from './ProfileSettings.component';
 import routes from 'variables/routes';
-import { getAuth } from 'state/selectors/firebase.selectors'
 
 class ProfileSettingsContainer extends Component {
   render() {

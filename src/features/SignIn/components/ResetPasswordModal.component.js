@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { Field } from 'redux-form';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form } from 'reactstrap';
-import InputField from '../../../components/InputField/InputField.component'
-import SubmitCancelButtons from '../../../components/SubmitCancelButtons/SubmitCancelButtons.component'
+import { Modal, ModalHeader, ModalBody, ModalFooter, Form } from 'reactstrap';
+import InputField from 'components/InputField/InputField.component'
+import SubmitCancelButtons from 'components/SubmitCancelButtons/SubmitCancelButtons.component'
 
 const ResetPasswordModalComponent = ({ isOpen, toggle, handleSubmit, reset, submitting }) => {
 	return (

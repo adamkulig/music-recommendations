@@ -1,5 +1,5 @@
-import messages from '../../../variables/messages';
-import { isEmailInvalid } from '../../../helpers/regex.helpers';
+import messages from 'variables/messages';
+import { isEmailInvalid } from 'helpers/regex.helpers';
 
 const syncValidate = values => {
     const errors = {};

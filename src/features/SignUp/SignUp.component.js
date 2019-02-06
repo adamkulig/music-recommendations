@@ -7,13 +7,12 @@ import {
   Card, 
   CardBody, 
   CardHeader, 
-  Button,
-  ButtonGroup,
   Form
 } from 'reactstrap';
-import InputField from '../../components/InputField/InputField.component'
-import SubmitCancelButtons from '../../components/SubmitCancelButtons/SubmitCancelButtons.component'
-import routes from '../../variables/routes';
+
+import InputField from 'components/InputField/InputField.component'
+import SubmitCancelButtons from 'components/SubmitCancelButtons/SubmitCancelButtons.component'
+import routes from 'variables/routes';
 
 const SignUpComponent = ({ handleSubmit, submitting, history }) => {
   return (
