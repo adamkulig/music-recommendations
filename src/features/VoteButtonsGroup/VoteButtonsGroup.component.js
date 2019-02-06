@@ -2,10 +2,10 @@ import React from 'react';
 
 import VoteButton from './VoteButton/VoteButton.container';
 
-const VoteButtonsGroup = ({ likes, reviewId }) => ( 
+const VoteButtonsGroup = ({ likes, recId }) => ( 
   <div className='d-flex'>
-    <VoteButton likes={likes} reviewId={reviewId} isLikeButton={true} />
-    <VoteButton likes={likes} reviewId={reviewId} isLikeButton={false}/>
+    <VoteButton likes={likes} recId={recId} isLikeButton={true} />
+    <VoteButton likes={likes} recId={recId} isLikeButton={false}/>
   </div>
  );
  

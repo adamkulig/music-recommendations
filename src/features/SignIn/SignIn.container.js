@@ -9,7 +9,7 @@ import { getAuth } from 'state/selectors/firebase.selectors';
 
 import SignIn from './SignIn.component';
 import validate from './SignIn.validators';
-import ResetPasswordModal from './components/ResetPasswordModal.container';
+import ResetPasswordModal from './ResetPasswordModal/ResetPasswordModal.container';
 import routes from 'variables/routes';
 
 class SignInContainer extends Component {

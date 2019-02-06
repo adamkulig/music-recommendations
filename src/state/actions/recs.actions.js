@@ -3,13 +3,10 @@ import routes from '../../variables/routes';
 import { toastr } from 'react-redux-toastr';
 import messages from '../../variables/messages';
 
-const ACTIONS = {
-    CREATE_RECOMMENDATION: 'CREATE_RECOMMENDATION',
-    CREATE_RECOMMENDATION_ERROR: 'CREATE_RECOMMENDATION_ERROR'
-  }
+const ACTIONS = {}
   
   // { getFirebase, getFirestore } are available thanks for thunk.withExtraArgument({...})
-  const createRecommendation = data => (dispatch, getState, { getFirebase, getFirestore }) => {
+  const createRec = data => (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     const { displayName } = getState().firebase.profile
     const newReco = {
@@ -38,9 +35,9 @@ const ACTIONS = {
   }
   
   const vote = data => (dispatch, getState, { getFirebase, getFirestore }) => {
-    const { reviewId, userId, like } = data;
+    const { recoId, userId, like } = data;
     const firestore = getFirestore();
-    const review = firestore.collection('recommendations').doc(reviewId)
+    const review = firestore.collection('recommendations').doc(recoId)
     review.update({
       likes: {
         [userId]: like
@@ -48,5 +45,5 @@ const ACTIONS = {
     })
   }
 
-  export { ACTIONS, createRecommendation, vote };
+  export { ACTIONS, createRec, vote };
   

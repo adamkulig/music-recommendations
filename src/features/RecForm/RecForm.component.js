@@ -13,15 +13,15 @@ import InputField from 'components/InputField/InputField.component';
 import SelectField from 'components/SelectField/SelectField.component';
 import SubmitCancelButtons from 'components/SubmitCancelButtons/SubmitCancelButtons.component'
 import history from 'history.js';
-import { GENRES, RATING } from 'variables/recos';
+import { GENRES, RATING } from 'variables/recs';
 import routes from 'variables/routes';
 
-const NewRecoComponent = ({ handleSubmit, submitting, countries }) => {
+const RecComponent = ({ handleSubmit, submitting, countries }) => {
   return (
     <Row>
       <Col md={{ size: 10, offset: 1 }} lg={{ size: 8, offset: 2 }}>
         <Card>
-          <CardHeader>New recommendation</CardHeader>
+          <CardHeader>New rec</CardHeader>
           <CardBody>
             <Form onSubmit={handleSubmit} autoComplete="off">
               <Field
@@ -91,4 +91,4 @@ const NewRecoComponent = ({ handleSubmit, submitting, countries }) => {
   )
 };
 
-export default NewRecoComponent;
+export default RecComponent;

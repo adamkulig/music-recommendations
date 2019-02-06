@@ -6,9 +6,9 @@ import Nav from 'features/Nav/Nav.container';
 import Footer from 'components/Footer/Footer.component';
 import SignIn from 'features/SignIn/SignIn.container';
 import SignUp from 'features/SignUp/SignUp.container';
-import NewRecoForm from 'features/NewRecoForm/NewRecoForm.container';
-import ReviewList from 'features/ReviewList/ReviewList.container';
-import ReviewDetails from 'features/ReviewDetails/ReviewDetails.container';
+import RecForm from 'features/RecForm/RecForm.container';
+import RecsList from 'features/RecsList/RecsList.container';
+import RecDetails from 'features/RecDetails/RecDetails.container';
 import ProfileSettings from 'features/ProfileSettings/ProfileSettings.container';
 import NotFound from 'components/NotFound/NotFound.component'
 
@@ -21,11 +21,11 @@ class App extends Component {
         <Nav />
         <Container>
           <Switch>
-            <Route exact path={routes.Main} component={ReviewList} />
+            <Route exact path={routes.Main} component={RecsList} />
             <Route path={routes.SignIn} component={SignIn} />
             <Route path={routes.SignUp} component={SignUp} />
-            <Route path={routes.NewRecoForm} component={NewRecoForm} />
-            <Route path={routes.RecoDetails} component={ReviewDetails} />
+            <Route path={routes.RecForm} component={RecForm} />
+            <Route path={routes.RecDetails} component={RecDetails} />
             <Route path={routes.Profile} component={ProfileSettings} />
             <Route component={NotFound} />
           </Switch>

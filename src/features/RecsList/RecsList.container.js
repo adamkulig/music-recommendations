@@ -3,21 +3,21 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 
-import { getAllRecos } from 'state/selectors/firestore.selectors';
+import { getAllRecs } from 'state/selectors/firestore.selectors';
 
-import ReviewList from './ReviewList.component';
+import RecsList from './RecsList.component';
 
-class ReviewListContainer extends Component {
+class RecsListContainer extends Component {
   render() {
-    const { recos } = this.props;
+    const { recs } = this.props;
     return (
-      <ReviewList recos={recos}/>
+      <RecsList recs={recs}/>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  recos: getAllRecos(state)
+  recs: getAllRecs(state)
 })
 
 export default compose(
@@ -25,4 +25,4 @@ export default compose(
   firestoreConnect([
     { collection: 'recommendations', orderBy: ['createdAt', 'desc'] }
   ])
-)(ReviewListContainer)
+)(RecsListContainer)

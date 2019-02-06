@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'reactstrap';
 
-const RecoItemRow = ({header, data, dataInLink = false}) => (
+const RecItemRow = ({header, data, dataInLink = false}) => (
   <Row noGutters>
     <Col xs='2' xl='1'>
       <span className='text-muted small'>
@@ -12,4 +12,4 @@ const RecoItemRow = ({header, data, dataInLink = false}) => (
   </Row>
 );
 
-export default RecoItemRow;
+export default RecItemRow;

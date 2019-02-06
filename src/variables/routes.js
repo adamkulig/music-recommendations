@@ -2,8 +2,8 @@ const routes = {
   'Main': '/',
   'SignIn': '/signin',
   'SignUp': '/signup',
-  'NewRecoForm': '/new-reco',
-  'RecoDetails': '/reco/:id',
+  'RecForm': '/new-rec',
+  'RecDetails': '/rec/:id',
   // 'ProfileDetails': '/profile/:id',
   'Profile': '/profile'
 }

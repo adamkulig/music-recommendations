@@ -6,7 +6,7 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav } from 'reactstrap';
-  
+
 import NavForLoggedIn from './components/NavForLoggedIn.component';
 import NavForNotLoggedIn from './components/NavForNotLoggedIn.component';
 import routes from 'variables/routes';
@@ -24,7 +24,7 @@ const NavComponent = ({
   return (
     <Navbar color="primary" dark expand="sm" className='mb-3'>
       <Container>
-        <NavbarBrand href={routes.Main}>Brutal Recommendations</NavbarBrand>
+        <NavbarBrand href={routes.Main}>Brutal RECs</NavbarBrand>
         <NavbarToggler onClick={onToggleNavbar} />
         <Collapse isOpen={navIsOpen} navbar>
           <Nav className='ml-auto' navbar>

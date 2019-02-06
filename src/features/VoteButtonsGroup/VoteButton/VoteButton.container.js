@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { get, some, reduce } from 'lodash';
 import { toastr } from 'react-redux-toastr';
 
-import { vote } from 'state/actions/recommendations.actions';
+import { vote } from 'state/actions/recs.actions';
 import { getAuth } from 'state/selectors/firebase.selectors';
 
 import VoteButtonLike from './VoteButtonLike.component';
@@ -15,10 +15,10 @@ class VoteButtonContainer extends Component {
   onVote = () => {
     const isLoggedIn = !this.props.auth.isEmpty;
     if (isLoggedIn) {
-      const { auth, isLikeButton: newVote, likes, reviewId, vote } = this.props;
+      const { auth, isLikeButton: newVote, likes, recId, vote } = this.props;
       const currentVote = likes[auth.uid];
       vote({
-        reviewId: reviewId,
+        recoId: recId,
         userId: auth.uid,
         like: (currentVote === newVote) ? null : newVote
       })

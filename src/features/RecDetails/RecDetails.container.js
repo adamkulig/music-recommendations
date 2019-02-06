@@ -4,17 +4,17 @@ import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { isNil } from 'lodash';
 
-import { getRecoById } from 'state/selectors/firestore.selectors'
+import { getRecById } from 'state/selectors/firestore.selectors'
 
-import ReviewDetails from './ReviewDetails.component';
+import RecDetails from './RecDetails.component';
 
 
-class ReviewDetailsContainer extends Component {
+class RecDetailsContainer extends Component {
   render() {
     const { reco } = this.props;
     return (
       !isNil(reco) ? (
-        <ReviewDetails data={reco} />
+        <RecDetails data={reco} />
       ) : (
         <span>Loading...</span>
       )
@@ -23,7 +23,7 @@ class ReviewDetailsContainer extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  reco: getRecoById(state, ownProps.match.params.id)
+  reco: getRecById(state, ownProps.match.params.id)
 })
 
 export default compose(
@@ -31,4 +31,4 @@ export default compose(
   firestoreConnect([
     { collection: 'recommendations' }
   ])
-)(ReviewDetailsContainer)
+)(RecDetailsContainer)

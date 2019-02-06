@@ -6,26 +6,26 @@ import { compose } from 'redux';
 import countryList from 'react-select-country-list';
 
 import { getAuth } from 'state/selectors/firebase.selectors';
-import { createRecommendation } from 'state/actions/recommendations.actions';
+import { createRec } from 'state/actions/recs.actions';
 
-import NewRecoForm from './NewRecoForm.component';
-import validate from './NewRecoForm.validators';
+import RecForm from './RecForm.component';
+import validate from './RecForm.validators';
 import routes from 'variables/routes';
 
-class NewRecoFormContainer extends Component {
+class RecFormContainer extends Component {
   state = {
     countries: countryList().getData()
   }
 
   render() {
-    const { handleSubmit, submitting, createRecommendation, auth } = this.props;
+    const { handleSubmit, submitting, createRecmmendation, auth } = this.props;
     const { isEmpty } = auth;
     if (isEmpty) {
       return <Redirect push to={routes.Main} />
     }
     return (
-      <NewRecoForm 
-        handleSubmit={handleSubmit(createRecommendation)} 
+      <RecForm 
+        handleSubmit={handleSubmit(createRecmmendation)} 
         submitting={submitting}
         countries={this.state.countries}
       />
@@ -38,13 +38,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  createRecommendation
+  createRec
 }
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   reduxForm({
-    form: 'newReco',
+    form: 'newRec',
     validate
   }),
-)(NewRecoFormContainer);
+)(RecFormContainer);

@@ -1,9 +1,9 @@
 import { get } from 'lodash';
 
-export const getRecoById = (state, id) => 
+export const getRecById = (state, id) => 
   get(state, `firestore.data.recommendations[${id}]`, null);
 
-export const getAllRecos = state => 
+export const getAllRecs = state => 
   get(state, 'firestore.ordered.recommendations', []);
 
 export const getAllUsers = state => 

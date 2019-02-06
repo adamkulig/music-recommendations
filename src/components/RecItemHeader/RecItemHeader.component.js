@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import moment from 'moment';
 import { Row, Col } from 'reactstrap';
 
-const RecoItemHeader = ({ user, createdAt, band }) => {
+const RecItemHeader = ({ user, createdAt, band }) => {
   return (
     <Fragment>
       <Row noGutters>
@@ -27,4 +27,4 @@ const RecoItemHeader = ({ user, createdAt, band }) => {
   )
 }
  
-export default RecoItemHeader;
+export default RecItemHeader;
