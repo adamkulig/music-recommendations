@@ -18,7 +18,7 @@ class VoteButtonContainer extends Component {
       const { auth, isLikeButton: newVote, likes, recId, vote } = this.props;
       const currentVote = likes[auth.uid];
       vote({
-        recoId: recId,
+        recId: recId,
         userId: auth.uid,
         like: (currentVote === newVote) ? null : newVote
       })

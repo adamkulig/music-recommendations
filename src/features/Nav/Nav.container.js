@@ -26,7 +26,7 @@ class NavContainer extends Component {
         onToggleNavbar={this.toggleNavbar}
         onToggleDropdown={this.toggleDropdown}
         onCloseNavbar={this.closeNavbar}
-        onSignOut={signOut} 
+        onSignOut={this.props.signOut} 
         navIsOpen={this.state.navIsOpen}
         dropdownIsOpen={this.state.dropdownIsOpen}
         isLoggedIn={!isEmpty}
