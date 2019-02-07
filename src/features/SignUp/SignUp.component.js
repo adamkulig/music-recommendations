@@ -46,7 +46,7 @@ const SignUpComponent = ({ handleSubmit, submitting, history }) => {
                 component={InputField} 
                 label="Nickname" 
               />
-              <SubmitCancelButtons disabled={submitting} onCancel={() => history.push(routes.Main)}/>
+              <SubmitCancelButtons submitting={submitting} onCancel={() => history.push(routes.Main)}/>
             </Form>
           </CardBody>
         </Card>

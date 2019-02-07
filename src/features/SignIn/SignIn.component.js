@@ -14,8 +14,9 @@ import {
 import InputField from 'components/InputField/InputField.component'
 import SubmitCancelButtons from 'components/SubmitCancelButtons/SubmitCancelButtons.component'
 import routes from 'variables/routes';
+import history from 'history.js';
 
-const SignInComponent = ({ handleSubmit, submitting, handleOpenModal, history }) => {
+const SignInComponent = ({ handleSubmit, submitting, handleOpenModal }) => {
   return (
     <Row>
       <Col md={{ size: 10, offset: 1 }} lg={{ size: 8, offset: 2 }}>
@@ -38,7 +39,7 @@ const SignInComponent = ({ handleSubmit, submitting, handleOpenModal, history })
               <Button color="link" disabled={submitting} onClick={handleOpenModal} className='px-0'>
                 Forgot your password?
               </Button>
-              <SubmitCancelButtons disabled={submitting} onCancel={() => history.push(routes.Main)} />
+              <SubmitCancelButtons submitting={submitting} onCancel={() => history.push(routes.Main)} />
             </Form>
             {/* <div className=" my-2 text-center">
               <span className="text-success">{message}</span>

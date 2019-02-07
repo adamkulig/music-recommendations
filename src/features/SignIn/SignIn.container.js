@@ -14,7 +14,7 @@ import routes from 'variables/routes';
 
 class SignInContainer extends Component {
   render() {
-    const { handleSubmit, submitting, signIn, toggleResetPasswordModal, auth, history } = this.props;
+    const { handleSubmit, submitting, signIn, toggleResetPasswordModal, auth } = this.props;
     const { isEmpty } = auth;
     if (!isEmpty) {
       return <Redirect to={routes.Main} />
@@ -25,7 +25,6 @@ class SignInContainer extends Component {
           handleSubmit={handleSubmit(signIn)} 
           submitting={submitting}
           handleOpenModal={toggleResetPasswordModal}
-          history={history}
         />
         <ResetPasswordModal />
       </Fragment>

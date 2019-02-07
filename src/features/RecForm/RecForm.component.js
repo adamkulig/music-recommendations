@@ -59,30 +59,31 @@ const RecComponent = ({ handleSubmit, submitting, countries }) => {
                 label="YT link*" 
                 placeholder='paste youtube link...'
               />
+              <p className='small text-muted'>* fields are required.</p>
               <Field
                 name="similar" 
                 type="text" 
                 component={InputField} 
-                label="Similar"
+                label="Similar**"
                 placeholder='separate band names with a comma...' 
               />
               <Field
                 name="facebookLink" 
                 type="text" 
                 component={InputField} 
-                label="FB link"
+                label="FB link**"
                 placeholder='paste facebook link...'
               />
               <Field
                 name="opinion" 
                 type="textarea" 
                 component={InputField} 
-                label="Opinion"
+                label="Opinion**"
                 placeholder='your opinion...'
                 rows="5"
               />
-              <p className='small text-muted'>* fields are required.</p>
-             <SubmitCancelButtons disabled={submitting} onCancel={() => history.push(routes.Main)}/>
+              <p className='small text-muted'>** optional fields.</p>
+             <SubmitCancelButtons submitting={submitting} onCancel={() => history.push(routes.Main)}/>
             </Form>
           </CardBody>
         </Card>

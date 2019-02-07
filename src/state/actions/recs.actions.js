@@ -33,7 +33,7 @@ const createRec = data => async (dispatch, getState, { getFirebase, getFirestore
 const vote = data => (dispatch, getState, { getFirebase, getFirestore }) => {
   const { recId, userId, like } = data;
   const firestore = getFirestore();
-  const rec = firestore.collection(`recommendations/${recId}`);
+  const rec = firestore.collection('recommendations').doc(recId);
   try {
     rec.update({
       likes: {

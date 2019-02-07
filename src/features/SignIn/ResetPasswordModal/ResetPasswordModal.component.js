@@ -20,7 +20,7 @@ const ResetPasswordModalComponent = ({ isOpen, toggle, handleSubmit, reset, subm
 					/>
 				</ModalBody>
 				<ModalFooter>
-				<SubmitCancelButtons disabled={submitting} onCancel={toggle}/>
+				<SubmitCancelButtons submitting={submitting} onCancel={toggle}/>
 				</ModalFooter>
 			</Form>
 		</Modal>

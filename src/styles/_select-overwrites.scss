@@ -9,3 +9,7 @@
 .select__item__placeholder {
   color: $gray-600 !important;
 }
+
+.select--is-invalid > div {
+  border-color: $danger;
+}

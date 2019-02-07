@@ -31,7 +31,7 @@ class VoteButtonContainer extends Component {
     const { likes, isLikeButton, auth } = this.props;
     const uid = get(auth, 'uid', null);
     const countVoting = reduce(likes, (count, vote) => 
-    vote === isLikeButton ? count += 1 : count, 0);
+      vote === isLikeButton ? count += 1 : count, 0);
   
     const isLikeVoted = some(likes, (vote, key) => key === uid && vote === true);
     const isDislikeVoted = some(likes, (vote, key) => key === uid && vote === false);

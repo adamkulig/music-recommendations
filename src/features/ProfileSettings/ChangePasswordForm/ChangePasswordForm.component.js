@@ -21,7 +21,7 @@ const ChangePasswordForm = ({ handleSubmit, submitting, history }) => {
         component={InputField} 
         label="Confirm Password" 
       />
-      <SubmitCancelButtons disabled={submitting} onCancel={() => history.push(routes.Main)}/>
+      <SubmitCancelButtons submitting={submitting} onCancel={() => history.push(routes.Main)}/>
     </Form>
   )
 }
