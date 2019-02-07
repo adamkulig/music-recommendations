@@ -8,6 +8,7 @@ const ACTIONS = {}
   
 const createRec = data => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const firestore = getFirestore();
+  // const user = firestore.auth().currentUser;
   const { displayName } = getState().firebase.profile;
   const { country, rating, genres } = data;
   const newRec = {
@@ -22,7 +23,7 @@ const createRec = data => async (dispatch, getState, { getFirebase, getFirestore
   try {
     await firestore.collection('recommendations').add(newRec)
     history.push(routes.Main)
-    toastr.success(messages.toastrSuccess, messages.toastrSuccessNewRecoAdded)
+    toastr.success(messages.toastrSuccess, messages.toastrSuccessNewRecAdded)
   } catch(error) {
     console.log(error);
     toastr.error(messages.toastrError, messages.unknownError);
@@ -32,9 +33,9 @@ const createRec = data => async (dispatch, getState, { getFirebase, getFirestore
 const vote = data => (dispatch, getState, { getFirebase, getFirestore }) => {
   const { recId, userId, like } = data;
   const firestore = getFirestore();
-  const review = firestore.collection('recommendations').doc(recId)
+  const rec = firestore.collection(`recommendations/${recId}`);
   try {
-    review.update({
+    rec.update({
       likes: {
         [userId]: like
       }
