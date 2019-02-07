@@ -19,7 +19,6 @@ const RecItemHeader = ({ user, createdAt, band }) => {
           </span>
         </div>
       </div>
-      <h4 className='mb-0 text-center'>{band}</h4>
     </Fragment>
   )
 }

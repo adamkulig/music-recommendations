@@ -5,7 +5,7 @@ const RecItemRow = ({header, data, dataInLink = false}) => (
     <span className='text-muted font-weight-light d-inline-block mr-2'>
       {header}
     </span>
-    {dataInLink ? <a href={data} target='_blank' rel='noopener noreferrer'>facebook</a> : data}
+    <span>{dataInLink ? <a href={data} target='_blank' rel='noopener noreferrer'>facebook</a> : data}</span>
   </div>
 );
 
