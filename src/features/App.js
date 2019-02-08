@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { Container } from 'reactstrap';
 
 import Nav from 'features/Nav/Nav.container';
@@ -21,7 +21,8 @@ class App extends Component {
         <Nav />
         <Container>
           <Switch>
-            <Route exact path={routes.Main} component={RecsList} />
+            <Redirect exact from={routes.Main} to={routes.Recs}/>
+            <Route path={routes.Recs} component={RecsList} />
             <Route path={routes.SignIn} component={SignIn} />
             <Route path={routes.SignUp} component={SignUp} />
             <Route path={routes.RecForm} component={RecForm} />

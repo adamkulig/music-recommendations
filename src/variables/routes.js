@@ -1,5 +1,6 @@
 const routes = {
   'Main': '/',
+  'Recs': '/recs',
   'SignIn': '/signin',
   'SignUp': '/signup',
   'RecForm': '/new-rec',

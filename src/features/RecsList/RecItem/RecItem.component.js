@@ -16,7 +16,6 @@ import RecItemHeader from 'components/RecItemHeader/RecItemHeader.component';
 
 const RecItemComponent = ({ data }) => {
   const { user, createdAt, band, country, genres, youtubeLink, likes, id } = data;
-  console.log(data)
   return (
     <div className='rec-item'>
       <Card className='mb-3 mx-auto'>

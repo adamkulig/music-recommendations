@@ -16,6 +16,7 @@ import { collectionToString } from 'helpers/collections.helpers';
 import RecItemRow from 'components/RecItemRow/RecItemRow.component';
 import RecItemHeader from 'components/RecItemHeader/RecItemHeader.component';
 import routes from 'variables/routes';
+import history from 'history.js';
 
 const RecDetailsComponent = ({ data }) => {
   const { user, createdAt, band, country, genres, youtubeLink, likes, id, similar, facebookLink, opinion, rating } = data;
@@ -41,9 +42,7 @@ const RecDetailsComponent = ({ data }) => {
           <CardFooter>
             <div className='d-flex justify-content-between align-items-center'>
               <VoteButtonsGroup likes={likes} recId={id} />
-              <Link to={routes.Main}>
-                <Button color='primary' className='btn-sm'>Back</Button>
-              </Link>
+              <Button color='primary' className='btn-sm' onClick={() => history.goBack()}>Back</Button>
             </div>
           </CardFooter>
         </Card>

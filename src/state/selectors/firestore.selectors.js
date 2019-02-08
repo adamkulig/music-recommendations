@@ -11,3 +11,6 @@ export const getAllUsers = state =>
 
 export const getRec = state => 
   get(state, 'firestore.ordered.recommendations[0]', null);
+
+export const getRequestedStatuses = state => 
+  get(state, 'firestore.status.requested')
