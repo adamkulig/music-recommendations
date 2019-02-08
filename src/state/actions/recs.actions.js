@@ -4,7 +4,9 @@ import history from 'history.js';
 import routes from 'variables/routes';
 import messages from 'variables/messages';
 
-const ACTIONS = {}
+const ACTIONS = {
+  FETCH_RECS: 'FETCH_RECS'
+}
   
 const createRec = data => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const firestore = getFirestore();
@@ -46,5 +48,24 @@ const vote = data => (dispatch, getState, { getFirebase, getFirestore }) => {
   }
 }
 
-export { ACTIONS, createRec, vote };
+const fetchFirstPage = items => async (dispatch, getState, { getFirebase, getFirestore }) => {
+  const firestore = getFirestore();
+  const recsQuery = firestore.collection('recommendations').orderBy('createdAt', 'desc').limit(items);
+  try {
+    const querySnap = await recsQuery.get();
+    console.log(querySnap);
+    const recs = querySnap.docs.reduce((acc, rec, i) => (
+      [...acc, {...rec.data(), id: rec.id }]
+    ), [])
+    dispatch({
+      type: ACTIONS.FETCH_RECS,
+      payload: {recs}
+    })
+    console.log(recs)
+  } catch(error){
+    console.log(error);
+  }
+}
+
+export { ACTIONS, createRec, vote, fetchFirstPage };
   
