@@ -12,7 +12,7 @@ import RecDetails from './RecDetails.component';
 import history from 'history.js';
 import messages from 'variables/messages';
 import routes from 'variables/routes';
-
+import LoadingWrapper from 'components/LoadingWrapper/LoadingWrapper.component';
 
 class RecDetailsContainer extends Component {
   async componentDidMount() {
@@ -31,11 +31,9 @@ class RecDetailsContainer extends Component {
       currentRec = match.params.id === rec.id;
     } 
     return (
-      currentRec ? (
+      <LoadingWrapper isLoading={!currentRec}>
         <RecDetails data={rec} />
-      ) : (
-        <span>Loading...</span>
-      )
+      </LoadingWrapper>
     )
   }
 }

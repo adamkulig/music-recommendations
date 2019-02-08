@@ -6,18 +6,16 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { getAllRecs, getRequestedStatuses } from 'state/selectors/firestore.selectors';
 
 import RecsList from './RecsList.component';
-import Spinner from 'components/Spinner/Spinner.component';
+import LoadingWrapper from 'components/LoadingWrapper/LoadingWrapper.component';
 
 class RecsListContainer extends Component {
   render() {
     const { reqsStatuses, recs } = this.props;
     const { recommendations: recsAreReady } = reqsStatuses;
     return (
-      recsAreReady ? (
+      <LoadingWrapper isLoading={!recsAreReady}>
         <RecsList recs={recs}/>
-      ) : (
-        <Spinner />
-      )
+      </LoadingWrapper>
     )
   }
 }
