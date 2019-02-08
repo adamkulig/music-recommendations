@@ -2,8 +2,6 @@ import React from 'react';
 import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
 import { 
-  Row, 
-  Col, 
   Card, 
   CardHeader,
   CardBody,
@@ -18,20 +16,15 @@ import RecItemHeader from 'components/RecItemHeader/RecItemHeader.component';
 
 const RecItemComponent = ({ data }) => {
   const { user, createdAt, band, country, genres, youtubeLink, likes, id } = data;
+  console.log(data)
   return (
     <div className='rec-item'>
       <Card className='mb-3 mx-auto'>
         <CardHeader>
-          <RecItemHeader user={user} createdAt={createdAt} band={band} />
+          <RecItemHeader user={user} createdAt={createdAt} />
         </CardHeader>
         <CardBody>
-        <div className='text-center px-3 mb-1 d-flex justify-content-center align-center'>
-          <h4 className='text-muted font-weight-light d-inline-block mr-2 mb-0'>
-            band:
-          </h4>
-          <h4 className='mb-0'>{band}</h4>
-        </div>
-          
+          <RecItemRow header='band:' data={band} large />  
           <RecItemRow header='country:' data={country} />
           <RecItemRow header='genres:' data={collectionToString(genres)} />
           <div className='player-wrapper mt-2'>

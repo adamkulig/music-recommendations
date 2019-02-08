@@ -18,7 +18,7 @@ const NavForLoggedIn = ({ onSignOut, displayName }) => {
       <DropdownMenu right className='text-center'>
         <DropdownItem header>{displayName}</DropdownItem>
         <DropdownItem>
-          <Link to={routes.RecForm} className='d-block nav-link'>New Reco</Link>
+          <Link to={routes.RecForm} className='d-block nav-link'>New Rec</Link>
         </DropdownItem>
         <DropdownItem>
           <Link to={routes.Profile} className='d-block nav-link'>Settings</Link>

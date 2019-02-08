@@ -17,18 +17,22 @@ import routes from 'variables/routes';
 class RecDetailsContainer extends Component {
   async componentDidMount() {
     const { firestore, match } = this.props;
-    const reco = await firestore.get(`recommendations/${match.params.id}`)
-    if (!reco.exists) {
+    const rec = await firestore.get(`recommendations/${match.params.id}`)
+    if (!rec.exists) {
       history.push(routes.Main);
       toastr.error(messages.toastrError, messages.toastrSuccessRecDoesNotExist);
     }
   }
 
   render() {
-    const { reco } = this.props;
+    const { rec, match } = this.props;
+    let currentRec = null;
+    if(!isNil(rec)) {
+      currentRec = match.params.id === rec.id;
+    } 
     return (
-      !isNil(reco) ? (
-        <RecDetails data={reco} />
+      currentRec ? (
+        <RecDetails data={rec} />
       ) : (
         <span>Loading...</span>
       )
@@ -37,7 +41,7 @@ class RecDetailsContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  reco: getRec(state)
+  rec: getRec(state)
 })
 
 // export default connect(mapStateToProps)(RecDetailsContainer)
