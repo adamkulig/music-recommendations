@@ -17,7 +17,7 @@ class RecsListContainer extends Component {
     const parsed = queryString.parse(window.location.search);
     console.log(parsed)
     this.props.fetchPage({
-      currentPage: parsed.page
+      currentPage: Number(parsed.page)
     })
   }
 

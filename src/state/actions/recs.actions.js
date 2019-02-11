@@ -73,7 +73,7 @@ const fetchPage = params => async (dispatch, getState, { getFirebase, getFiresto
       recs,
       totalRecs,
       totalPages,
-      currentPage: Number(params.currentPage)
+      currentPage: params.currentPage
     }))
   } catch(error){
     dispatch(asyncActionRejected(ACTIONS.FETCH_RECS, error));
