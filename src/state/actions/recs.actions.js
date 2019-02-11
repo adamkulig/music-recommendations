@@ -3,6 +3,11 @@ import { toastr } from 'react-redux-toastr';
 import history from 'history.js';
 import routes from 'variables/routes';
 import messages from 'variables/messages';
+import {   
+  asyncActionPending,
+  asyncActionFulfilled,
+  asyncActionRejected
+} from './generic/async.actions';
 
 const ACTIONS = {
   FETCH_RECS: 'FETCH_RECS'
@@ -52,20 +57,17 @@ const fetchFirstPage = items => async (dispatch, getState, { getFirebase, getFir
   const firestore = getFirestore();
   const recsQuery = firestore.collection('recommendations').orderBy('createdAt', 'desc').limit(items);
   try {
+    dispatch(asyncActionPending(ACTIONS.FETCH_RECS))
     const querySnap = await recsQuery.get();
-    console.log(querySnap);
-    const recs = querySnap.docs.reduce((acc, rec, i) => (
+    const recs = querySnap.docs.reduce((acc, rec) => (
       [...acc, {...rec.data(), id: rec.id }]
     ), [])
-    dispatch({
-      type: ACTIONS.FETCH_RECS,
-      payload: {recs}
-    })
+    dispatch(asyncActionFulfilled(ACTIONS.FETCH_RECS, recs))
     console.log(recs)
   } catch(error){
+    dispatch(asyncActionRejected(ACTIONS.FETCH_RECS, error));
     console.log(error);
   }
 }
 
 export { ACTIONS, createRec, vote, fetchFirstPage };
-  

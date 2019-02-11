@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 
-import { etRequestedStatuses } from 'state/selectors/firestore.selectors';
+import { getRequestedStatuses } from 'state/selectors/firestore.selectors';
 import { getRecs } from 'state/selectors/recs.selectors';
 import { fetchFirstPage } from 'state/actions/recs.actions';
 
@@ -16,12 +16,14 @@ class RecsListContainer extends Component {
   }
 
   render() {
-    const { /*reqsStatuses,*/ recs } = this.props;
-    // const { recommendations: recsAreReady } = reqsStatuses;
+    // const { /*reqsStatuses,*/ recs } = this.props;
+    const { intact, fetching, data } = this.props.recs;
+    // const { recommendation s: recsAreReady } = reqsStatuses;
+    const active = intact || fetching;
     return (
-      // <LoadingWrapper isLoading={!recsAreReady}>
-        <RecsList recs={recs}/>
-      // </LoadingWrapper>
+      <LoadingWrapper isLoading={active}>
+        <RecsList recs={data}/>
+      </LoadingWrapper>
     )
   }
 }

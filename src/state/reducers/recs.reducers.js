@@ -1,20 +1,6 @@
 import { ACTIONS } from '../actions/recs.actions';
+import asyncReducerFactory from '../reducers/generic/async.reducer';
 
-const initialState = {
-  recs: []
-}
-
-const recsReducer = (state = initialState, action ) => {
-  switch (action.type) {
-    case ACTIONS.FETCH_RECS: {
-      return {
-        ...state,
-        recs: action.payload.recs
-      };
-    }
-    default:
-      return state;
-  }
-}
+const recsReducer = asyncReducerFactory(ACTIONS.FETCH_RECS)
 
 export default recsReducer;
