@@ -1,4 +1,6 @@
-export const TYPES = ['band', 'album', 'track'];
+export const RECS = {
+  pageSize: 2
+};
 
 export const RATING = [
   { value: 'awesome', label: 'awesome' }, 

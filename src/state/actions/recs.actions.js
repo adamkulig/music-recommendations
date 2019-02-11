@@ -3,6 +3,8 @@ import { toastr } from 'react-redux-toastr';
 import history from 'history.js';
 import routes from 'variables/routes';
 import messages from 'variables/messages';
+import { RECS } from 'variables/recs';
+import { snapshotsToArray } from 'helpers/firestore.helpers';
 import {   
   asyncActionPending,
   asyncActionFulfilled,
@@ -53,21 +55,29 @@ const vote = data => (dispatch, getState, { getFirebase, getFirestore }) => {
   }
 }
 
-const fetchFirstPage = items => async (dispatch, getState, { getFirebase, getFirestore }) => {
+const fetchPage = params => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const firestore = getFirestore();
-  const recsQuery = firestore.collection('recommendations').orderBy('createdAt', 'desc').limit(items);
+  const recsRef = firestore
+    .collection('recommendations')
+    .orderBy('createdAt', 'desc')
   try {
     dispatch(asyncActionPending(ACTIONS.FETCH_RECS))
+    const allRecs = await recsRef.get()
+    const totalRecs = allRecs.docs.length;
+    const lastRecRef = allRecs.docs[params.currentPage * RECS.pageSize - RECS.pageSize];
+    const totalPages = Math.ceil(totalRecs / RECS.pageSize);
+    const recsQuery = await recsRef.startAt(lastRecRef).limit(RECS.pageSize);
     const querySnap = await recsQuery.get();
-    const recs = querySnap.docs.reduce((acc, rec) => (
-      [...acc, {...rec.data(), id: rec.id }]
-    ), [])
-    dispatch(asyncActionFulfilled(ACTIONS.FETCH_RECS, recs))
-    console.log(recs)
+    const recs = snapshotsToArray(querySnap.docs);
+    dispatch(asyncActionFulfilled(ACTIONS.FETCH_RECS, {
+      recs,
+      totalRecs,
+      totalPages,
+      currentPage: Number(params.currentPage)
+    }))
   } catch(error){
     dispatch(asyncActionRejected(ACTIONS.FETCH_RECS, error));
-    console.log(error);
   }
 }
 
-export { ACTIONS, createRec, vote, fetchFirstPage };
+export { ACTIONS, createRec, vote, fetchPage };

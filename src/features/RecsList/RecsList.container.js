@@ -2,39 +2,43 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
+import { get } from 'lodash';
+import queryString from 'query-string';
 
 import { getRequestedStatuses } from 'state/selectors/firestore.selectors';
 import { getRecs } from 'state/selectors/recs.selectors';
-import { fetchFirstPage } from 'state/actions/recs.actions';
+import { fetchPage } from 'state/actions/recs.actions';
 
 import RecsList from './RecsList.component';
 import LoadingWrapper from 'components/LoadingWrapper/LoadingWrapper.component';
 
 class RecsListContainer extends Component {
   componentDidMount() {
-    this.props.fetchFirstPage(4)
+    const parsed = queryString.parse(window.location.search);
+    console.log(parsed)
+    this.props.fetchPage({
+      currentPage: parsed.page
+    })
   }
 
   render() {
-    // const { /*reqsStatuses,*/ recs } = this.props;
-    const { intact, fetching, data } = this.props.recs;
-    // const { recommendation s: recsAreReady } = reqsStatuses;
+    const { intact, fetching } = this.props.recs;
+    const recs = get(this.props, 'recs.data.recs', []);
     const active = intact || fetching;
     return (
       <LoadingWrapper isLoading={active}>
-        <RecsList recs={data}/>
+        <RecsList recs={recs}/>
       </LoadingWrapper>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  recs: getRecs(state),
-  // reqsStatuses: getRequestedStatuses(state)
+  recs: getRecs(state)
 })
 
 const mapDispatchToProps = {
-  fetchFirstPage
+  fetchPage
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecsListContainer)
