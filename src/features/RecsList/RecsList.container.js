@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { firestoreConnect } from 'react-redux-firebase';
 import { get } from 'lodash';
 import queryString from 'query-string';
 
-import { getRequestedStatuses } from 'state/selectors/firestore.selectors';
 import { getRecs } from 'state/selectors/recs.selectors';
 import { fetchPage } from 'state/actions/recs.actions';
 
@@ -15,7 +12,6 @@ import LoadingWrapper from 'components/LoadingWrapper/LoadingWrapper.component';
 class RecsListContainer extends Component {
   componentDidMount() {
     const parsed = queryString.parse(window.location.search);
-    console.log(parsed)
     this.props.fetchPage({
       currentPage: Number(parsed.page)
     })
