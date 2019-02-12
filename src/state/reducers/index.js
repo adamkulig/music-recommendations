@@ -5,13 +5,15 @@ import { reducer as formReducer } from 'redux-form';
 import { reducer as toastrReducer } from 'react-redux-toastr';
 
 import modalsReducer from './modals.reducers';
+import recsReducer from './recs.reducers';
 
 const rootReducer = combineReducers ({
   firestore: firestoreReducer,
   firebase: firebaseReducer,
-  modals: modalsReducer,
   form: formReducer,
-  toastr: toastrReducer
+  toastr: toastrReducer,
+  modals: modalsReducer,
+  recs: recsReducer
 });
 
 export default rootReducer;
