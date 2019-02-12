@@ -1,5 +1,5 @@
 export const RECS = {
-  pageSize: 1
+  pageSize: 3
 };
 
 export const PAGINATION = {
