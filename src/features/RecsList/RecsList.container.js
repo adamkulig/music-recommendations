@@ -7,14 +7,24 @@ import { getRecs } from 'state/selectors/recs.selectors';
 import { fetchPage } from 'state/actions/recs.actions';
 
 import RecsList from './RecsList.component';
+import PaginationContainer from './Pagination/Pagination.container';
 import LoadingWrapper from 'components/LoadingWrapper/LoadingWrapper.component';
 
 class RecsListContainer extends Component {
   componentDidMount() {
     const parsed = queryString.parse(window.location.search);
     this.props.fetchPage({
-      currentPage: Number(parsed.page)
+      currentPage: parsed.page ? Number(parsed.page) : 1
     })
+  }
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (this.props.location.search !== prevProps.location.search) {
+      const parsed = queryString.parse(this.props.location.search);
+      this.props.fetchPage({
+        currentPage: parsed.page ? Number(parsed.page) : 1
+      })
+    } 
   }
 
   render() {
@@ -24,6 +34,7 @@ class RecsListContainer extends Component {
     return (
       <LoadingWrapper isLoading={active}>
         <RecsList recs={recs}/>
+        <PaginationContainer />
       </LoadingWrapper>
     )
   }
