@@ -1,6 +1,11 @@
 export const RECS = {
-  pageSize: 10
+  pageSize: 1
 };
+
+export const PAGINATION = {
+  LEFT: 'LEFT',
+  RIGHT: 'RIGHT'
+}
 
 export const RATING = [
   { value: 'awesome', label: 'awesome' }, 
