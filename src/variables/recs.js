@@ -1,5 +1,5 @@
 export const RECS = {
-  pageSize: 2
+  pageSize: 10
 };
 
 export const RATING = [
