@@ -3,12 +3,24 @@ import { IoIosStarOutline, IoIosStarHalf, IoIosStar } from "react-icons/io";
 
 const Stars = ({ data }) => {
   const stars = value => {
-    let starsCount = 5;
-    let valueRest = value;
+    let stars = [];
+    let valueRest = Number(value);
+    while(stars.lenght <= 5) {
+      if (valueRest >= 2) {
+        stars.push(<IoIosStar />)
+        valueRest =- 2;
+      } else if (valueRest === 1) {
+        stars.push(<IoIosStarHalf />)
+        valueRest =- 1;
+      } else {
+        stars.push(<IoIosStarOutline />)
+      }
+    }
+    return stars;
   }
   return (
-    <div className='stars'>
-      {stars}
+    <div className='stars d-flex'>
+      {stars(data)}
     </div>
   )
 }
