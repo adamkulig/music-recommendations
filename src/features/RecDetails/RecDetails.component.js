@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactPlayer from 'react-player';
+import { isNil } from 'lodash';
+import { IoLogoFacebook } from "react-icons/io";
+
 import VoteButtonsGroup from '../VoteButtonsGroup/VoteButtonsGroup.component';
 import { 
   Row, 
@@ -10,12 +13,11 @@ import {
   CardFooter,
   Button
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
 
 import { collectionToString } from 'helpers/collections.helpers';
 import RecItemRow from 'components/RecItemRow/RecItemRow.component';
+import RecItemRowLink from 'components/RecItemRowLink/RecItemRowLink.component';
 import RecItemHeader from 'components/RecItemHeader/RecItemHeader.component';
-import routes from 'variables/routes';
 import history from 'history.js';
 
 const RecDetailsComponent = ({ data }) => {
@@ -32,7 +34,9 @@ const RecDetailsComponent = ({ data }) => {
             <RecItemRow header='country:' data={country} />
             <RecItemRow header='genres:' data={collectionToString(genres)} />
             <RecItemRow header='similar:' data={similar} />
-            {/* <RecItemRow header='facebook:' data={facebookLink} dataInLink /> */}
+            {!isNil(facebookLink) && <RecItemRowLink header='facebook:' data={facebookLink} colorClass='c-fb'>
+              <IoLogoFacebook size={24}/>
+            </RecItemRowLink>}
             <RecItemRow header='opinion:' data={opinion} />
             <RecItemRow header='rating:' data={rating} />
             <div className='player-wrapper mt-2'>
