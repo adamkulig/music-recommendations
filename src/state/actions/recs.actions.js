@@ -1,4 +1,5 @@
 import { toastr } from 'react-redux-toastr';
+import { inRange } from 'lodash';
 
 import history from 'history.js';
 import routes from 'variables/routes';
@@ -55,7 +56,7 @@ const vote = data => (dispatch, getState, { getFirebase, getFirestore }) => {
   }
 }
 
-const fetchPage = params => async (dispatch, getState, { getFirebase, getFirestore }) => {
+const fetchPage = params => async (dispatch, getState, { getFirestore }) => {
   const firestore = getFirestore();
   const recsRef = firestore
     .collection('recommendations')
@@ -66,15 +67,20 @@ const fetchPage = params => async (dispatch, getState, { getFirebase, getFiresto
     const totalRecs = allRecs.docs.length;
     const lastRecRef = allRecs.docs[params.currentPage * RECS.pageSize - RECS.pageSize];
     const totalPages = Math.ceil(totalRecs / RECS.pageSize);
-    const recsQuery = await recsRef.startAt(lastRecRef).limit(RECS.pageSize);
-    const querySnap = await recsQuery.get();
-    const recs = snapshotsToArray(querySnap.docs);
-    dispatch(asyncActionFulfilled(ACTIONS.FETCH_RECS, {
-      recs,
-      totalRecs,
-      totalPages,
-      currentPage: params.currentPage
-    }))
+    if (inRange(params.currentPage, totalPages)) {
+      const recsQuery = await recsRef.startAt(lastRecRef).limit(RECS.pageSize);
+      const querySnap = await recsQuery.get();
+      const recs = snapshotsToArray(querySnap.docs);
+      dispatch(asyncActionFulfilled(ACTIONS.FETCH_RECS, {
+        recs,
+        totalRecs,
+        totalPages,
+        currentPage: params.currentPage
+      }))
+    } else {
+      history.push(routes.Main)
+      toastr.error(messages.toastrError, messages.toastrErrorPage)
+    }
   } catch(error){
     dispatch(asyncActionRejected(ACTIONS.FETCH_RECS, error));
   }

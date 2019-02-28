@@ -19,6 +19,7 @@ const messages = {
   toastrSuccessNewRecAdded: 'Your recommendation has beed added.',
   toastrSuccessRecDoesNotExist: 'Rec does not exist.',
   toastrErrorVote: 'You must be logged in to vote.',
+  toastrErrorPage: 'This page does not exist.',
   unknownError: 'Something went wrong.',
   invalidYoutubeUrl: 'It is not a youtube url.',
 }

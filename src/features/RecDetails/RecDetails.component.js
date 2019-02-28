@@ -39,7 +39,7 @@ const RecDetailsComponent = ({ data }) => {
               <IoLogoFacebook size={24}/>
             </RecItemRowLink>}
             <RecItemRow header='opinion:' data={opinion} />
-            <RecItemRow header='rating:' data={rating} />
+            <Stars header='rating:' data={rating} />
             <div className='player-wrapper mt-2'>
               <ReactPlayer className='player-wrapper__player' width='100%' height='100%' url={youtubeLink} controls />
             </div>

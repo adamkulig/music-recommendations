@@ -12,6 +12,7 @@ import LoadingWrapper from 'components/LoadingWrapper/LoadingWrapper.component';
 
 class RecsListContainer extends Component {
   componentDidMount() {
+    console.log('didmount');
     const parsed = queryString.parse(window.location.search);
     this.props.fetchPage({
       currentPage: parsed.page ? Number(parsed.page) : 1
