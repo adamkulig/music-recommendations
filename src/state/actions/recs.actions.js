@@ -1,5 +1,5 @@
 import { toastr } from 'react-redux-toastr';
-import { inRange, get } from 'lodash';
+import { inRange, get, slice } from 'lodash';
 
 import history from 'history.js';
 import routes from 'variables/routes';
@@ -58,34 +58,27 @@ const vote = data => (dispatch, getState, { getFirebase, getFirestore }) => {
   }
 }
 
-const fetchPage = params => async (dispatch, getState, { getFirestore }) => {
-  const firestore = getFirestore();
-  const recsRef = firestore
-    .collection('recommendations')
-    .orderBy('createdAt', 'desc')
-  try {
-    dispatch(asyncActionPending(ACTIONS.FETCH_RECS))
-    const allRecs = await recsRef.get()
-    const totalRecs = allRecs.docs.length;
-    const lastRecRef = allRecs.docs[params.currentPage * RECS.pageSize - RECS.pageSize];
-    const totalPages = Math.ceil(totalRecs / RECS.pageSize);
-    if (inRange(params.currentPage, totalPages + 1)) {
-      const recsQuery = await recsRef.startAt(lastRecRef).limit(RECS.pageSize);
-      const querySnap = await recsQuery.get();
-      const recs = snapshotsToArray(querySnap.docs);
-      console.log('recs :', recs);
-      dispatch(asyncActionFulfilled(ACTIONS.FETCH_RECS, {
-        recs,
+const fetchPage = params => async (dispatch, getState) => {
+  const state = getState();
+  const allRecs = get(state, 'allRecs.data.allRecs', []);
+  const totalRecs = allRecs.length;
+  const totalPages = Math.ceil(totalRecs / RECS.pageSize);
+  if (inRange(params.currentPage, 1, totalPages + 1)) {
+    const startIndex = params.currentPage * RECS.pageSize - RECS.pageSize;
+    const endIndex = params.currentPage * RECS.pageSize;
+    const desiredRecs = slice(allRecs, startIndex, endIndex)
+    dispatch({
+      type: ACTIONS.FETCH_RECS,
+      payload: {
+        recs: desiredRecs,
         totalRecs,
         totalPages,
         currentPage: params.currentPage
-      }))
-    } else {
-      history.push(routes.Main)
-      toastr.error(messages.toastrError, messages.toastrErrorPage)
-    }
-  } catch(error){
-    dispatch(asyncActionRejected(ACTIONS.FETCH_RECS, error));
+      }
+    })
+  } else {
+    history.push(routes.Main)
+    toastr.error(messages.toastrError, messages.toastrErrorPage)
   }
 }
 
@@ -105,7 +98,6 @@ const fetchAllRecs = (appIsMounting = false) => async (dispatch, getState, { get
         dispatch(asyncActionFulfilled(ACTIONS.FETCH_ALL_RECS, {
           allRecs,
       }))
-    console.log('fetched');
     } else {
       dispatch(asyncActionCancelled(ACTIONS.FETCH_ALL_RECS));
     }
