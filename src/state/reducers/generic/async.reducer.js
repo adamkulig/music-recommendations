@@ -19,6 +19,7 @@ const asyncReducerFactory = baseActionName => (state = initialState, action ) =>
       return {
         ...state,
         fetching: false,
+        error: null,
         data: payload
       };
     }
@@ -27,6 +28,12 @@ const asyncReducerFactory = baseActionName => (state = initialState, action ) =>
         ...state,
         fetching: false,
         error: error
+      };
+    }
+    case `${baseActionName}_CANCELLED`: {
+      return {
+        ...state,
+        fetching: false
       };
     }
     default:

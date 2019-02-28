@@ -1,5 +1,5 @@
 import { toastr } from 'react-redux-toastr';
-import { inRange } from 'lodash';
+import { inRange, get } from 'lodash';
 
 import history from 'history.js';
 import routes from 'variables/routes';
@@ -9,11 +9,13 @@ import { snapshotsToArray } from 'helpers/firestore.helpers';
 import {   
   asyncActionPending,
   asyncActionFulfilled,
-  asyncActionRejected
+  asyncActionRejected,
+  asyncActionCancelled,
 } from './generic/async.actions';
 
 const ACTIONS = {
-  FETCH_RECS: 'FETCH_RECS'
+  FETCH_RECS: 'FETCH_RECS',
+  FETCH_ALL_RECS: 'FETCH_ALL_RECS'
 }
   
 const createRec = data => async (dispatch, getState, { getFirebase, getFirestore }) => {
@@ -67,10 +69,11 @@ const fetchPage = params => async (dispatch, getState, { getFirestore }) => {
     const totalRecs = allRecs.docs.length;
     const lastRecRef = allRecs.docs[params.currentPage * RECS.pageSize - RECS.pageSize];
     const totalPages = Math.ceil(totalRecs / RECS.pageSize);
-    if (inRange(params.currentPage, totalPages)) {
+    if (inRange(params.currentPage, totalPages + 1)) {
       const recsQuery = await recsRef.startAt(lastRecRef).limit(RECS.pageSize);
       const querySnap = await recsQuery.get();
       const recs = snapshotsToArray(querySnap.docs);
+      console.log('recs :', recs);
       dispatch(asyncActionFulfilled(ACTIONS.FETCH_RECS, {
         recs,
         totalRecs,
@@ -86,4 +89,41 @@ const fetchPage = params => async (dispatch, getState, { getFirestore }) => {
   }
 }
 
-export { ACTIONS, createRec, vote, fetchPage };
+
+const fetchAllRecs = (appIsMounting = false) => async (dispatch, getState, { getFirestore }) => {
+  const firestore = getFirestore();
+  const state = getState();
+  try {
+    dispatch(asyncActionPending(ACTIONS.FETCH_ALL_RECS))
+    const permissionToGetAllRecs = appIsMounting || await checkIfAreNewRecs(firestore, state);
+    if (permissionToGetAllRecs) {
+      const allRecsRef = await firestore
+        .collection('recommendations')
+        .orderBy('createdAt', 'desc')
+        .get();
+        const allRecs = snapshotsToArray(allRecsRef.docs);
+        dispatch(asyncActionFulfilled(ACTIONS.FETCH_ALL_RECS, {
+          allRecs,
+      }))
+    console.log('fetched');
+    } else {
+      dispatch(asyncActionCancelled(ACTIONS.FETCH_ALL_RECS));
+    }
+  } catch(error){
+    dispatch(asyncActionRejected(ACTIONS.FETCH_ALL_RECS, error));
+  }
+}
+
+const checkIfAreNewRecs = async (firestore, state) => {
+  const lastRecRef = await firestore
+    .collection('recommendations')
+    .orderBy('createdAt', 'desc')
+    .limit(1)
+    .get()
+  const lastRec = snapshotsToArray(lastRecRef.docs);
+  const lastRecFirestoreTimestamp = get(lastRec[0], 'createdAt.seconds');
+  const lastRecStateTimestamp = get(state, 'allRecs.data.allRecs[0].createdAt.seconds', null)
+  return lastRecStateTimestamp !== lastRecFirestoreTimestamp;
+}
+
+export { ACTIONS, createRec, vote, fetchPage, fetchAllRecs };
