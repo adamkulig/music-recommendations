@@ -57,7 +57,7 @@ class PaginationContainer extends Component {
     const { LEFT, RIGHT } = PAGINATION;
     const parsed = queryString.parse(window.location.search);
     if (countPage === LEFT) {
-      parsed.page = Math.min(1, currentPage - 3);;
+      parsed.page = Math.min(1, currentPage - 3);
     } else if (countPage === RIGHT) {
       parsed.page = Math.min(totalPages, currentPage + 3);
     } else {

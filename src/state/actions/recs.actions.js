@@ -15,7 +15,8 @@ import {
 
 const ACTIONS = {
   FETCH_RECS: 'FETCH_RECS',
-  FETCH_ALL_RECS: 'FETCH_ALL_RECS'
+  FETCH_ALL_RECS: 'FETCH_ALL_RECS',
+  FILTER_RECS: 'FILTER_RECS'
 }
   
 const createRec = data => async (dispatch, getState, { getFirebase, getFirestore }) => {
@@ -82,7 +83,6 @@ const fetchPage = params => async (dispatch, getState) => {
   }
 }
 
-
 const fetchAllRecs = (appIsMounting = false) => async (dispatch, getState, { getFirestore }) => {
   const firestore = getFirestore();
   const state = getState();
@@ -118,4 +118,9 @@ const checkIfAreNewRecs = async (firestore, state) => {
   return lastRecStateTimestamp !== lastRecFirestoreTimestamp;
 }
 
-export { ACTIONS, createRec, vote, fetchPage, fetchAllRecs };
+const filterRecs = () => ({
+  type: ACTIONS.TOGGLE_RESET_PASSWORD_MODAL
+})
+
+
+export { ACTIONS, createRec, vote, fetchPage, fetchAllRecs, filterRecs };

@@ -1,50 +1,58 @@
-// import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import { Redirect } from 'react-router-dom';
-// import { reduxForm } from 'redux-form';
-// import { compose } from 'redux';
-// import countryList from 'react-select-country-list';
 
-// import { getAuth } from 'state/selectors/firebase.selectors';
-// import { createRec } from 'state/actions/recs.actions';
+import React from 'react';
+import { Field } from 'redux-form';
+import { 
+  Row, 
+  Col, 
+  Card, 
+  CardBody, 
+  Button, 
+  Form, 
+} from 'reactstrap';
 
-// import RecForm from './RecForm.component';
-// import validate from './RecForm.validators';
+import InputField from 'components/InputField/InputField.component';
+import SelectField from 'components/SelectField/SelectField.component';
+// import SubmitCancelButtons from 'components/SubmitCancelButtons/SubmitCancelButtons.component'
+// import history from 'history.js';
+import { GENRES, RATING } from 'variables/recs';
 // import routes from 'variables/routes';
 
-// class RecFiltersContainer extends Component {
-//   state = {
-//     countries: countryList().getData()
-//   }
+const RecsFiltersComponent = ({ handleSubmit, submitting }) => {
+  return (
+    <Row>
+      <Col md={{ size: 10, offset: 1 }} lg={{ size: 8, offset: 2 }}>
+        <Card>
+           <CardBody>
+            <Form onSubmit={handleSubmit} autoComplete="off">
+              <Field
+                name="band" 
+                type="text" 
+                component={InputField} 
+                label="Band*" 
+              />
+              <Field
+                name="rating"
+                component={SelectField} 
+                label="Rating*" 
+                options={RATING}
+                placeholder='your rating...'
+              />
+              <Field
+                isMulti
+                name="genres"
+                component={SelectField} 
+                label="Genres*" 
+                options={GENRES}
+                placeholder='choose genres...'
+              />
+              
+             <Button submitting={submitting} >Filter</Button>
+            </Form>
+          </CardBody>
+        </Card>
+      </Col>
+    </Row>
+  )
+};
 
-//   render() {
-//     const { handleSubmit, submitting, createRec, auth } = this.props;
-//     const { isEmpty } = auth;
-//     if (isEmpty) {
-//       return <Redirect push to={routes.Main} />
-//     }
-//     return (
-//       <RecForm 
-//         handleSubmit={handleSubmit(createRec)} 
-//         submitting={submitting}
-//         countries={this.state.countries}
-//       />
-//     );
-//   }
-// }
-
-// const mapStateToProps = state => ({
-//   auth: getAuth(state)
-// });
-
-// const mapDispatchToProps = {
-//   filterRecs
-// }
-
-// export default compose(
-//   connect(mapStateToProps, mapDispatchToProps),
-//   reduxForm({
-//     form: 'recsFilters',
-//     validate
-//   }),
-// )(RecFiltersContainer);
+export default RecsFiltersComponent;

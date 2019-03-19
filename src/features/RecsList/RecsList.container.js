@@ -8,6 +8,7 @@ import { fetchPage, fetchAllRecs } from 'state/actions/recs.actions';
 
 import RecsList from './RecsList.component';
 import PaginationContainer from './Pagination/Pagination.container';
+import RecsFiltersContainer from '../RecsFilters/RecsFilters.container';
 import LoadingWrapper from 'components/LoadingWrapper/LoadingWrapper.component';
 
 class RecsListContainer extends Component {
@@ -38,7 +39,8 @@ class RecsListContainer extends Component {
     const active = intact || fetching || desiredRecsIntact;
     return (
       <LoadingWrapper isLoading={active}>
-        <RecsList recs={recs}/>
+        <RecsFiltersContainer />
+        <RecsList recs={recs} />
         <PaginationContainer />
       </LoadingWrapper>
     )
