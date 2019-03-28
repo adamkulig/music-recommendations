@@ -1,4 +1,5 @@
 import React from 'react';
+import { object } from 'prop-types';
 import { IoIosStarOutline, IoIosStarHalf, IoIosStar } from "react-icons/io";
 
 const Stars = ({ data }) => {
@@ -27,6 +28,10 @@ const Stars = ({ data }) => {
       {desiredStars.map((star,index) => <div key={index}>{star}</div>)}
     </div>
   )
+}
+
+Stars.propTypes = {
+  data: object
 }
 
 export default Stars;

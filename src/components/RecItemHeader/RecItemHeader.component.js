@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import { string, number } from 'prop-types';
 
 const RecItemHeader = ({ user, createdAt }) => {
   return (
@@ -21,4 +22,9 @@ const RecItemHeader = ({ user, createdAt }) => {
   )
 }
  
+RecItemHeader.propTypes = {
+  user: string,
+  createdAt: number
+}
+
 export default RecItemHeader;

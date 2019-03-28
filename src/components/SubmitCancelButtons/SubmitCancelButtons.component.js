@@ -1,4 +1,5 @@
 import React from 'react';
+import { bool, func } from 'prop-types';
 import { Button, ButtonGroup } from 'reactstrap';
 
 import LaddaButtonWrapper from '../LaddaButtonWrapper/LaddaButtonWrapper.component'
@@ -14,6 +15,11 @@ const SubmitCancelButtons = ({ submitting, onCancel }) => {
       </LaddaButtonWrapper>
     </ButtonGroup>
   )
+}
+
+SubmitCancelButtons.propTypes = {
+  submitting: bool,
+  onCancel: func
 }
 
 export default SubmitCancelButtons;

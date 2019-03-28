@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, number } from 'prop-types';
 
 const RecItemRow = ({header, data, large = false}) => (
   <div className='text-center px-3 mb-1'>
