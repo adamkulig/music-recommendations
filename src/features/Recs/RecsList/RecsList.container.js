@@ -40,6 +40,7 @@ class RecsListContainer extends Component {
     return (
       <LoadingWrapper isLoading={active}>
         <RecsFiltersContainer />
+        <PaginationContainer />
         <RecsList recs={recs} />
         <PaginationContainer />
       </LoadingWrapper>

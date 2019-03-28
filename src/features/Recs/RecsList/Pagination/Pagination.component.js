@@ -8,7 +8,7 @@ import { PAGINATION } from 'variables/recs';
 const PaginationComponent = ({ pages, currentPage }) => {
   const { LEFT, RIGHT } = PAGINATION;
   return ( 
-    <Pagination className='d-flex justify-content-center'>
+    <Pagination className='d-flex justify-content-center py-1'>
       {pages.map(page => (
         <PaginationItem 
           key={page.count} 

@@ -5,7 +5,7 @@ import {
   Label, 
   Input
 } from 'reactstrap';
-import {} from 'prop-types';
+// import {} from 'prop-types';
 
 const InputField = ({ 
   input,
@@ -33,9 +33,9 @@ const InputField = ({
   )
 };
 
-InputField.propTypes = {
+// InputField.propTypes = {
   
-}
+// }
 
 InputField.defaultProps = {
   placeholder: ''

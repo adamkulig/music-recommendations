@@ -4,12 +4,12 @@ import { Container } from 'reactstrap';
 
 import Nav from 'features/Nav/Nav.container';
 import Footer from 'components/Footer/Footer.component';
-import SignIn from 'features/SignIn/SignIn.container';
-import SignUp from 'features/SignUp/SignUp.container';
-import RecForm from 'features/RecForm/RecForm.container';
-import RecsList from 'features/RecsList/RecsList.container';
-import RecDetails from 'features/RecDetails/RecDetails.container';
-import ProfileSettings from 'features/ProfileSettings/ProfileSettings.container';
+import SignIn from 'features/Auth/SignIn/SignIn.container';
+import SignUp from 'features/Auth/SignUp/SignUp.container';
+import RecForm from 'features/Recs/RecForm/RecForm.container';
+import RecsList from 'features/Recs/RecsList/RecsList.container';
+import RecDetails from 'features/Recs/RecDetails/RecDetails.container';
+import ProfileSettings from 'features/Profile/ProfileSettings/ProfileSettings.container';
 import NotFound from 'components/NotFound/NotFound.component'
 
 import routes from 'variables/routes';

@@ -20,7 +20,7 @@ class RecFiltersContainer extends Component {
     console.log('data :', data);
     const parsed = queryString.parse(window.location.search);
     parsed.page = 1;
-    !isEmpty(data.band) {parsed.band = data.band }
+    // !isEmpty(data.band) {parsed.band = data.band }
   }
 
   render() {
