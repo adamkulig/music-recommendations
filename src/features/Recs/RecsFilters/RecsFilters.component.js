@@ -46,7 +46,7 @@ const RecsFiltersComponent = ({ handleSubmit, submitting }) => {
                 placeholder='choose genres...'
               />
               
-             <Button submitting={submitting} >Filter</Button>
+             <Button disabled={submitting} >Filter</Button>
             </Form>
           </CardBody>
         </Card>

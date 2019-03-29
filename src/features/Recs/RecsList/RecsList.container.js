@@ -21,7 +21,7 @@ class RecsListContainer extends Component {
     if (this.props.location.search !== prevProps.location.search) {
       await this.props.fetchAllRecs();
       this.fetchDesiredPage();
-    } 
+    }
   }
 
   fetchDesiredPage = () => {

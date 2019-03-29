@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { range } from 'lodash';
 import queryString from 'query-string';
+import { withRouter } from "react-router";
 
 import { getRecs } from 'state/selectors/recs.selectors';
 import Pagination from './Pagination.component';
@@ -14,6 +15,11 @@ class PaginationContainer extends Component {
 
   componentDidMount() {
     this.createPaginationPages();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.recs.data.currentPage !== prevProps.recs.data.currentPage) {
+      this.createPaginationPages();
+    }
   }
 
   createPaginationPages = () => {
@@ -57,9 +63,9 @@ class PaginationContainer extends Component {
     const { LEFT, RIGHT } = PAGINATION;
     const parsed = queryString.parse(window.location.search);
     if (countPage === LEFT) {
-      parsed.page = Math.min(1, currentPage - 3);
+      parsed.page = Math.max(1, currentPage - 6);
     } else if (countPage === RIGHT) {
-      parsed.page = Math.min(totalPages, currentPage + 3);
+      parsed.page = Math.min(totalPages, currentPage + 6);
     } else {
       parsed.page = countPage;
     }
@@ -81,4 +87,5 @@ const mapStateToProps = state => ({
   recs: getRecs(state)
 })
 
-export default connect(mapStateToProps, null)(PaginationContainer);
+const PaginationContainerWithRouter = withRouter(PaginationContainer)
+export default connect(mapStateToProps, null)(PaginationContainerWithRouter);

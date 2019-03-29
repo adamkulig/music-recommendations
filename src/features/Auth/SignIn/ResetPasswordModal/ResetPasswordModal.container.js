@@ -10,29 +10,22 @@ import validate from './ResetPasswordModal.validators';
 
 class ResetPasswordModalContainer extends Component {
 
-  // onToggleResetPasswordModal = () => {
-  //   const { toggleResetPasswordModal, destroy, reset, initialize } = this.props;
-  //   // destroy();
-  //   reset('resetPassword');
-  //   // initialize();
-  //   toggleResetPasswordModal();
-  // }
-
-  onResetPassword = () => {
-    const { toggleResetPasswordModal, resetPassword } = this.props;
-    resetPassword()
+  onToggle = () => {
+    const { toggleResetPasswordModal, reset } = this.props;
     toggleResetPasswordModal();
+    reset(); //do not initialize syncErrors on the beginning...
+    // this.props.initialize({ email: '' });
   }
   
   render() {
-    const { handleSubmit, submitting, toggleResetPasswordModal, reset, modals} = this.props;
+    const { handleSubmit, submitting, reset, modals, resetPassword} = this.props;
     const { resetPasswordModalIsOpen } = modals;
       return (
         <ResetPasswordModal 
           isOpen={resetPasswordModalIsOpen} 
-          handleSubmit={handleSubmit(this.onResetPassword)} 
+          handleSubmit={handleSubmit(resetPassword)} 
           submitting={submitting}
-          toggle={toggleResetPasswordModal}
+          toggle={this.onToggle}
           reset={reset}
         />
     );

@@ -2,6 +2,7 @@ import { SubmissionError, reset } from 'redux-form';
 import { toastr } from 'react-redux-toastr';
 
 import messages from 'variables/messages';
+import { toggleResetPasswordModal } from './modals.actions';
 
 const ACTIONS = {};
 
@@ -69,6 +70,8 @@ const resetPassword = creds => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
   try {
     await firebase.auth().sendPasswordResetEmail(creds.email);
+    dispatch(toggleResetPasswordModal());
+    dispatch(reset('resetPassword'));
     toastr.success(messages.toastrSuccess, messages.toastrSuccessResetPassword);
   } catch(error) {
     console.log(error);
