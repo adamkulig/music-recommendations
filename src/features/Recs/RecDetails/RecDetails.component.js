@@ -15,9 +15,9 @@ import {
 } from 'reactstrap';
 
 import { collectionToString } from 'helpers/collections.helpers';
-import RecItemRow from 'components/RecItemRow/RecItemRow.component';
-import RecItemRowLink from 'components/RecItemRowLink/RecItemRowLink.component';
-import RecItemHeader from 'components/RecItemHeader/RecItemHeader.component';
+import RecItemRow from '../components/RecItemRow/RecItemRow.component';
+import RecItemRowLink from '../components/RecItemRowLink/RecItemRowLink.component';
+import RecItemHeader from '../components/RecItemHeader/RecItemHeader.component';
 import Stars from 'components/Stars/Stars.component';
 import history from 'history.js';
 

@@ -8,19 +8,20 @@ import { isEmpty } from 'lodash';
 
 // import { getAuth } from 'state/selectors/firebase.selectors';
 import { filterRecs } from 'state/actions/recs.actions';
-import queryString from 'query-string';
+import { parse, stringify } from 'query-string';
 
 import RecsFilters from './RecsFilters.component';
 // import validate from './RecForm.validators';
 // import routes from 'variables/routes';
+import { filtersObjectToQueryString } from 'helpers/queryString.helpers';
 
 class RecFiltersContainer extends Component {
 
-  filterRecs = data => {
-    console.log('data :', data);
-    const parsed = queryString.parse(window.location.search);
-    parsed.page = 1;
-    // !isEmpty(data.band) {parsed.band = data.band }
+  filterRecs = filters => {
+    // const parsed = parse(window.location.search);
+    filters = {'page': '1', ...filters};
+    const stringify = filtersObjectToQueryString(filters);
+    console.log(stringify)
   }
 
   render() {

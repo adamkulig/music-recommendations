@@ -11,8 +11,8 @@ import {
 
 import VoteButtonsGroup from '../../VoteButtonsGroup/VoteButtonsGroup.component';
 import { collectionToString } from 'helpers/collections.helpers';
-import RecItemRow from 'components/RecItemRow/RecItemRow.component';
-import RecItemHeader from 'components/RecItemHeader/RecItemHeader.component';
+import RecItemRow from '../../components/RecItemRow/RecItemRow.component';
+import RecItemHeader from '../../components/RecItemHeader/RecItemHeader.component';
 
 const RecItemComponent = ({ data }) => {
   const { user, createdAt, band, country, genres, youtubeLink, likes, id } = data;
