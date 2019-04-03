@@ -12,20 +12,24 @@ import { parse, stringify } from 'query-string';
 
 import RecsFilters from './RecsFilters.component';
 // import validate from './RecForm.validators';
-// import routes from 'variables/routes';
-import { filtersObjectToQueryString } from 'helpers/queryString.helpers';
+import routes from 'variables/routes';
+import { objectToQueryString } from 'helpers/queryString.helpers';
+import history from 'history.js';
 
 class RecFiltersContainer extends Component {
 
   filterRecs = filters => {
-    // const parsed = parse(window.location.search);
     filters = {'page': '1', ...filters};
-    const stringify = filtersObjectToQueryString(filters);
-    console.log(stringify)
+    const stringify = objectToQueryString(filters);
+    const queryString = encodeURI(stringify)
+    history.push({
+      pathname: routes.Recs,
+      search: queryString
+    })
   }
 
   render() {
-    const { handleSubmit, submitting, filterRecs } = this.props;
+    const { handleSubmit, submitting } = this.props;
     return (
       <RecsFilters 
         handleSubmit={handleSubmit(this.filterRecs)} 
