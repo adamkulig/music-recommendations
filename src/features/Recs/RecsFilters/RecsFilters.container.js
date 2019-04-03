@@ -19,7 +19,7 @@ import history from 'history.js';
 class RecFiltersContainer extends Component {
 
   filterRecs = filters => {
-    filters = {'page': '1', ...filters};
+    filters = {...filters, 'page': '1', };
     const stringify = objectToQueryString(filters);
     const queryString = encodeURI(stringify)
     history.push({

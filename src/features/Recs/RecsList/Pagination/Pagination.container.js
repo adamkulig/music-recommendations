@@ -70,7 +70,8 @@ class PaginationContainer extends Component {
     } else {
       desiredPage = toString(countPage);
     }
-    const query = { 'page': desiredPage, ...parsed }
+    const query = { ...parsed, 'page': desiredPage }
+    console.log('query', query)
     return stringify(query);
   }
 
