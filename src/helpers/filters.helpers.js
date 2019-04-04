@@ -10,9 +10,8 @@ export const filtersToQueryString = data => Object.keys(data).reduce((accu, key,
   } else if (isArray(data[key])) {
     const stringifiedOptions = combineMultipleOptions(data[key])
     return `${accu}${key}=${stringifiedOptions}${end}`
-  } else {
-    return accu;
-  }
+  } 
+  return accu;
 }, '')
 
 const combineMultipleOptions = data => data.reduce((accuArray, obj, index) => {
@@ -31,7 +30,6 @@ export const filtersToObject = data => reduce(data, (accu, current, key) => {
       return [ ...accu, i.value]
     }, [])
    return { ...accu, [key]: array } 
-  } else {
-    return accu;
-  }
+  } 
+  return accu;
 }, {})

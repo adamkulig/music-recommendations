@@ -6,13 +6,14 @@ import routes from 'variables/routes';
 import { PAGINATION } from 'variables/recs';
 
 const PaginationComponent = ({ pages, page }) => {
+  const currentPage = page;
   const { LEFT, RIGHT } = PAGINATION;
   return ( 
     <Pagination className='d-flex justify-content-center py-1'>
       {pages.map(page => (
         <PaginationItem 
           key={page.count} 
-          active={page.count === page}
+          active={page.count === currentPage}
         >
           <PaginationLink 
             tag={Link}

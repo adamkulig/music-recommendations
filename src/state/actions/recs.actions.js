@@ -47,7 +47,6 @@ const createRec = data => async (dispatch, getState, { getFirebase, getFirestore
 
 const vote = data => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const { recId, userId, like } = data;
-  console.log('data :', data);
   const firestore = getFirestore();
   const rec = firestore.collection('recommendations').doc(recId);
   const modifiedAt = new Date();
@@ -59,7 +58,6 @@ const vote = data => async (dispatch, getState, { getFirebase, getFirestore }) =
       modifiedAt
     })
     dispatch(updateRec({ recId, userId, like }));
-    console.log('vote');
   } catch(error) {
     console.log(error);
     toastr.error(messages.toastrError, messages.unknownError);
@@ -67,7 +65,6 @@ const vote = data => async (dispatch, getState, { getFirebase, getFirestore }) =
 }
 
 const fetchPage = params => async (dispatch, getState) => {
-  console.log('params', params)
   const state = getState();
   const allRecs = get(state, 'allRecs.data.allRecs', []);
   const totalRecs = allRecs.length;

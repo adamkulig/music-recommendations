@@ -12,7 +12,7 @@ import RecsFiltersContainer from '../RecsFilters/RecsFilters.container';
 import LoadingWrapper from 'components/LoadingWrapper/LoadingWrapper.component';
 
 class RecsListContainer extends Component {
-  async componentDidMount() {
+  componentDidMount = async () => {
     await this.props.fetchAllRecs(true);
     this.fetchDesiredPage();
   }
@@ -20,7 +20,6 @@ class RecsListContainer extends Component {
   componentDidUpdate = async (prevProps, prevState) => {
     if (this.props.location.search !== prevProps.location.search) {
       await this.props.fetchAllRecs();
-      console.log('update');
       this.fetchDesiredPage();
     }
   }

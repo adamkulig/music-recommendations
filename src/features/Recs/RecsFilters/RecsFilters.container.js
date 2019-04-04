@@ -13,11 +13,7 @@ import history from 'history.js';
 class RecFiltersContainer extends Component {
 
   onFilterRecs = filters => {
-    // const { filterRecs } = this.props;
-    // filterRecs(filtersToObject(filters))
     const filtersForUrl = {...filters, 'page': '1', };
-    // console.log('filters :', filters);
-    // console.log('filtersForUrl :', filtersForUrl);
     const stringify = filtersToQueryString(filtersForUrl);
     const queryString = encodeURI(stringify)
     history.push({
