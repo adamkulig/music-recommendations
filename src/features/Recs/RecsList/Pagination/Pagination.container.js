@@ -17,21 +17,21 @@ class PaginationContainer extends Component {
     this.createPaginationPages();
   }
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.recs.data.currentPage !== prevProps.recs.data.currentPage) {
+    if (this.props.recs.data.page !== prevProps.recs.data.page) {
       this.createPaginationPages();
     }
   }
 
   createPaginationPages = () => {
-    const { currentPage, totalPages } = this.props.recs.data;
+    const { page, totalPages } = this.props.recs.data;
     const { LEFT, RIGHT } = PAGINATION;
     const maxPaginationBlocks = 7;
     let pagesRange;
     if (totalPages <= maxPaginationBlocks) {
       pagesRange = range(1, totalPages + 1)
     } else {
-      const startPage = Math.max(2, currentPage - 1);
-      const endPage = Math.min(totalPages - 1, currentPage + 1);
+      const startPage = Math.max(2, page - 1);
+      const endPage = Math.min(totalPages - 1, page + 1);
       const centerPagesRange = range(startPage, endPage + 1);
       const hasLeftArrow = startPage > 2;
       const hasRightSpill = endPage < totalPages - 1;
@@ -59,28 +59,27 @@ class PaginationContainer extends Component {
   }
 
   createPaginationQuery = countPage => {
-    const { currentPage, totalPages } = this.props.recs.data;
+    const { page, totalPages } = this.props.recs.data;
     const { LEFT, RIGHT } = PAGINATION;
     const parsed = parse(window.location.search);
     let desiredPage;
     if (countPage === LEFT) {
-      desiredPage = toString(Math.max(1, currentPage - 6));
+      desiredPage = toString(Math.max(1, page - 6));
     } else if (countPage === RIGHT) {
-      desiredPage = toString(Math.min(totalPages, currentPage + 6));
+      desiredPage = toString(Math.min(totalPages, page + 6));
     } else {
       desiredPage = toString(countPage);
     }
     const query = { ...parsed, 'page': desiredPage }
-    console.log('query', query)
     return stringify(query);
   }
 
   render() { 
-    const { currentPage } = this.props.recs.data;
+    const { page } = this.props.recs.data;
     return ( 
       <Pagination 
         pages={this.state.pages} 
-        currentPage={currentPage}
+        page={page}
       />
      );
   }

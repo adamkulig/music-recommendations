@@ -20,6 +20,7 @@ class RecsListContainer extends Component {
   componentDidUpdate = async (prevProps, prevState) => {
     if (this.props.location.search !== prevProps.location.search) {
       await this.props.fetchAllRecs();
+      console.log('update');
       this.fetchDesiredPage();
     }
   }
@@ -27,7 +28,8 @@ class RecsListContainer extends Component {
   fetchDesiredPage = () => {
     const parsed = queryString.parse(window.location.search);
     const params = {
-      currentPage: parsed.page ? Number(parsed.page) : 1
+      ...parsed,
+      page: parsed.page ? Number(parsed.page) : 1
     }
     this.props.fetchPage(params);
   }
