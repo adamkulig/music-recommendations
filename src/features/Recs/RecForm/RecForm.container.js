@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
 import { compose } from 'redux';
 import countryList from 'react-select-country-list';
+import { func, bool } from 'prop-types';
 
 import { getAuth } from 'state/selectors/firebase.selectors';
 import { createRec } from 'state/actions/recs.actions';
@@ -13,6 +14,13 @@ import validate from './RecForm.validators';
 import routes from 'variables/routes';
 
 class RecFormContainer extends Component {
+  static propTypes = {
+    handleSubmit: func,
+    submitting: bool,
+    createRec: func,
+    auth: bool
+  }
+
   state = {
     countries: countryList().getData()
   }

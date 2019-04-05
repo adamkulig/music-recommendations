@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { array, number } from 'prop-types';
 
 import routes from 'variables/routes';
 import { PAGINATION } from 'variables/recs';
@@ -31,5 +32,10 @@ const PaginationComponent = ({ pages, page }) => {
     </Pagination> 
   );
 }
- 
+
+PaginationComponent.propTypes = {
+  pages: array,
+  page: number 
+}
+
 export default PaginationComponent;

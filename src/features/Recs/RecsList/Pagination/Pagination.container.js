@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { range, toString } from 'lodash';
 import { parse, stringify } from 'query-string';
-import { withRouter } from "react-router";
+import { withRouter } from 'react-router';
 
 import { getRecs } from 'state/selectors/recs.selectors';
 import Pagination from './Pagination.component';
@@ -16,7 +16,7 @@ class PaginationContainer extends Component {
   componentDidMount() {
     this.createPaginationPages();
   }
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     const { page, totalPages } = this.props.recs.data;
     const { page: prevPage, totalPages: prevTotalPages } = prevProps.recs.data;
     if (page !== prevPage || totalPages !== prevTotalPages) {

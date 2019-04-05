@@ -8,6 +8,7 @@ import {
   CardHeader, 
   Form, 
 } from 'reactstrap';
+import { func, bool, array } from 'prop-types';
 
 import InputField from 'components/InputField/InputField.component';
 import SelectField from 'components/SelectField/SelectField.component';
@@ -17,6 +18,7 @@ import { GENRES, RATING } from 'variables/recs';
 import routes from 'variables/routes';
 
 const RecComponent = ({ handleSubmit, submitting, countries }) => {
+  console.log('countries :', countries);
   return (
     <Row>
       <Col md={{ size: 10, offset: 1 }} lg={{ size: 8, offset: 2 }}>
@@ -91,5 +93,11 @@ const RecComponent = ({ handleSubmit, submitting, countries }) => {
     </Row>
   )
 };
+
+RecComponent.propTypes = {
+  handleSubmit: func,
+  submitting: bool,
+  countries: array
+}
 
 export default RecComponent;

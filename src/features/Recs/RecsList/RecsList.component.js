@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { array } from 'prop-types';
 import { Row, Col } from 'reactstrap';
 
 import RecItem from './RecItem/RecItem.component';
@@ -17,7 +17,7 @@ const RecsListComponent = ({ recs }) => {
 }
 
 RecsListComponent.propTypes = {
-  recs: PropTypes.array
+  recs: array
 }
 
 export default RecsListComponent;
