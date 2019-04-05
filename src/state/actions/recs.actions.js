@@ -1,5 +1,5 @@
 import { toastr } from 'react-redux-toastr';
-import { inRange, get, slice } from 'lodash';
+import { inRange, get, slice, isNil, values } from 'lodash';
 
 import history from 'history.js';
 import routes from 'variables/routes';
@@ -65,21 +65,41 @@ const vote = data => async (dispatch, getState, { getFirebase, getFirestore }) =
 }
 
 const fetchPage = params => async (dispatch, getState) => {
+  console.log('params :', params);
+  const { page, rating, genres, band } = params;
   const state = getState();
   const allRecs = get(state, 'allRecs.data.allRecs', []);
-  const totalRecs = allRecs.length;
+  const isFiltered = !isNil(rating) || !isNil(genres) || !isNil(band);
+  console.log('isFiltered :', isFiltered);
+  const filterRecs = (recs, params) => {
+    const { rating, genres, band } = params;
+    let filteredRecs = recs;
+    if(!isNil(band)){
+      filteredRecs = filteredRecs.filter(rec => rec.band.toLowerCase().includes(band))
+    }
+    if(!isNil(rating)){
+      filteredRecs = filteredRecs.filter(rec => rec.rating >= rating)
+    }
+    if(!isNil(genres)){
+      genres.map(genre => filteredRecs = filteredRecs.filter(rec => rec.genres.includes(genre)))
+    }
+    return filteredRecs;
+  } 
+  const desiredRecs = isFiltered ? filterRecs(allRecs, params) : allRecs;
+ 
+  const totalRecs = desiredRecs.length;
   const totalPages = Math.ceil(totalRecs / RECS.pageSize);
-  if (inRange(params.page, 1, totalPages + 1)) {
-    const startIndex = params.page * RECS.pageSize - RECS.pageSize;
-    const endIndex = params.page * RECS.pageSize;
-    const desiredRecs = slice(allRecs, startIndex, endIndex)
+  if (inRange(page, 1, totalPages + 1)) {
+    const startIndex = page * RECS.pageSize - RECS.pageSize;
+    const endIndex = page * RECS.pageSize;
+    const recs = slice(desiredRecs, startIndex, endIndex)
     dispatch({
       type: ACTIONS.FETCH_RECS,
       payload: {
-        recs: desiredRecs,
+        recs,
         totalRecs,
         totalPages,
-        page: params.page
+        page
       }
     })
   } else {
@@ -99,7 +119,9 @@ const fetchAllRecs = (appIsMounting = false) => async (dispatch, getState, { get
         .collection('recommendations')
         .orderBy('createdAt', 'desc')
         .get();
-        const allRecs = snapshotsToArray(allRecsRef.docs);
+        const allRecs = snapshotsToArray(allRecsRef.docs)
+          .map(rec => ({...rec, genres: values(rec.genres)}));
+
         dispatch(asyncActionFulfilled(ACTIONS.FETCH_ALL_RECS, {
           allRecs,
       }))

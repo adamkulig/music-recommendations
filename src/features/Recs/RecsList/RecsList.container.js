@@ -26,9 +26,13 @@ class RecsListContainer extends Component {
 
   fetchDesiredPage = () => {
     const parsed = queryString.parse(window.location.search);
+    const { page, rating, genres, band } = parsed;
     const params = {
       ...parsed,
-      page: parsed.page ? Number(parsed.page) : 1
+      page: page ? Number(page) : 1,
+      rating: rating ? Number(rating) : null,
+      genres: genres ? genres.split(',') : null,
+      band: band ? band.toLowerCase() : null  
     }
     this.props.fetchPage(params);
   }

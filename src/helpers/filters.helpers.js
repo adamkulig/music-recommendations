@@ -29,7 +29,7 @@ export const filtersToObject = data => reduce(data, (accu, current, key) => {
     const array = reduce(current, (accu, i) => {
       return [ ...accu, i.value]
     }, [])
-   return { ...accu, [key]: array } 
+  return { ...accu, [key]: array } 
   } 
   return accu;
 }, {})
