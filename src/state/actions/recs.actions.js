@@ -65,26 +65,10 @@ const vote = data => async (dispatch, getState, { getFirebase, getFirestore }) =
 }
 
 const fetchPage = params => async (dispatch, getState) => {
-  console.log('params :', params);
   const { page, rating, genres, band } = params;
   const state = getState();
   const allRecs = get(state, 'allRecs.data.allRecs', []);
   const isFiltered = !isNil(rating) || !isNil(genres) || !isNil(band);
-  console.log('isFiltered :', isFiltered);
-  const filterRecs = (recs, params) => {
-    const { rating, genres, band } = params;
-    let filteredRecs = recs;
-    if(!isNil(band)){
-      filteredRecs = filteredRecs.filter(rec => rec.band.toLowerCase().includes(band))
-    }
-    if(!isNil(rating)){
-      filteredRecs = filteredRecs.filter(rec => rec.rating >= rating)
-    }
-    if(!isNil(genres)){
-      genres.map(genre => filteredRecs = filteredRecs.filter(rec => rec.genres.includes(genre)))
-    }
-    return filteredRecs;
-  } 
   const desiredRecs = isFiltered ? filterRecs(allRecs, params) : allRecs;
  
   const totalRecs = desiredRecs.length;
@@ -107,6 +91,21 @@ const fetchPage = params => async (dispatch, getState) => {
     toastr.error(messages.toastrError, messages.toastrErrorPage)
   }
 }
+
+const filterRecs = (recs, params) => {
+  const { rating, genres, band } = params;
+  let filteredRecs = recs;
+  if(!isNil(band)){
+    filteredRecs = filteredRecs.filter(rec => rec.band.toLowerCase().includes(band))
+  }
+  if(!isNil(rating)){
+    filteredRecs = filteredRecs.filter(rec => rec.rating >= rating)
+  }
+  if(!isNil(genres)){
+    genres.map(genre => filteredRecs = filteredRecs.filter(rec => rec.genres.includes(genre)))
+  }
+  return filteredRecs;
+} 
 
 const fetchAllRecs = (appIsMounting = false) => async (dispatch, getState, { getFirestore }) => {
   const firestore = getFirestore();
@@ -144,11 +143,6 @@ const checkIfRecsAreUpdated = async (firestore, state) => {
   const lastRecStateTimestamp = get(state, 'allRecs.data.allRecs[0].modifiedAt.seconds', null)
   return lastRecStateTimestamp !== lastRecFirestoreTimestamp;
 }
-
-const filterRecs = data => ({
-  type: ACTIONS.FILTER_RECS,
-  payload: data
-})
 
 const updateRec = data => ({
   type: ACTIONS.UPDATE_REC,
