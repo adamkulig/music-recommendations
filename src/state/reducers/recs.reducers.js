@@ -1,5 +1,3 @@
-import { isNil } from 'lodash';
-
 import { ACTIONS } from '../actions/recs.actions';
 
 const initialState = {
@@ -29,15 +27,6 @@ const recsReducer = (state = initialState, action ) => {
     case ACTIONS.UPDATE_REC: {
       const { payload } = action;
       console.log('payload :', payload);
-      const desiredRec = state.data.recs.find(rec => payload.recId === rec.id)
-      console.log('desiredRec', desiredRec);
-      const updatedRec = {
-        ...desiredRec,
-        likes: {
-          ...desiredRec.likes,
-          [payload.userId]: payload.like 
-        }
-      }
       const updatedRecs = state.data.recs.map(rec => {
         if (payload.recId === rec.id) {
           return {

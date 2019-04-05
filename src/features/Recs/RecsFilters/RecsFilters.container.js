@@ -7,7 +7,7 @@ import { filterRecs } from 'state/actions/recs.actions'
 
 import RecsFilters from './RecsFilters.component';
 import routes from 'variables/routes';
-import { filtersToQueryString, filtersToObject } from 'helpers/filters.helpers';
+import { filtersToQueryString } from 'helpers/filters.helpers';
 import history from 'history.js';
 
 class RecFiltersContainer extends Component {
