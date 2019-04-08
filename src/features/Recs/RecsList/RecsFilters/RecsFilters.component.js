@@ -16,7 +16,7 @@ const RecsFiltersComponent = ({ handleSubmit, submitting }) => {
             name="band" 
             type="text" 
             component={InputField} 
-            label="Band*" 
+            label="Band*"
           />
           <Field
             isMulti

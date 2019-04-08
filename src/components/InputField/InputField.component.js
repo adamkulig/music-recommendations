@@ -13,6 +13,7 @@ const InputField = ({
   type,
   meta: { touched, error, valid },
   placeholder,
+  noValidate,
   ...props
 }) => {
   const isValid = touched && valid;
@@ -38,7 +39,8 @@ const InputField = ({
 // }
 
 InputField.defaultProps = {
-  placeholder: ''
+  placeholder: '',
+  noValidate: false
 }
 
 export default InputField;
