@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { signOut } from 'state/actions/auth.actions';
 import { getAuth, getProfile } from 'state/selectors/firebase.selectors';
 
-import Nav from './Nav.component';
+import AppNav from './AppNav.component';
 
-class NavContainer extends Component {
+class AppNavContainer extends Component {
   state = {
     navIsOpen: false,
     dropdownIsOpen: false
@@ -22,7 +22,7 @@ class NavContainer extends Component {
     const { isEmpty } = this.props.auth;
     const { displayName } = this.props.profile;
      return (
-      <Nav
+      <AppNav
         onToggleNavbar={this.toggleNavbar}
         onToggleDropdown={this.toggleDropdown}
         onCloseNavbar={this.closeNavbar}
@@ -45,4 +45,4 @@ const mapDispatchToProps = {
   signOut 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AppNavContainer);

@@ -11,7 +11,7 @@ import NavForLoggedIn from './components/NavForLoggedIn.component';
 import NavForNotLoggedIn from './components/NavForNotLoggedIn.component';
 import routes from 'variables/routes';
 
-const NavComponent = ({ 
+const AppNavComponent = ({ 
   dropdownIsOpen,
   navIsOpen,
   onToggleDropdown,
@@ -48,4 +48,4 @@ const NavComponent = ({
   );
 };
 
-export default NavComponent;
+export default AppNavComponent;
