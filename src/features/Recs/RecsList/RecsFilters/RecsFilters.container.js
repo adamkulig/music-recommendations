@@ -33,10 +33,6 @@ class RecFiltersContainer extends Component {
   }
 }
 
-// const mapStateToProps = state => ({
-//   auth: getAuth(state)
-// });
-
 const mapDispatchToProps = {
   filterRecs
 }
@@ -45,4 +41,5 @@ export default compose(
   connect(null, mapDispatchToProps),
   reduxForm({
     form: 'recsFilters'
-  }))(RecFiltersContainer);
+  })
+)(RecFiltersContainer);

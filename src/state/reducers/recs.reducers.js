@@ -26,7 +26,6 @@ const recsReducer = (state = initialState, action ) => {
     }
     case ACTIONS.UPDATE_REC: {
       const { payload } = action;
-      console.log('payload :', payload);
       const updatedRecs = state.data.recs.map(rec => {
         if (payload.recId === rec.id) {
           return {

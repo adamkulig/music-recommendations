@@ -65,10 +65,10 @@ const vote = data => async (dispatch, getState, { getFirebase, getFirestore }) =
 }
 
 const fetchPage = params => async (dispatch, getState) => {
-  const { page, rating, genres, band } = params;
+  const { page, genres, band } = params;
   const state = getState();
   const allRecs = get(state, 'allRecs.data.allRecs', []);
-  const isFiltered = !isNil(rating) || !isNil(genres) || !isNil(band);
+  const isFiltered = !isNil(genres) || !isNil(band);
   const desiredRecs = isFiltered ? filterRecs(allRecs, params) : allRecs;
  
   const totalRecs = desiredRecs.length;
@@ -93,13 +93,10 @@ const fetchPage = params => async (dispatch, getState) => {
 }
 
 const filterRecs = (recs, params) => {
-  const { rating, genres, band } = params;
+  const { genres, band } = params;
   let filteredRecs = recs;
   if(!isNil(band)){
     filteredRecs = filteredRecs.filter(rec => rec.band.toLowerCase().includes(band))
-  }
-  if(!isNil(rating)){
-    filteredRecs = filteredRecs.filter(rec => rec.rating >= rating)
   }
   if(!isNil(genres)){
     genres.map(genre => filteredRecs = filteredRecs.filter(rec => rec.genres.includes(genre)))

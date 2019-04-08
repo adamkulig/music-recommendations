@@ -8,7 +8,7 @@ import { fetchPage, fetchAllRecs } from 'state/actions/recs.actions';
 
 import RecsList from './RecsList.component';
 import PaginationContainer from './Pagination/Pagination.container';
-import RecsFiltersContainer from '../RecsFilters/RecsFilters.container';
+import RecsFiltersContainer from './RecsFilters/RecsFilters.container';
 import LoadingWrapper from 'components/LoadingWrapper/LoadingWrapper.component';
 
 class RecsListContainer extends Component {

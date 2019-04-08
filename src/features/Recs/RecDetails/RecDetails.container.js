@@ -8,7 +8,7 @@ import { toastr } from 'react-redux-toastr';
 
 import { getRec } from 'state/selectors/firestore.selectors'
 
-import RecDetails from './RecDetails.component';
+import RecItem from '../components/RecItem/RecItem.component';
 import history from 'history.js';
 import messages from 'variables/messages';
 import routes from 'variables/routes';
@@ -26,13 +26,13 @@ class RecDetailsContainer extends Component {
 
   render() {
     const { rec, match } = this.props;
-    let currentRec = null;
+    let currentRec;
     if(!isNil(rec)) {
       currentRec = match.params.id === rec.id;
     } 
     return (
       <LoadingWrapper isLoading={!currentRec}>
-        <RecDetails data={rec} />
+        <RecItem data={rec} isSingleRecPage />
       </LoadingWrapper>
     )
   }
@@ -42,5 +42,4 @@ const mapStateToProps = (state) => ({
   rec: getRec(state)
 })
 
-// export default connect(mapStateToProps)(RecDetailsContainer)
 export default withFirestore(connect(mapStateToProps)(RecDetailsContainer))

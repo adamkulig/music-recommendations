@@ -1,13 +1,18 @@
 import React from 'react';
-// import { string, number } from 'prop-types';
+import { string, node } from 'prop-types';
 
-const RecItemRow = ({header, data, large = false}) => (
-  <div className='text-center px-3 mb-1'>
-    <span className='text-muted font-weight-light d-inline-block mr-2'>
+const RecItemRow = ({ header, children }) => (
+  <div className='d-flex justify-content-center align-items px-3 mb-1'>
+    <div className='text-muted font-weight-light mr-2'>
       {header}
-    </span>
-    <span className={large ? 'large-font' : ''}>{data}</span>
+    </div>
+      {children}
   </div>
 );
+
+RecItemRow.propTypes = {
+  header: string,
+  children: node
+}
 
 export default RecItemRow;

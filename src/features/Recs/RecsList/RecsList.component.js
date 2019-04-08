@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { array } from 'prop-types';
 
-import RecItem from './RecItem/RecItem.component';
+import RecItem from '../components/RecItem/RecItem.component';
 
 const RecsListComponent = ({ recs }) => {
   return (
