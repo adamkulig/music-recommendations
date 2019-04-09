@@ -13,7 +13,7 @@ const messages = {
   toastrError: 'Error!',
   toastrSuccessSignIn: 'You are logged in.',
   toastrSuccessSignOut: 'You are logged out.',
-  toastrSuccessSignUp: 'You are registered and logged in.',
+  toastrSuccessSignUp: 'You are registered. Check your inbox and verify your account.',
   toastrSuccessResetPassword: 'E-mail was send.',
   toastrSuccessUpdatePassword: 'Password has been changed.',
   toastrSuccessNewRecAdded: 'Your recommendation has beed added.',
@@ -22,6 +22,7 @@ const messages = {
   toastrErrorPage: 'This page does not exist.',
   unknownError: 'Something went wrong.',
   invalidYoutubeUrl: 'It is not a youtube url.',
+  toastrVerifyEmailWasSend: 'Your account is not verified. New verification e-mail was sent. Check your inbox.'
 }
 
 export default messages;

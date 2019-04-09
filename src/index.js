@@ -23,7 +23,7 @@ store.firebaseAuthIsReady.then(() => {
             transitionOut='fadeOut'
             progressBar
             closeOnToastrClick
-            timeOut={3000}
+            timeOut={5000}
           />
           <App />
         </Fragment>

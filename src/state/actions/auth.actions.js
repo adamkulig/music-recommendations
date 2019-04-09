@@ -13,7 +13,15 @@ const signIn = creds => async (dispatch, getState, { getFirebase }) => {
       creds.email,
       creds.password
     )
-    toastr.success(messages.toastrSuccess, messages.toastrSuccessSignIn)
+    const user = firebase.auth().currentUser;
+    if (user.emailVerified) {
+      toastr.success(messages.toastrSuccess, messages.toastrSuccessSignIn)
+    } else {
+      await firebase.auth().currentUser.sendEmailVerification();
+      await firebase.auth().signOut();
+      dispatch(reset('signIn'));
+      toastr.warning(messages.toastrVerifyEmailWasSend);
+    }
   } catch(error) {
     if(error.code === 'auth/wrong-password') {
       throw new SubmissionError({
@@ -59,12 +67,25 @@ const signUp = creds => async (dispatch, getState, { getFirebase, getFirestore }
       displayName: creds.nickname,
       email: creds.email
     })
+    await firebase.auth().currentUser.sendEmailVerification();
+    firebase.auth().signOut();
     toastr.success(messages.toastrSuccess, messages.toastrSuccessSignUp);
   } catch(error) {
     console.log(error);
     toastr.error(messages.toastrError, messages.unknownError);
   }
 }
+
+// const sendVerificationMail = () => async (dispatch, getState, { getFirebase, getFirestore }) => {
+//   const firebase = getFirebase();
+//   try {
+//     const user = firebase.auth().currentUser;
+//     await user.sendEmailVerification();
+//     console.log('sendVerificationMail success')
+//   } catch(error) {
+//     console.log('sendVerificationMail error')
+//   }
+// }
 
 const resetPassword = creds => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();

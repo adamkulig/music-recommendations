@@ -15,8 +15,8 @@ import routes from 'variables/routes';
 class SignInContainer extends Component {
   render() {
     const { handleSubmit, submitting, signIn, toggleResetPasswordModal, auth } = this.props;
-    const { isEmpty } = auth;
-    if (!isEmpty) {
+    const { isEmpty, emailVerified } = auth;
+    if (!isEmpty && emailVerified) {
       return <Redirect to={routes.Main} />
     }
     return (
