@@ -7,7 +7,7 @@ import LaddaButtonWrapper from '../LaddaButtonWrapper/LaddaButtonWrapper.compone
 const SubmitCancelButtons = ({ submitting, onCancel }) => {
   return (
     <ButtonGroup className='float-right'>
-      <Button color='secondary' disabled={submitting} className='mr-2' type='reset' onClick={onCancel}>
+      <Button color='secondary' disabled={submitting} className='mr-1' type='reset' onClick={onCancel}>
         Cancel
       </Button>
       <LaddaButtonWrapper color='primary' type='submit' disabled={submitting} loading={submitting} >

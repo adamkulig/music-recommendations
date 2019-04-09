@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { Card, CardBody, CardHeader, Button, Form } from 'reactstrap';
 
-import InputField from 'components/InputField/InputField.component'
+import InputField from 'components/Forms/InputField/InputField.component'
 import SubmitCancelButtons from 'components/SubmitCancelButtons/SubmitCancelButtons.component'
 import routes from 'variables/routes';
 import history from 'history.js';
@@ -31,9 +31,6 @@ const SignInComponent = ({ handleSubmit, submitting, handleOpenModal }) => {
           </Button>
           <SubmitCancelButtons submitting={submitting} onCancel={() => history.push(routes.Main)} />
         </Form>
-        {/* <div className=" my-2 text-center">
-          <span className="text-success">{message}</span>
-        </div> */}
       </CardBody>
     </Card>
   )

@@ -5,19 +5,18 @@ import {
   Label, 
   Input
 } from 'reactstrap';
-// import {} from 'prop-types';
+import { object, string, bool } from 'prop-types';
 
 const InputField = ({ 
   input,
   label,
   type,
-  meta: { touched, error, valid },
   placeholder,
-  noValidate,
-  ...props
+  meta: { touched, error, valid },
+  noValidate
 }) => {
-  const isValid = touched && valid;
-  const isInvalid = touched && !valid;
+  const isValid = touched && valid && !noValidate;
+  const isInvalid = touched && !valid && !noValidate;
   return (
     <FormGroup>
       <Label>{label}</Label>
@@ -27,16 +26,22 @@ const InputField = ({
         valid={isValid}
         invalid={isInvalid}
         placeholder={placeholder}
-        {...props}
       />
       <FormFeedback>{error}</FormFeedback>
     </FormGroup>
   )
 };
 
-// InputField.propTypes = {
-  
-// }
+InputField.propTypes = {
+  input: object,
+  label: string,
+  type: string,
+  placeholder: string,
+  touched: bool,
+  error: string,
+  valid: bool,
+  noValidate: bool
+}
 
 InputField.defaultProps = {
   placeholder: '',

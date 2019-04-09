@@ -3,8 +3,8 @@ import { Field } from 'redux-form';
 import { Card, CardBody, CardHeader, Form } from 'reactstrap';
 import { func, bool, array } from 'prop-types';
 
-import InputField from 'components/InputField/InputField.component';
-import SelectField from 'components/SelectField/SelectField.component';
+import InputField from 'components/Forms/InputField/InputField.component';
+import SelectField from 'components/Forms/SelectField/SelectField.component';
 import SubmitCancelButtons from 'components/SubmitCancelButtons/SubmitCancelButtons.component'
 import history from 'history.js';
 import { GENRES, RATING } from 'variables/recs';
@@ -21,6 +21,7 @@ const RecComponent = ({ handleSubmit, submitting, countries }) => {
             type="text" 
             component={InputField} 
             label="Band*" 
+            placeholder="write the band's name..."
           />
           <Field
             name="country"
@@ -35,6 +36,7 @@ const RecComponent = ({ handleSubmit, submitting, countries }) => {
             label="Rating*" 
             options={RATING}
             placeholder='your rating...'
+            openMenuOnClick
           />
           <Field
             isMulti

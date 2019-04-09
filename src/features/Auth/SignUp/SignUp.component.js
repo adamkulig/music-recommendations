@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import { Card, CardBody, CardHeader, Form } from 'reactstrap';
 
-import InputField from 'components/InputField/InputField.component'
+import InputField from 'components/Forms/InputField/InputField.component'
 import SubmitCancelButtons from 'components/SubmitCancelButtons/SubmitCancelButtons.component'
 import routes from 'variables/routes';
 

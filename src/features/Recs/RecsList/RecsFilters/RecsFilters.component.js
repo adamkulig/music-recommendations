@@ -3,8 +3,8 @@ import React from 'react';
 import { Field } from 'redux-form';
 import { Card, CardBody, Button, Form } from 'reactstrap';
 
-import InputField from 'components/InputField/InputField.component';
-import SelectField from 'components/SelectField/SelectField.component';
+import InputField from 'components/Forms/InputField/InputField.component';
+import SelectField from 'components/Forms/SelectField/SelectField.component';
 import { GENRES } from 'variables/recs';
 
 const RecsFiltersComponent = ({ handleSubmit, submitting }) => {
@@ -17,6 +17,7 @@ const RecsFiltersComponent = ({ handleSubmit, submitting }) => {
             type="text" 
             component={InputField} 
             label="Band*"
+            noValidate
           />
           <Field
             isMulti
@@ -26,7 +27,6 @@ const RecsFiltersComponent = ({ handleSubmit, submitting }) => {
             options={GENRES}
             placeholder='choose genres...'
           />
-          
           <Button disabled={submitting} >Filter</Button>
         </Form>
       </CardBody>
