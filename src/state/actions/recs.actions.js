@@ -1,5 +1,5 @@
 import { toastr } from 'react-redux-toastr';
-import { inRange } from 'lodash';
+import { inRange, get, slice, isNil, values } from 'lodash';
 
 import history from 'history.js';
 import routes from 'variables/routes';
@@ -9,11 +9,15 @@ import { snapshotsToArray } from 'helpers/firestore.helpers';
 import {   
   asyncActionPending,
   asyncActionFulfilled,
-  asyncActionRejected
+  asyncActionRejected,
+  asyncActionCancelled,
 } from './generic/async.actions';
 
 const ACTIONS = {
-  FETCH_RECS: 'FETCH_RECS'
+  FETCH_RECS: 'FETCH_RECS',
+  FETCH_ALL_RECS: 'FETCH_ALL_RECS',
+  FILTER_RECS: 'FILTER_RECS',
+  UPDATE_REC: 'UPDATE_REC'
 }
   
 const createRec = data => async (dispatch, getState, { getFirebase, getFirestore }) => {
@@ -28,7 +32,8 @@ const createRec = data => async (dispatch, getState, { getFirebase, getFirestore
     genres: Object.assign({}, ...genres.map(item => ({[item.label]: item.value }))),
     likes: {},
     user: displayName,
-    createdAt: new Date()
+    createdAt: new Date(),
+    modifiedAt: new Date()
   }
   try {
     await firestore.collection('recommendations').add(newRec)
@@ -40,50 +45,105 @@ const createRec = data => async (dispatch, getState, { getFirebase, getFirestore
   }
 }
 
-const vote = data => (dispatch, getState, { getFirebase, getFirestore }) => {
+const vote = data => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const { recId, userId, like } = data;
   const firestore = getFirestore();
   const rec = firestore.collection('recommendations').doc(recId);
+  const modifiedAt = new Date();
   try {
-    rec.update({
+    await rec.update({
       likes: {
         [userId]: like
-      }
+      },
+      modifiedAt
     })
+    dispatch(updateRec({ recId, userId, like }));
   } catch(error) {
     console.log(error);
     toastr.error(messages.toastrError, messages.unknownError);
   }
 }
 
-const fetchPage = params => async (dispatch, getState, { getFirestore }) => {
-  const firestore = getFirestore();
-  const recsRef = firestore
-    .collection('recommendations')
-    .orderBy('createdAt', 'desc')
-  try {
-    dispatch(asyncActionPending(ACTIONS.FETCH_RECS))
-    const allRecs = await recsRef.get()
-    const totalRecs = allRecs.docs.length;
-    const lastRecRef = allRecs.docs[params.currentPage * RECS.pageSize - RECS.pageSize];
-    const totalPages = Math.ceil(totalRecs / RECS.pageSize);
-    if (inRange(params.currentPage, totalPages)) {
-      const recsQuery = await recsRef.startAt(lastRecRef).limit(RECS.pageSize);
-      const querySnap = await recsQuery.get();
-      const recs = snapshotsToArray(querySnap.docs);
-      dispatch(asyncActionFulfilled(ACTIONS.FETCH_RECS, {
+const fetchPage = params => async (dispatch, getState) => {
+  const { page, genres, band } = params;
+  const state = getState();
+  const allRecs = get(state, 'allRecs.data.allRecs', []);
+  const isFiltered = !isNil(genres) || !isNil(band);
+  const desiredRecs = isFiltered ? filterRecs(allRecs, params) : allRecs;
+ 
+  const totalRecs = desiredRecs.length;
+  const totalPages = Math.ceil(totalRecs / RECS.pageSize);
+  if (inRange(page, 1, totalPages + 1)) {
+    const startIndex = page * RECS.pageSize - RECS.pageSize;
+    const endIndex = page * RECS.pageSize;
+    const recs = slice(desiredRecs, startIndex, endIndex)
+    dispatch({
+      type: ACTIONS.FETCH_RECS,
+      payload: {
         recs,
         totalRecs,
         totalPages,
-        currentPage: params.currentPage
-      }))
-    } else {
-      history.push(routes.Main)
-      toastr.error(messages.toastrError, messages.toastrErrorPage)
-    }
-  } catch(error){
-    dispatch(asyncActionRejected(ACTIONS.FETCH_RECS, error));
+        page
+      }
+    })
+  } else {
+    history.push(routes.Main)
+    toastr.error(messages.toastrError, messages.toastrErrorPage)
   }
 }
 
-export { ACTIONS, createRec, vote, fetchPage };
+const filterRecs = (recs, params) => {
+  const { genres, band } = params;
+  let filteredRecs = recs;
+  if(!isNil(band)){
+    filteredRecs = filteredRecs.filter(rec => rec.band.toLowerCase().includes(band))
+  }
+  if(!isNil(genres)){
+    genres.map(genre => filteredRecs = filteredRecs.filter(rec => rec.genres.includes(genre)))
+  }
+  return filteredRecs;
+} 
+
+const fetchAllRecs = (appIsMounting = false) => async (dispatch, getState, { getFirestore }) => {
+  const firestore = getFirestore();
+  const state = getState();
+  try {
+    dispatch(asyncActionPending(ACTIONS.FETCH_ALL_RECS))
+    const permissionToGetAllRecs = appIsMounting || await checkIfRecsAreUpdated(firestore, state);
+    if (permissionToGetAllRecs) {
+      const allRecsRef = await firestore
+        .collection('recommendations')
+        .orderBy('createdAt', 'desc')
+        .get();
+        const allRecs = snapshotsToArray(allRecsRef.docs)
+          .map(rec => ({...rec, genres: values(rec.genres)}));
+
+        dispatch(asyncActionFulfilled(ACTIONS.FETCH_ALL_RECS, {
+          allRecs,
+      }))
+    } else {
+      dispatch(asyncActionCancelled(ACTIONS.FETCH_ALL_RECS));
+    }
+  } catch(error){
+    dispatch(asyncActionRejected(ACTIONS.FETCH_ALL_RECS, error));
+  }
+}
+
+const checkIfRecsAreUpdated = async (firestore, state) => {
+  const lastRecRef = await firestore
+    .collection('recommendations')
+    .orderBy('modifiedAt', 'desc')
+    .limit(1)
+    .get()
+  const lastRec = snapshotsToArray(lastRecRef.docs);
+  const lastRecFirestoreTimestamp = get(lastRec[0], 'modifiedAt.seconds');
+  const lastRecStateTimestamp = get(state, 'allRecs.data.allRecs[0].modifiedAt.seconds', null)
+  return lastRecStateTimestamp !== lastRecFirestoreTimestamp;
+}
+
+const updateRec = data => ({
+  type: ACTIONS.UPDATE_REC,
+  payload: data
+})
+
+export { ACTIONS, createRec, vote, fetchPage, fetchAllRecs, filterRecs };

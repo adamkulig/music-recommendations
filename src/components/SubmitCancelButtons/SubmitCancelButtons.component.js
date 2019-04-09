@@ -1,4 +1,5 @@
 import React from 'react';
+import { bool, func } from 'prop-types';
 import { Button, ButtonGroup } from 'reactstrap';
 
 import LaddaButtonWrapper from '../LaddaButtonWrapper/LaddaButtonWrapper.component'
@@ -6,7 +7,7 @@ import LaddaButtonWrapper from '../LaddaButtonWrapper/LaddaButtonWrapper.compone
 const SubmitCancelButtons = ({ submitting, onCancel }) => {
   return (
     <ButtonGroup className='float-right'>
-      <Button color='secondary' disabled={submitting} className='mr-2' type='reset' onClick={onCancel}>
+      <Button color='secondary' disabled={submitting} className='mr-1' type='reset' onClick={onCancel}>
         Cancel
       </Button>
       <LaddaButtonWrapper color='primary' type='submit' disabled={submitting} loading={submitting} >
@@ -14,6 +15,11 @@ const SubmitCancelButtons = ({ submitting, onCancel }) => {
       </LaddaButtonWrapper>
     </ButtonGroup>
   )
+}
+
+SubmitCancelButtons.propTypes = {
+  submitting: bool,
+  onCancel: func
 }
 
 export default SubmitCancelButtons;

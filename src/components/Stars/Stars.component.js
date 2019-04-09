@@ -1,32 +1,34 @@
 import React from 'react';
+import { string } from 'prop-types';
 import { IoIosStarOutline, IoIosStarHalf, IoIosStar } from "react-icons/io";
 
-const Stars = ({ data }) => {
+const Stars = ({ rating }) => {
   const stars = value => {
     let stars = [];
-    console.log('stars.length :', stars.length);
     let valueRest = Number(value);
     while(stars.length < 5) {
-      console.log(valueRest);
       if (valueRest >= 2) {
-        stars.push(<IoIosStar size={16} />)
+        stars.push(<IoIosStar size={18} style={{verticalAlign: 'text-bottom'}}/>)
         valueRest -= 2;
       } else if (valueRest === 1) {
-        stars.push(<IoIosStarHalf size={16} />)
+        stars.push(<IoIosStarHalf size={18} style={{verticalAlign: 'text-bottom'}}/>)
         valueRest -= 1;
       } else {
-        stars.push(<IoIosStarOutline size={16} />)
+        stars.push(<IoIosStarOutline size={18} style={{verticalAlign: 'text-bottom'}}/>)
       }
     }
     return stars;
   }
-  const desiredStars = stars(data)
-  console.log('desiredStars :', desiredStars);
+  const desiredStars = stars(rating)
   return (
-    <div className='stars d-flex justify-content-center'>
-      {desiredStars.map((star,index) => <div key={index}>{star}</div>)}
+    <div className='d-flex justify-content-center text-info'>
+      {desiredStars.map((star, i) => <div key={i}>{star}</div>)}
     </div>
   )
+}
+
+Stars.propTypes = {
+  rating: string
 }
 
 export default Stars;

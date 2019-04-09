@@ -6,6 +6,7 @@ import { reducer as toastrReducer } from 'react-redux-toastr';
 
 import modalsReducer from './modals.reducers';
 import recsReducer from './recs.reducers';
+import allRecsReducer from './allRecs.reducers';
 
 const rootReducer = combineReducers ({
   firestore: firestoreReducer,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers ({
   form: formReducer,
   toastr: toastrReducer,
   modals: modalsReducer,
-  recs: recsReducer
+  recs: recsReducer,
+  allRecs: allRecsReducer
 });
 
 export default rootReducer;

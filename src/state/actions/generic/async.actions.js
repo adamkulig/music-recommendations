@@ -2,7 +2,7 @@ const asyncActionPending = actionName => ({
   type: `${actionName}_PENDING`
 });
 
-const asyncActionFulfilled = (actionName, payload) => ({
+const asyncActionFulfilled = (actionName, payload = null) => ({
   type: `${actionName}_FULFILLED`,
   payload: payload
 });
@@ -12,8 +12,13 @@ const asyncActionRejected = (actionName, error) => ({
   error: error
 });
 
+const asyncActionCancelled = actionName => ({
+  type: `${actionName}_CANCELLED`
+});
+
 export {
   asyncActionPending,
   asyncActionFulfilled,
-  asyncActionRejected
+  asyncActionRejected,
+  asyncActionCancelled
 }

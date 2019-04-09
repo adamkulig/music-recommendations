@@ -4,7 +4,7 @@ html {
   }
 }
 
-.App {
+.app-wrapper {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -53,6 +53,6 @@ textarea {
   }
 }
 
-.large-font {
-  font-size: 1.3rem;
-}
+// .large-font {
+//   font-size: 1.3rem;
+// }
