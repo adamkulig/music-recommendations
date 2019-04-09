@@ -27,8 +27,8 @@ const WrappedSelectField = ({
         classNamePrefix="select__item"
         isMulti={isMulti}
         value={input.value}
-        onChange={(value) => input.onChange(value)}
-        onBlur={() => input.onBlur(input.value)}
+        onChange={input.onChange}
+        onBlur={event => event.preventDefault()}
         openMenuOnClick={openMenuOnClick}
       />
       <div className={`select-feedback ${isInvalid ? 'select-feedback--is-invalid' : '' }`}>{error}</div>
