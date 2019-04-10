@@ -7,6 +7,7 @@ import { withRouter } from 'react-router';
 import { getRecs } from 'state/selectors/recs.selectors';
 import Pagination from './Pagination.component';
 import { PAGINATION } from 'variables/recs';
+import { defaultCoreCipherList } from 'constants';
 
 class PaginationContainer extends Component {
   state = { 
@@ -36,17 +37,17 @@ class PaginationContainer extends Component {
       const endPage = Math.min(totalPages - 1, page + 1);
       const centerPagesRange = range(startPage, endPage + 1);
       const hasLeftArrow = startPage > 2;
-      const hasRightSpill = endPage < totalPages - 1;
+      const hasRightArrow = endPage < totalPages - 1;
       const arrowOffset = 3 - (endPage - startPage);
-      if (hasLeftArrow && hasRightSpill) {
+      if (hasLeftArrow && hasRightArrow) {
         pagesRange = [1, LEFT, ...centerPagesRange, RIGHT, totalPages]
-      } else if (!hasLeftArrow && hasRightSpill) {
+      } else if (!hasLeftArrow && hasRightArrow) {
         const extraPages = range(endPage + 1, endPage + arrowOffset + 1);
         pagesRange = [1, ...centerPagesRange, ...extraPages, RIGHT, totalPages]
-      } else if (hasLeftArrow && !hasRightSpill) {
-        const extraPages = range(startPage - arrowOffset - 1, startPage - 1);
+      } else if (hasLeftArrow && !hasRightArrow) {
+        const extraPages = range(startPage - arrowOffset, startPage);
         pagesRange = [1, LEFT, ...extraPages, ...centerPagesRange, totalPages]
-      } else if (!hasLeftArrow && !hasRightSpill) {
+      } else if (!hasLeftArrow && !hasRightArrow) {
         pagesRange = range(1, totalPages + 1)
       }
     }

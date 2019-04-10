@@ -1,3 +1,16 @@
 .page-item.active .page-link {
-    z-index: 0;
+  z-index: 0;
+}
+
+.list-group-item-action.active:hover, .list-group-item-action.active:focus {
+  background-color: $primary;
+  cursor: auto
+}
+
+button:focus {
+  outline: 0;
+}
+
+.page-link:focus {
+  box-shadow: none;
 }
