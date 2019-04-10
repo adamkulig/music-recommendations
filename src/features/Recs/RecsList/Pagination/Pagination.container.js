@@ -7,7 +7,6 @@ import { withRouter } from 'react-router';
 import { getRecs } from 'state/selectors/recs.selectors';
 import Pagination from './Pagination.component';
 import { PAGINATION } from 'variables/recs';
-import { defaultCoreCipherList } from 'constants';
 
 class PaginationContainer extends Component {
   state = { 
