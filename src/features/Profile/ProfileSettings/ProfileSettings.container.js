@@ -10,8 +10,9 @@ import routes from 'variables/routes';
 class ProfileSettingsContainer extends Component {
   render() {
     const { auth } = this.props;
-    const { isEmpty } = auth;
-    if (isEmpty) {
+    const { isEmpty, emailVerified } = auth;
+    console.log(emailVerified)
+    if (!isEmpty && !emailVerified) {
       return <Redirect to={routes.Main} />
     }
     return (
@@ -25,4 +26,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(ProfileSettingsContainer);
-

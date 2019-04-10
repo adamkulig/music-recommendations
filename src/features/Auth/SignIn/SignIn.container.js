@@ -16,7 +16,7 @@ class SignInContainer extends Component {
   render() {
     const { handleSubmit, submitting, signIn, toggleResetPasswordModal, auth } = this.props;
     const { isEmpty, emailVerified } = auth;
-    if (!isEmpty && emailVerified) {
+    if (!isEmpty && !emailVerified) {
       return <Redirect to={routes.Main} />
     }
     return (
