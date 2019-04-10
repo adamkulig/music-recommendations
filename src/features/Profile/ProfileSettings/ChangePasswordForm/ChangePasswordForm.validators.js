@@ -4,16 +4,22 @@ import { isPasswordInvalid } from 'helpers/regex.helpers';
 const syncValidate = values => {
   const errors = {};
 
-  if (!values.password) {
-      errors.password = messages.emptyField
-  } else if (isPasswordInvalid(values.password)) {
-      errors.password = messages.invalidPassword;
+  if (!values.currentPassword) {
+      errors.currentPassword = messages.emptyField
+  } else if (isPasswordInvalid(values.currentPassword)) {
+    errors.currentPassword = messages.invalidPassword;
   } 
 
-  if (!values.confirmPassword) {
-      errors.confirmPassword = messages.emptyField
-  } else if (values.password !== values.confirmPassword) {
-      errors.confirmPassword = messages.invalidConfirmPassword
+  if (!values.newPassword) {
+      errors.newPassword = messages.emptyField
+  } else if (isPasswordInvalid(values.newPassword)) {
+      errors.newPassword = messages.invalidPassword;
+  } 
+
+  if (!values.confirmNewPassword) {
+      errors.confirmNewPassword = messages.emptyField
+  } else if (values.newPassword !== values.confirmNewPassword) {
+      errors.confirmNewPassword = messages.invalidConfirmPassword
   } 
 
   return errors;

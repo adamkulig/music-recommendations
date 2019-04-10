@@ -3,7 +3,7 @@ import Loader from 'react-loader-spinner'
 
 const Spinner = () => {
   return (
-    <div className='d-flex justify-content-center'>
+    <div className='spinner'>
       <Loader 
         type="Audio"
         color="#DDD"

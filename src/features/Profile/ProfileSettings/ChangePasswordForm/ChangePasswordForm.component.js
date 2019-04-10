@@ -11,16 +11,22 @@ const ChangePasswordForm = ({ handleSubmit, submitting }) => {
   return (
     <Form onSubmit={handleSubmit} autoComplete="off">
       <Field
-        name="password" 
+        name="currentPassword" 
         type="password" 
         component={InputField} 
-        label="Password" 
+        label="Current password" 
       />
       <Field
-        name="confirmPassword" 
+        name="newPassword" 
         type="password" 
         component={InputField} 
-        label="Confirm Password" 
+        label="New password" 
+      />
+      <Field
+        name="confirmNewPassword" 
+        type="password" 
+        component={InputField} 
+        label="Confirm new password" 
       />
       <SubmitCancelButtons submitting={submitting} onCancel={() => history.push(routes.Main)}/>
     </Form>

@@ -9,12 +9,13 @@ import routes from 'variables/routes';
 
 class ProfileSettingsContainer extends Component {
   state = {
-    activeId: 1 
+    activeId: null 
   }
 
   switchForm = id => {
+    const { activeId } = this.state;
     this.setState({
-      activeId: id
+      activeId: id !== activeId ? id : null  
     })
   }
 

@@ -7,12 +7,12 @@ import AppFooter from './AppFooter/AppFooter.component';
 const AppLayout = ({ children }) => (
   <div className='app-wrapper'>
     <AppNav />
-    <Container>
-      <Row>
-        <Col md={{ size: 10, offset: 1 }} lg={{ size: 8, offset: 2 }}>
+    <Container className='app-wrapper__content'>
+      {/* <Row> */}
+        {/* <Col md={{ size: 10, offset: 1 }} lg={{ size: 8, offset: 2 }}> */}
           {children}
-        </Col>
-      </Row>
+        {/* </Col> */}
+      {/* </Row> */}
     </Container>
     <AppFooter />
   </div>  

@@ -104,23 +104,35 @@ const resetPassword = creds => async (dispatch, getState, { getFirebase }) => {
   }
 }
 
-const changePassword = creds => async (dispatch, getState, { getFirebase }) => {
+const changePassword = passwords => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
   const user = firebase.auth().currentUser;
+  const { currentPassword, newPassword } = passwords;
   try {
-    await user.updatePassword(creds.password);
-    await dispatch(reset('changePassword'));
+    await dispatch(reauthenticate(currentPassword));
+    await user.updatePassword(newPassword);
+    dispatch(reset('changePassword'));
     toastr.success(messages.toastrSuccess, messages.toastrSuccessUpdatePassword);
   } catch(error) {
+    dispatch(reset('changePassword'));
     console.log(error);
-    // if (error.code === 'auth/user-not-found') {
-    //   throw new SubmissionError({
-    //     email: messages.emailNotFound
-    //   }); 
-    // }
+    if (error.code === 'auth/wrong-password') {
+      throw new SubmissionError({
+        currentPassword: messages.wrongPassword
+      }); 
+    }
     //https://medium.com/@ericmorgan1/change-user-email-password-in-firebase-and-react-native-d0abc8d21618
     //https://github.com/firebase/firebaseui-web/issues/52
   }
+}
+
+const reauthenticate = currentPassword => (dispatch, getState, { getFirebase }) => {
+  console.log('reauthenticate', currentPassword);
+  const firebase = getFirebase();
+  const user = firebase.auth().currentUser;
+  const credential = firebase.auth.EmailAuthProvider.credential(
+    user.email, currentPassword);
+  return user.reauthenticateWithCredential(credential);
 }
 
 export { 
