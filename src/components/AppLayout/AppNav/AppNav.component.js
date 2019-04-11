@@ -24,7 +24,7 @@ const AppNavComponent = ({
   return (
     <Navbar color="primary" dark expand="sm" className='mb-3'>
       <Container>
-        <NavbarBrand href={routes.Main}>Brutal RECs</NavbarBrand>
+        <NavbarBrand href={routes.Recs}>Brutal RECs</NavbarBrand>
         <NavbarToggler onClick={onToggleNavbar} />
         <Collapse isOpen={navIsOpen} navbar>
           <Nav className='ml-auto' navbar>

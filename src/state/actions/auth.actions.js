@@ -1,8 +1,11 @@
 import { SubmissionError, reset } from 'redux-form';
 import { toastr } from 'react-redux-toastr';
 
-import messages from 'variables/messages';
 import { toggleResetPasswordModal } from './modals.actions';
+
+import messages from 'variables/messages';
+import history from 'history.js';
+import routes from 'variables/routes';
 
 const ACTIONS = {};
 
@@ -20,6 +23,8 @@ const signIn = creds => async (dispatch, getState, { getFirebase }) => {
       await firebase.auth().currentUser.sendEmailVerification();
       await firebase.auth().signOut();
       dispatch(reset('signIn'));
+      // bug: if you submit by enter click, focuses field is still focused and syncError is shown 
+      history.push(routes.Recs)
       toastr.warning(messages.toastrVerifyEmailWasSend);
     }
   } catch(error) {
@@ -43,7 +48,7 @@ const signOut = () => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
   try {
     await firebase.auth().signOut();
-    toastr.success(messages.toastrSuccess, messages.toastrSuccessSignOut)
+    toastr.success(messages.toastrSuccess, messages.toastrSuccessSignOut);
   } catch(error) {
     console.log(error);
     toastr.error(messages.toastrError, messages.unknownError);
@@ -53,39 +58,31 @@ const signOut = () => async (dispatch, getState, { getFirebase }) => {
 const signUp = creds => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const firebase = getFirebase();
   const firestore = getFirestore();
+  const { email, password, nickname } = creds;
   try {
     let createdUser = await firebase
       .auth()
       .createUserWithEmailAndPassword(
-        creds.email,
-        creds.password
+        email,
+        password
     )
     await createdUser.user.updateProfile({
-      displayName: creds.nickname
+      displayName: nickname
     })
     await firestore.collection('users').doc(createdUser.user.uid).set({
-      displayName: creds.nickname,
-      email: creds.email
+      displayName: nickname,
+      email: email
     })
     await firebase.auth().currentUser.sendEmailVerification();
-    firebase.auth().signOut();
+    await firebase.auth().signOut();
+    dispatch(reset('signUp'));
+    history.push(routes.Recs);
     toastr.success(messages.toastrSuccess, messages.toastrSuccessSignUp);
   } catch(error) {
     console.log(error);
     toastr.error(messages.toastrError, messages.unknownError);
   }
 }
-
-// const sendVerificationMail = () => async (dispatch, getState, { getFirebase, getFirestore }) => {
-//   const firebase = getFirebase();
-//   try {
-//     const user = firebase.auth().currentUser;
-//     await user.sendEmailVerification();
-//     console.log('sendVerificationMail success')
-//   } catch(error) {
-//     console.log('sendVerificationMail error')
-//   }
-// }
 
 const resetPassword = creds => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
@@ -104,25 +101,47 @@ const resetPassword = creds => async (dispatch, getState, { getFirebase }) => {
   }
 }
 
-const changePassword = passwords => async (dispatch, getState, { getFirebase }) => {
+const changePassword = creds => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
   const user = firebase.auth().currentUser;
-  const { currentPassword, newPassword } = passwords;
+  const { currentPassword, newPassword } = creds;
   try {
     await dispatch(reauthenticate(currentPassword));
     await user.updatePassword(newPassword);
     dispatch(reset('changePassword'));
     toastr.success(messages.toastrSuccess, messages.toastrSuccessUpdatePassword);
   } catch(error) {
-    dispatch(reset('changePassword'));
     console.log(error);
     if (error.code === 'auth/wrong-password') {
       throw new SubmissionError({
         currentPassword: messages.wrongPassword
       }); 
     }
-    //https://medium.com/@ericmorgan1/change-user-email-password-in-firebase-and-react-native-d0abc8d21618
-    //https://github.com/firebase/firebaseui-web/issues/52
+  }
+}
+
+const changeEmail = creds => async (dispatch, getState, { getFirebase, getFirestore }) => {
+  const firebase = getFirebase();
+  const firestore = getFirestore();
+  const user = firebase.auth().currentUser;
+  const { currentPassword, newEmail } = creds;
+  try {
+    await dispatch(reauthenticate(currentPassword));
+    await user.updateEmail(newEmail);
+    await firestore.collection('users').doc(user.uid).update({
+      email: newEmail
+    })
+    await user.sendEmailVerification();
+    await firebase.auth().signOut();
+    dispatch(reset('changeEmail'));
+    toastr.success(messages.toastrSuccess, messages.toastrSuccessUpdateEmail);
+  } catch(error) {
+    console.log(error);
+    if (error.code === 'auth/email-already-in-use') {
+      throw new SubmissionError({
+        currentEmail: messages.emailIsUsed
+      }); 
+    }
   }
 }
 
@@ -131,7 +150,9 @@ const reauthenticate = currentPassword => (dispatch, getState, { getFirebase }) 
   const firebase = getFirebase();
   const user = firebase.auth().currentUser;
   const credential = firebase.auth.EmailAuthProvider.credential(
-    user.email, currentPassword);
+    user.email, 
+    currentPassword
+  );
   return user.reauthenticateWithCredential(credential);
 }
 
@@ -141,5 +162,6 @@ export {
   signOut, 
   signUp, 
   resetPassword, 
-  changePassword 
+  changePassword,
+  changeEmail
 };

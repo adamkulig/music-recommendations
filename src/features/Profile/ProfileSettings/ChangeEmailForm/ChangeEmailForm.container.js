@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import ChangeEmailForm from './ChangeEmailForm.component';
-import { changePassword } from 'state/actions/auth.actions';
+import { changeEmail } from 'state/actions/auth.actions';
 import { getAuth } from 'state/selectors/firebase.selectors.js';
 import validate from './ChangeEmailForm.validators';
 
 class ChangeEmailFormContainer extends Component {
   render() {
-    const { handleSubmit, submitting, changePassword } = this.props;
+    const { handleSubmit, submitting, changeEmail } = this.props;
     return (
       <ChangeEmailForm 
-        handleSubmit={handleSubmit(changePassword)} 
+        handleSubmit={handleSubmit(changeEmail)} 
         submitting={submitting}
       />
     );
@@ -24,7 +24,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  changePassword
+  changeEmail
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({

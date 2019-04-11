@@ -9,6 +9,8 @@ import RecDetails from 'features/Recs/RecDetails/RecDetails.container';
 import ProfileSettings from 'features/Profile/ProfileSettings/ProfileSettings.container';
 import NotFound from 'features/NotFound/NotFound.component';
 import AppLayout from 'components/AppLayout/AppLayout.component.js';
+import PublicRoute from 'hocs/PublicRoute.hoc.js';
+import PrivateRoute from 'hocs/PrivateRoute.hoc.js';
 
 import routes from 'variables/routes';
 
@@ -19,11 +21,11 @@ class App extends Component {
         <Switch>
           <Redirect exact from={routes.Main} to={routes.Recs}/>
           <Route path={routes.Recs} component={RecsList} />
-          <Route path={routes.SignIn} component={SignIn} />
-          <Route path={routes.SignUp} component={SignUp} />
-          <Route path={routes.RecForm} component={RecForm} />
+          <PublicRoute path={routes.SignIn} component={SignIn} />
+          <PublicRoute path={routes.SignUp} component={SignUp} />
+          <PrivateRoute path={routes.RecForm} component={RecForm} />
           <Route path={routes.RecDetails} component={RecDetails} />
-          <Route path={routes.Profile} component={ProfileSettings} />
+          <PrivateRoute path={routes.Profile} component={ProfileSettings} />
           <Route component={NotFound} />
         </Switch>
       </AppLayout>

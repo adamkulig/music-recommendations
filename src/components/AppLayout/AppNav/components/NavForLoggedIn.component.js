@@ -25,7 +25,7 @@ const NavForLoggedIn = ({ onSignOut, displayName }) => {
         </DropdownItem>
         <DropdownItem divider />
         <DropdownItem onClick={onSignOut}>
-          <Link to={routes.Main} className='d-block nav-link'>Sign Out</Link>
+          <Link to={routes.Recs} className='d-block nav-link'>Sign Out</Link>
         </DropdownItem>
       </DropdownMenu>
     </UncontrolledDropdown>

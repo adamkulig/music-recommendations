@@ -11,18 +11,18 @@ const ChangeEmailForm = ({ handleSubmit, submitting }) => {
   return (
     <Form onSubmit={handleSubmit} autoComplete="off">
       <Field
-        name="email" 
-        type="email" 
+        name="currentPassword" 
+        type="password" 
         component={InputField} 
-        label="Email" 
+        label="Current password" 
       />
       <Field
-        name="confirmEmail" 
+        name="newEmail" 
         type="email" 
         component={InputField} 
-        label="Confirm Email" 
+        label="New e-mail" 
       />
-      <SubmitCancelButtons submitting={submitting} onCancel={() => history.push(routes.Main)}/>
+      <SubmitCancelButtons submitting={submitting} onCancel={() => history.push(routes.Recs)}/>
     </Form>
   )
 }

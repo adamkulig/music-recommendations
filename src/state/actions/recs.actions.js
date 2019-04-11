@@ -37,7 +37,7 @@ const createRec = data => async (dispatch, getState, { getFirebase, getFirestore
   }
   try {
     await firestore.collection('recommendations').add(newRec)
-    history.push(routes.Main)
+    history.push(routes.Recs)
     toastr.success(messages.toastrSuccess, messages.toastrSuccessNewRecAdded)
   } catch(error) {
     console.log(error);
@@ -87,7 +87,7 @@ const fetchPage = params => async (dispatch, getState) => {
       }
     })
   } else {
-    history.push(routes.Main)
+    history.push(routes.Recs)
     toastr.error(messages.toastrError, messages.toastrErrorPage)
   }
 }

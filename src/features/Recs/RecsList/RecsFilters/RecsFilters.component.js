@@ -9,7 +9,7 @@ import { GENRES } from 'variables/recs';
 
 const RecsFiltersComponent = ({ handleSubmit, submitting }) => {
   return (
-    <Card>
+    <Card className='container-narrow'>
         <CardBody>
         <Form onSubmit={handleSubmit} autoComplete="off">
           <Field

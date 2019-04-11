@@ -19,7 +19,7 @@ class RecDetailsContainer extends Component {
     const { firestore, match } = this.props;
     const rec = await firestore.get(`recommendations/${match.params.id}`)
     if (!rec.exists) {
-      history.push(routes.Main);
+      history.push(routes.Recs);
       toastr.error(messages.toastrError, messages.toastrSuccessRecDoesNotExist);
     }
   }
