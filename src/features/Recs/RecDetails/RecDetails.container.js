@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 // import { compose } from 'redux';
 // import { firestoreConnect } from 'react-redux-firebase';
 import { withFirestore } from 'react-redux-firebase';
-import { isNil } from 'lodash';
+import { isNil, get } from 'lodash';
 import { toastr } from 'react-redux-toastr';
 
-import { getRec } from 'state/selectors/firestore.selectors'
+import { getRec } from 'state/selectors/recs.selectors';
+import { fetchRec } from 'state/actions/recs.actions'
 
 import RecItem from '../components/RecItem/RecItem.component';
 import history from 'history.js';
@@ -16,22 +17,16 @@ import LoadingWrapper from 'components/LoadingWrapper/LoadingWrapper.component';
 
 class RecDetailsContainer extends Component {
   async componentDidMount() {
-    const { firestore, match } = this.props;
-    const rec = await firestore.get(`recommendations/${match.params.id}`)
-    if (!rec.exists) {
-      history.push(routes.Recs);
-      toastr.error(messages.toastrError, messages.toastrSuccessRecDoesNotExist);
-    }
+    const { fetchRec, match } = this.props;
+    fetchRec(match.params.id);
   }
 
   render() {
-    const { rec, match } = this.props;
-    let currentRec;
-    if(!isNil(rec)) {
-      currentRec = match.params.id === rec.id;
-    } 
+    const { intact, fetching } = this.props.rec;
+    const rec = get(this.props, 'rec.data', null);
+    const active = intact || fetching;
     return (
-      <LoadingWrapper isLoading={!currentRec}>
+      <LoadingWrapper isLoading={active}>
         <RecItem data={rec} isSingleRecPage />
       </LoadingWrapper>
     )
@@ -42,4 +37,8 @@ const mapStateToProps = (state) => ({
   rec: getRec(state)
 })
 
-export default withFirestore(connect(mapStateToProps)(RecDetailsContainer))
+const mapDispatchToProps = {
+  fetchRec
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecDetailsContainer);

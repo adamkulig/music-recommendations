@@ -11,18 +11,18 @@ const ACTIONS = {};
 
 const signIn = creds => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
-  const { signInWithEmailAndPassword, currentUser, signOut } = firebase.auth();
+  const auth = firebase.auth();
   const { email, password } = creds;
   try {
-    await signInWithEmailAndPassword(
+    await auth.signInWithEmailAndPassword(
       email,
       password
     )
-    if (currentUser.emailVerified) {
+    if (auth.currentUser.emailVerified) {
       toastr.success(messages.toastrSuccess, messages.toastrSuccessSignIn)
     } else {
-      await currentUser.sendEmailVerification();
-      await signOut();
+      await auth.currentUser.sendEmailVerification();
+      await auth.signOut();
       dispatch(reset('signIn'));
       // bug: if you submit by enter click, focuses field is still focused and syncError is shown 
       history.push(routes.Recs)
@@ -47,9 +47,9 @@ const signIn = creds => async (dispatch, getState, { getFirebase }) => {
 
 const signOut = () => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
-  const { signOut } = firebase.auth();
+  const auth = firebase.auth();
   try {
-    await signOut();
+    await auth.signOut();
     toastr.success(messages.toastrSuccess, messages.toastrSuccessSignOut);
   } catch(error) {
     console.log(error);
@@ -60,10 +60,10 @@ const signOut = () => async (dispatch, getState, { getFirebase }) => {
 const signUp = creds => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const firebase = getFirebase();
   const firestore = getFirestore();
-  const { createUserWithEmailAndPassword, currentUser, signOut } = firebase.auth();
+  const auth = firebase.auth();
   const { email, password, nickname } = creds;
   try {
-    let createdUser = await createUserWithEmailAndPassword(
+    let createdUser = await auth.createUserWithEmailAndPassword(
       email,
       password
     )
@@ -74,8 +74,8 @@ const signUp = creds => async (dispatch, getState, { getFirebase, getFirestore }
       displayName: nickname,
       email: email
     })
-    await currentUser.sendEmailVerification();
-    await signOut();
+    await auth.currentUser.sendEmailVerification();
+    await auth.signOut();
     dispatch(reset('signUp'));
     history.push(routes.Recs);
     toastr.success(messages.toastrSuccess, messages.toastrSuccessSignUp);
@@ -87,10 +87,10 @@ const signUp = creds => async (dispatch, getState, { getFirebase, getFirestore }
 
 const resetPassword = creds => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
-  const { sendPasswordResetEmail } = firebase.auth();
+  const auth = firebase.auth();
   const { email } = creds;
   try {
-    await sendPasswordResetEmail(email);
+    await auth.sendPasswordResetEmail(email);
     dispatch(toggleResetPasswordModal());
     dispatch(reset('resetPassword'));
     toastr.success(messages.toastrSuccess, messages.toastrSuccessResetPassword);
@@ -106,11 +106,11 @@ const resetPassword = creds => async (dispatch, getState, { getFirebase }) => {
 
 const changePassword = creds => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
-  const { currentUser } = firebase.auth();
+  const auth = firebase.auth();
   const { currentPassword, newPassword } = creds;
   try {
     await dispatch(reauthenticate(currentPassword));
-    await currentUser.updatePassword(newPassword);
+    await auth.currentUser.updatePassword(newPassword);
     dispatch(reset('changePassword'));
     toastr.success(messages.toastrSuccess, messages.toastrSuccessUpdatePassword);
   } catch(error) {
@@ -126,15 +126,15 @@ const changePassword = creds => async (dispatch, getState, { getFirebase }) => {
 const changeEmail = creds => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const firebase = getFirebase();
   const firestore = getFirestore();
-  const { currentUser, signOut } = firebase.auth();
+  const auth = firebase.auth();
   const { currentPassword, newEmail } = creds;
   try {
     await dispatch(reauthenticate(currentPassword));
-    await currentUser.updateEmail(newEmail);
-    await firestore.collection('users').doc(currentUser.uid).update({
+    await auth.currentUser.updateEmail(newEmail);
+    await firestore.collection('users').doc(auth.currentUser.uid).update({
       email: newEmail
     })
-    await currentUser.sendEmailVerification();
+    await auth.currentUser.sendEmailVerification();
     await signOut();
     dispatch(reset('changeEmail'));
     toastr.success(messages.toastrSuccess, messages.toastrSuccessUpdateEmail);
@@ -150,12 +150,12 @@ const changeEmail = creds => async (dispatch, getState, { getFirebase, getFirest
 
 const reauthenticate = currentPassword => (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
-  const { currentUser } = firebase.auth();
+  const auth = firebase.auth();
   const credential = firebase.auth.EmailAuthProvider.credential(
-    currentUser.email, 
+    auth.currentUser.email, 
     currentPassword
   );
-  return currentUser.reauthenticateWithCredential(credential);
+  return auth.currentUser.reauthenticateWithCredential(credential);
 }
 
 export { 

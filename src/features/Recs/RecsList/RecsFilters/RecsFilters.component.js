@@ -18,7 +18,7 @@ const RecsFiltersComponent = ({ handleSubmit, submitting }) => {
             type="text" 
             component={InputField} 
             noValidate
-            placeholder='choose genres...'
+            placeholder="write band's name..."
           />
           <Field
             isMulti

@@ -17,12 +17,12 @@ const ACTIONS = {
   FETCH_RECS: 'FETCH_RECS',
   FETCH_ALL_RECS: 'FETCH_ALL_RECS',
   FILTER_RECS: 'FILTER_RECS',
-  UPDATE_REC: 'UPDATE_REC'
+  UPDATE_REC: 'UPDATE_REC',
+  FETCH_REC: 'FETCH_REC'
 }
   
 const createRec = data => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const firestore = getFirestore();
-  // const user = firestore.auth().currentUser;
   const { displayName } = getState().firebase.profile;
   const { country, rating, genres } = data;
   const newRec = {
@@ -146,4 +146,25 @@ const updateRec = data => ({
   payload: data
 })
 
-export { ACTIONS, createRec, vote, fetchPage, fetchAllRecs, filterRecs };
+const fetchRec = id => async (dispatch, getState, { getFirestore }) => {
+  const firestore = getFirestore();
+  try {
+    dispatch(asyncActionPending(ACTIONS.FETCH_REC))
+    const recRef = await firestore.collection('recommendations').doc(id).get();
+    if (recRef.exists) {
+      const rec = recRef.data();
+      dispatch(asyncActionFulfilled(ACTIONS.FETCH_REC, {
+        ...rec,
+        id
+      }))
+    } else {
+      dispatch(asyncActionCancelled(ACTIONS.FETCH_REC));
+      history.push(routes.Recs);
+      toastr.error(messages.toastrError, messages.toastrSuccessRecDoesNotExist);
+    }
+  } catch(error){
+    dispatch(asyncActionRejected(ACTIONS.FETCH_REC, error));
+  }
+}
+
+export { ACTIONS, createRec, vote, fetchPage, fetchAllRecs, filterRecs, fetchRec };
