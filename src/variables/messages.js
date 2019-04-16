@@ -16,6 +16,7 @@ const messages = {
   toastrSuccessSignUp: 'You are registered. Check your inbox and verify your account.',
   toastrSuccessResetPassword: 'E-mail was send.',
   toastrSuccessUpdatePassword: 'Password has been changed.',
+  toastrSuccessUpdateEmail: 'E-mail has been changed. Check your inbox and verify new e-mail.',
   toastrSuccessNewRecAdded: 'Your recommendation has beed added.',
   toastrSuccessRecDoesNotExist: 'Rec does not exist.',
   toastrErrorVote: 'You must be logged in to vote.',

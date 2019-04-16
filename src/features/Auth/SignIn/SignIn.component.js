@@ -10,7 +10,7 @@ import history from 'history.js';
 
 const SignInComponent = ({ handleSubmit, submitting, handleOpenModal }) => {
   return (
-    <Card className="mx-auto">
+    <Card className="container-narrow">
       <CardHeader>Sign In</CardHeader>
       <CardBody>
         <Form onSubmit={handleSubmit} autoComplete="off">
@@ -29,7 +29,7 @@ const SignInComponent = ({ handleSubmit, submitting, handleOpenModal }) => {
           <Button color="link" disabled={submitting} onClick={handleOpenModal} className='px-0'>
             Forgot your password?
           </Button>
-          <SubmitCancelButtons submitting={submitting} onCancel={() => history.push(routes.Main)} />
+          <SubmitCancelButtons submitting={submitting} onCancel={() => history.push(routes.Recs)} />
         </Form>
       </CardBody>
     </Card>

@@ -9,7 +9,7 @@ import routes from 'variables/routes';
 
 const SignUpComponent = ({ handleSubmit, submitting, history }) => {
   return (
-    <Card className="mx-auto">
+    <Card className="container-narrow">
       <CardHeader>Sign Up</CardHeader>
       <CardBody>
         <Form onSubmit={handleSubmit} autoComplete="off">
@@ -37,7 +37,7 @@ const SignUpComponent = ({ handleSubmit, submitting, history }) => {
             component={InputField} 
             label="Nickname" 
           />
-          <SubmitCancelButtons submitting={submitting} onCancel={() => history.push(routes.Main)}/>
+          <SubmitCancelButtons submitting={submitting} onCancel={() => history.push(routes.Recs)}/>
         </Form>
       </CardBody>
     </Card>

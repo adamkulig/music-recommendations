@@ -2,6 +2,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import { Card, CardBody, Button, Form } from 'reactstrap';
+import { IoIosSearch } from "react-icons/io";
 
 import InputField from 'components/Forms/InputField/InputField.component';
 import SelectField from 'components/Forms/SelectField/SelectField.component';
@@ -16,18 +17,17 @@ const RecsFiltersComponent = ({ handleSubmit, submitting }) => {
             name="band" 
             type="text" 
             component={InputField} 
-            label="Band*"
             noValidate
+            placeholder="write band's name..."
           />
           <Field
             isMulti
             name="genres"
             component={SelectField} 
-            label="Genres*" 
             options={GENRES}
             placeholder='choose genres...'
           />
-          <Button disabled={submitting} >Filter</Button>
+          <Button disabled={submitting}><IoIosSearch size={20}/></Button>
         </Form>
       </CardBody>
     </Card>

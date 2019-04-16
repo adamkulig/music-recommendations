@@ -7,7 +7,7 @@ import SubmitCancelButtons from 'components/SubmitCancelButtons/SubmitCancelButt
 import routes from 'variables/routes';
 import history from 'history.js';
 
-const ChangePasswordForm = ({ handleSubmit, submitting }) => {
+const ChangeEmailForm = ({ handleSubmit, submitting }) => {
   return (
     <Form onSubmit={handleSubmit} autoComplete="off">
       <Field
@@ -17,20 +17,14 @@ const ChangePasswordForm = ({ handleSubmit, submitting }) => {
         label="Current password" 
       />
       <Field
-        name="newPassword" 
-        type="password" 
+        name="newEmail" 
+        type="email" 
         component={InputField} 
-        label="New password" 
-      />
-      <Field
-        name="confirmNewPassword" 
-        type="password" 
-        component={InputField} 
-        label="Confirm new password" 
+        label="New e-mail" 
       />
       <SubmitCancelButtons submitting={submitting} onCancel={() => history.push(routes.Recs)}/>
     </Form>
   )
 }
 
-export default ChangePasswordForm;
+export default ChangeEmailForm;

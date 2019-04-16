@@ -1,5 +1,5 @@
 import { toastr } from 'react-redux-toastr';
-import { inRange, get, slice, isNil, values } from 'lodash';
+import { inRange, get, slice, isNil, values, orderBy } from 'lodash';
 
 import history from 'history.js';
 import routes from 'variables/routes';
@@ -17,12 +17,12 @@ const ACTIONS = {
   FETCH_RECS: 'FETCH_RECS',
   FETCH_ALL_RECS: 'FETCH_ALL_RECS',
   FILTER_RECS: 'FILTER_RECS',
-  UPDATE_REC: 'UPDATE_REC'
+  UPDATE_REC: 'UPDATE_REC',
+  FETCH_REC: 'FETCH_REC'
 }
   
 const createRec = data => async (dispatch, getState, { getFirebase, getFirestore }) => {
   const firestore = getFirestore();
-  // const user = firestore.auth().currentUser;
   const { displayName } = getState().firebase.profile;
   const { country, rating, genres } = data;
   const newRec = {
@@ -37,7 +37,7 @@ const createRec = data => async (dispatch, getState, { getFirebase, getFirestore
   }
   try {
     await firestore.collection('recommendations').add(newRec)
-    history.push(routes.Main)
+    history.push(routes.Recs)
     toastr.success(messages.toastrSuccess, messages.toastrSuccessNewRecAdded)
   } catch(error) {
     console.log(error);
@@ -87,7 +87,7 @@ const fetchPage = params => async (dispatch, getState) => {
       }
     })
   } else {
-    history.push(routes.Main)
+    history.push(routes.Recs)
     toastr.error(messages.toastrError, messages.toastrErrorPage)
   }
 }
@@ -107,9 +107,10 @@ const filterRecs = (recs, params) => {
 const fetchAllRecs = (appIsMounting = false) => async (dispatch, getState, { getFirestore }) => {
   const firestore = getFirestore();
   const state = getState();
+  const localRecs = get(state, 'allRecs.data.allRecs', [])
   try {
     dispatch(asyncActionPending(ACTIONS.FETCH_ALL_RECS))
-    const permissionToGetAllRecs = appIsMounting || await checkIfRecsAreUpdated(firestore, state);
+    const permissionToGetAllRecs = appIsMounting || await checkIfRecsAreUpdated(firestore, localRecs);
     if (permissionToGetAllRecs) {
       const allRecsRef = await firestore
         .collection('recommendations')
@@ -129,15 +130,15 @@ const fetchAllRecs = (appIsMounting = false) => async (dispatch, getState, { get
   }
 }
 
-const checkIfRecsAreUpdated = async (firestore, state) => {
+const checkIfRecsAreUpdated = async (firestore, localRecs) => {
   const lastRecRef = await firestore
-    .collection('recommendations')
-    .orderBy('modifiedAt', 'desc')
-    .limit(1)
-    .get()
+  .collection('recommendations')
+  .orderBy('modifiedAt', 'desc')
+  .limit(1)
+  .get()
   const lastRec = snapshotsToArray(lastRecRef.docs);
   const lastRecFirestoreTimestamp = get(lastRec[0], 'modifiedAt.seconds');
-  const lastRecStateTimestamp = get(state, 'allRecs.data.allRecs[0].modifiedAt.seconds', null)
+  const lastRecStateTimestamp = orderBy(localRecs, ['modifiedAt.seconds'], ['desc'])[0]
   return lastRecStateTimestamp !== lastRecFirestoreTimestamp;
 }
 
@@ -146,4 +147,25 @@ const updateRec = data => ({
   payload: data
 })
 
-export { ACTIONS, createRec, vote, fetchPage, fetchAllRecs, filterRecs };
+const fetchRec = id => async (dispatch, getState, { getFirestore }) => {
+  const firestore = getFirestore();
+  try {
+    dispatch(asyncActionPending(ACTIONS.FETCH_REC))
+    const recRef = await firestore.collection('recommendations').doc(id).get();
+    if (recRef.exists) {
+      const rec = recRef.data();
+      dispatch(asyncActionFulfilled(ACTIONS.FETCH_REC, {rec: {
+        ...rec,
+        id
+      }}))
+    } else {
+      dispatch(asyncActionCancelled(ACTIONS.FETCH_REC));
+      history.push(routes.Recs);
+      toastr.error(messages.toastrError, messages.toastrSuccessRecDoesNotExist);
+    }
+  } catch(error){
+    dispatch(asyncActionRejected(ACTIONS.FETCH_REC, error));
+  }
+}
+
+export { ACTIONS, createRec, vote, fetchPage, fetchAllRecs, filterRecs, fetchRec };

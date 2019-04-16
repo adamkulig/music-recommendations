@@ -29,7 +29,7 @@ class RecFormContainer extends Component {
     const { handleSubmit, submitting, createRec, auth } = this.props;
     const { isEmpty } = auth;
     if (isEmpty) {
-      return <Redirect push to={routes.Main} />
+      return <Redirect push to={routes.Recs} />
     }
     return (
       <RecForm 

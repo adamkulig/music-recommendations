@@ -12,7 +12,7 @@ import routes from 'variables/routes';
 
 const RecComponent = ({ handleSubmit, submitting, countries }) => {
   return (
-    <Card>
+    <Card className="container-narrow">
       <CardHeader>New rec</CardHeader>
       <CardBody>
         <Form onSubmit={handleSubmit} autoComplete="off">
@@ -77,7 +77,7 @@ const RecComponent = ({ handleSubmit, submitting, countries }) => {
             rows="5"
           />
           <p className='small text-muted'>** optional fields.</p>
-          <SubmitCancelButtons submitting={submitting} onCancel={() => history.push(routes.Main)}/>
+          <SubmitCancelButtons submitting={submitting} onCancel={() => history.push(routes.Recs)}/>
         </Form>
       </CardBody>
     </Card>
