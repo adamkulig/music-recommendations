@@ -1,5 +1,5 @@
 import { toastr } from 'react-redux-toastr';
-import { inRange, get, slice, isNil, values } from 'lodash';
+import { inRange, get, slice, isNil, values, orderBy } from 'lodash';
 
 import history from 'history.js';
 import routes from 'variables/routes';
@@ -107,9 +107,10 @@ const filterRecs = (recs, params) => {
 const fetchAllRecs = (appIsMounting = false) => async (dispatch, getState, { getFirestore }) => {
   const firestore = getFirestore();
   const state = getState();
+  const localRecs = get(state, 'allRecs.data.allRecs', [])
   try {
     dispatch(asyncActionPending(ACTIONS.FETCH_ALL_RECS))
-    const permissionToGetAllRecs = appIsMounting || await checkIfRecsAreUpdated(firestore, state);
+    const permissionToGetAllRecs = appIsMounting || await checkIfRecsAreUpdated(firestore, localRecs);
     if (permissionToGetAllRecs) {
       const allRecsRef = await firestore
         .collection('recommendations')
@@ -129,15 +130,15 @@ const fetchAllRecs = (appIsMounting = false) => async (dispatch, getState, { get
   }
 }
 
-const checkIfRecsAreUpdated = async (firestore, state) => {
+const checkIfRecsAreUpdated = async (firestore, localRecs) => {
   const lastRecRef = await firestore
-    .collection('recommendations')
-    .orderBy('modifiedAt', 'desc')
-    .limit(1)
-    .get()
+  .collection('recommendations')
+  .orderBy('modifiedAt', 'desc')
+  .limit(1)
+  .get()
   const lastRec = snapshotsToArray(lastRecRef.docs);
   const lastRecFirestoreTimestamp = get(lastRec[0], 'modifiedAt.seconds');
-  const lastRecStateTimestamp = get(state, 'allRecs.data.allRecs[0].modifiedAt.seconds', null)
+  const lastRecStateTimestamp = orderBy(localRecs, ['modifiedAt.seconds'], ['desc'])[0]
   return lastRecStateTimestamp !== lastRecFirestoreTimestamp;
 }
 
@@ -153,10 +154,10 @@ const fetchRec = id => async (dispatch, getState, { getFirestore }) => {
     const recRef = await firestore.collection('recommendations').doc(id).get();
     if (recRef.exists) {
       const rec = recRef.data();
-      dispatch(asyncActionFulfilled(ACTIONS.FETCH_REC, {
+      dispatch(asyncActionFulfilled(ACTIONS.FETCH_REC, {rec: {
         ...rec,
         id
-      }))
+      }}))
     } else {
       dispatch(asyncActionCancelled(ACTIONS.FETCH_REC));
       history.push(routes.Recs);

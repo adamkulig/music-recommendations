@@ -1,11 +1,12 @@
-const initialState = {
-	data: null,
-	intact: true,
-	fetching: false,
-	error: null
-};
+import { cloneDeep } from 'lodash';
 
-const asyncReducerFactory = ({ baseActionName, additionalActions = {}}) => {
+import initialState from './initialState';
+
+const asyncReducerFactory = ({ 
+  baseActionName, 
+  additionalActions = {},
+  baseInitialState = cloneDeep(initialState),
+}) => {
   const actions = {};
 
   actions[`${baseActionName}_PENDING`] = (state, action) => ({
@@ -34,7 +35,7 @@ const asyncReducerFactory = ({ baseActionName, additionalActions = {}}) => {
   
   const allActions = { ...actions, ...additionalActions }
 
-  return (state = initialState, action) => {
+  return (state = baseInitialState, action) => {
 		let result;
 
 		if (action.type in allActions) {

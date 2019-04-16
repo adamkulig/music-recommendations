@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { compose } from 'redux';
-// import { firestoreConnect } from 'react-redux-firebase';
-import { withFirestore } from 'react-redux-firebase';
-import { isNil, get } from 'lodash';
-import { toastr } from 'react-redux-toastr';
+import { get } from 'lodash';
 
 import { getRec } from 'state/selectors/recs.selectors';
 import { fetchRec } from 'state/actions/recs.actions'
 
 import RecItem from '../components/RecItem/RecItem.component';
-import history from 'history.js';
-import messages from 'variables/messages';
-import routes from 'variables/routes';
 import LoadingWrapper from 'components/LoadingWrapper/LoadingWrapper.component';
 
 class RecDetailsContainer extends Component {
@@ -23,7 +16,7 @@ class RecDetailsContainer extends Component {
 
   render() {
     const { intact, fetching } = this.props.rec;
-    const rec = get(this.props, 'rec.data', null);
+    const rec = get(this.props, 'rec.data.rec', null);
     const active = intact || fetching;
     return (
       <LoadingWrapper isLoading={active}>

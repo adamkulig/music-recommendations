@@ -38,9 +38,7 @@ const signIn = creds => async (dispatch, getState, { getFirebase }) => {
         email: messages.emailNotFound
       });
     } else {
-      throw new SubmissionError({
-        email: messages.unknownProblem
-      });
+      toastr.error(messages.toastrError, messages.unknownError);
     }
   }
 }
@@ -81,7 +79,13 @@ const signUp = creds => async (dispatch, getState, { getFirebase, getFirestore }
     toastr.success(messages.toastrSuccess, messages.toastrSuccessSignUp);
   } catch(error) {
     console.log(error);
-    toastr.error(messages.toastrError, messages.unknownError);
+    if(error.code === 'auth/email-already-in-use') {
+      throw new SubmissionError({
+        email: messages.emailIsUsed
+      });
+    } else {
+      toastr.error(messages.toastrError, messages.unknownError);
+    }
   }
 }
 
