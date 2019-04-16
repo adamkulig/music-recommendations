@@ -19,7 +19,8 @@ class AppNavContainer extends Component {
   closeNavbar = () => this.setState({ navIsOpen: false });
 
   render() {
-    const { isEmpty } = this.props.auth;
+    const { isEmpty, emailVerified } = this.props.auth;
+    const isLoggedIn = !isEmpty && emailVerified;
     const { displayName } = this.props.profile;
      return (
       <AppNav
@@ -29,7 +30,7 @@ class AppNavContainer extends Component {
         onSignOut={this.props.signOut} 
         navIsOpen={this.state.navIsOpen}
         dropdownIsOpen={this.state.dropdownIsOpen}
-        isLoggedIn={!isEmpty}
+        isLoggedIn={isLoggedIn}
         displayName={displayName}
       />
     );
