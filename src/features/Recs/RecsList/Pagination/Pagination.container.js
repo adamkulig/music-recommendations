@@ -16,6 +16,7 @@ class PaginationContainer extends Component {
   componentDidMount() {
     this.createPaginationPages();
   }
+
   componentDidUpdate(prevProps) {
     const { page, totalPages } = this.props.recs.data;
     const { page: prevPage, totalPages: prevTotalPages } = prevProps.recs.data;

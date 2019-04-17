@@ -11,11 +11,12 @@ const WrappedSelectField = ({
   meta: { touched, error, valid },
   options,
   isMulti,
-  openMenuOnClick
+  openMenuOnClick,
+  additionalClasses
 }) => {
   const isInvalid = touched && !valid;
   return (
-    <FormGroup>
+    <FormGroup className={additionalClasses}>
       <Label>{label}</Label>
       <Select
         {...input}
@@ -47,13 +48,15 @@ WrappedSelectField.propTypes = {
   valid: bool,
   noValidate: bool,
   options: array,
-  isMulti: bool
+  isMulti: bool,
+  additionalClasses: string
 }
 
 WrappedSelectField.defaultProps = {
   isMulti: false,
   placeholder: '',
-  openMenuOnClick: false
+  openMenuOnClick: false,
+  additionalClasses: ''
 }
 
 export default WrappedSelectField;

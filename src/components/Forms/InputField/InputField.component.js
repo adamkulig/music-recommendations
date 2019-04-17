@@ -13,12 +13,13 @@ const InputField = ({
   type,
   placeholder,
   meta: { touched, error, valid },
-  noValidate
+  noValidate,
+  additionalClasses
 }) => {
   const isValid = touched && valid && !noValidate;
   const isInvalid = touched && !valid && !noValidate;
   return (
-    <FormGroup>
+    <FormGroup className={additionalClasses}>
       <Label>{label}</Label>
       <Input 
         {...input} 
@@ -40,12 +41,14 @@ InputField.propTypes = {
   touched: bool,
   error: string,
   valid: bool,
-  noValidate: bool
+  noValidate: bool,
+  additionalClasses: string
 }
 
 InputField.defaultProps = {
   placeholder: '',
-  noValidate: false
+  noValidate: false,
+  additionalClasses: ''
 }
 
 export default InputField;
