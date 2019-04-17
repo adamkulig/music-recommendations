@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import SignIn from 'features/Auth/SignIn/SignIn.container';
 import SignUp from 'features/Auth/SignUp/SignUp.container';
 import RecForm from 'features/Recs/RecForm/RecForm.container';
-import RecsList from 'features/Recs/RecsList/RecsList.container';
+import Recs from 'features/Recs/Recs.container';
 import RecDetails from 'features/Recs/RecDetails/RecDetails.container';
 import ProfileSettings from 'features/Profile/ProfileSettings/ProfileSettings.container';
 import NotFound from 'features/NotFound/NotFound.component';
@@ -20,7 +20,7 @@ class App extends Component {
       <AppLayout>
         <Switch>
           <Redirect exact from={routes.Main} to={routes.Recs}/>
-          <Route path={routes.Recs} component={RecsList} />
+          <Route path={routes.Recs} component={Recs} />
           <PublicRoute path={routes.SignIn} component={SignIn} />
           <PublicRoute path={routes.SignUp} component={SignUp} />
           <PrivateRoute path={routes.RecForm} component={RecForm} />

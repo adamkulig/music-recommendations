@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
 import queryString from 'query-string';
-import { withRouter } from 'react-router';
 
 import { getRecs, getAllRecs } from 'state/selectors/recs.selectors';
 import { fetchPage, fetchAllRecs } from 'state/actions/recs.actions';
 
-import RecsList from './RecsList.component';
-import PaginationContainer from './Pagination/Pagination.container';
-import RecsFiltersContainer from '../RecsFilters/RecsFilters.container';
+import RecsList from './RecsList/RecsList.component';
+import RecsFiltersContainer from './RecsFilters/RecsFilters.container';
 import LoadingWrapper from 'components/LoadingWrapper/LoadingWrapper.component';
 
 class RecsListContainer extends Component {
@@ -19,9 +17,7 @@ class RecsListContainer extends Component {
   }
 
   componentDidUpdate = async (prevProps, prevState) => {
-    console.log('window.location.search :', window.location.search);
-    console.log('this.props.location.search :', this.props.location.search);
-    console.log('prevProps.location.search :', prevProps.location.search);
+
     if (this.props.location.search !== prevProps.location.search) {
       await this.props.fetchAllRecs();
       this.fetchDesiredPage();
@@ -46,15 +42,12 @@ class RecsListContainer extends Component {
     const recs = get(this.props, 'recs.data.recs', []);
     const active = intact || fetching || desiredRecsIntact;
     return (
-      <React.Fragment>
+      <div className='recs'>
         <RecsFiltersContainer />
         <LoadingWrapper isLoading={active}>
-          <PaginationContainer />
           <RecsList recs={recs} />
-          <PaginationContainer />
         </LoadingWrapper>
-
-      </React.Fragment>
+      </div>
     )
   }
 }
@@ -69,5 +62,4 @@ const mapDispatchToProps = {
   fetchAllRecs
 }
 
-const RecsListContainerWithRouter = withRouter(RecsListContainer)
-export default connect(mapStateToProps, mapDispatchToProps)(RecsListContainerWithRouter)
+export default connect(mapStateToProps, mapDispatchToProps)(RecsListContainer);
