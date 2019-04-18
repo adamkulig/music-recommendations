@@ -16,8 +16,7 @@ class RecsListContainer extends Component {
     this.fetchDesiredPage();
   }
 
-  componentDidUpdate = async (prevProps, prevState) => {
-
+  componentDidUpdate = async (prevProps) => {
     if (this.props.location.search !== prevProps.location.search) {
       await this.props.fetchAllRecs();
       this.fetchDesiredPage();

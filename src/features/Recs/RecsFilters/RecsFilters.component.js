@@ -7,7 +7,6 @@ import { IoMdSearch } from "react-icons/io";
 import InputField from 'components/Forms/InputField/InputField.component';
 import SelectField from 'components/Forms/SelectField/SelectField.component';
 import { GENRES } from 'variables/recs';
-import LaddaButtonWrapper from 'components/LaddaButtonWrapper/LaddaButtonWrapper.component';
 
 const RecsFiltersComponent = ({ handleSubmit, submitting }) => {
   return (
@@ -16,19 +15,19 @@ const RecsFiltersComponent = ({ handleSubmit, submitting }) => {
         <Form onSubmit={handleSubmit} autoComplete="off">
           <Row className='d-flex align-items-center'>
             <Field
-              name="band" 
-              type="text" 
-              component={InputField} 
-              noValidate
-              placeholder="write band's name..."
-              additionalClasses='col-12 col-md-4'
-            />
-            <Field
               isMulti
               name="genres"
               component={SelectField} 
               options={GENRES}
               placeholder='choose genres...'
+              additionalClasses='col-12 col-md-6'
+            />
+            <Field
+              name="band" 
+              type="text" 
+              component={InputField} 
+              noValidate
+              placeholder="write band's name..."
               additionalClasses='col'
             />
             <Col md="auto" >

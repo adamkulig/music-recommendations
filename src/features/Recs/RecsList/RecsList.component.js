@@ -1,18 +1,24 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { array } from 'prop-types';
+import { isEmpty } from 'lodash';
 
 import RecItem from '../components/RecItem/RecItem.component';
 import PaginationContainer from './Pagination/Pagination.container';
 
 const RecsListComponent = ({ recs }) => {
   return (
-    <Fragment>
-      <PaginationContainer />
-      {recs.map(item => (
-        <RecItem key={item.id} data={item}/>
-      ))}
-      <PaginationContainer />
-    </Fragment>
+    <div className='recs__list'>
+      {!isEmpty(recs) ? (
+        <>
+          {recs.map(item => (
+            <RecItem key={item.id} data={item}/>
+          ))}
+          <PaginationContainer />
+        </>
+      ) : (
+        <p className='lead text-center'>No results.</p>
+      )}
+    </div>
   )
 }
 

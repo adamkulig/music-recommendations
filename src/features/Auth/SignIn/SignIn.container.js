@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
@@ -14,14 +14,14 @@ class SignInContainer extends Component {
   render() {
     const { handleSubmit, submitting, signIn, toggleResetPasswordModal } = this.props;
     return (
-      <Fragment>
+      <>
         <SignIn 
           handleSubmit={handleSubmit(signIn)} 
           submitting={submitting}
           handleOpenModal={toggleResetPasswordModal}
         />
         <ResetPasswordModal />
-      </Fragment>
+      </>
     );
   }
 }

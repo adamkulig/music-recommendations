@@ -79,11 +79,15 @@ class PaginationContainer extends Component {
 
   render() { 
     const { page } = this.props.recs.data;
-    return ( 
-      <Pagination 
-        pages={this.state.pages} 
-        page={page}
-      />
+    const { pages } = this.state;
+    return (
+      <>
+        {pages.length > 1 ? (
+          <Pagination pages={pages} page={page} /> 
+        ) : (
+          null
+        )}
+      </>
      );
   }
 }

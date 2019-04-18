@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { get, some, reduce } from 'lodash';
@@ -37,13 +37,13 @@ class VoteButtonContainer extends Component {
     const isDislikeVoted = some(likes, (vote, key) => key === uid && vote === false);
 
     return (
-      <Fragment>
+      <>
         { isLikeButton ? (
           <VoteButtonLike count={countVoting} onClick={this.onVote} isVoted={isLikeVoted}/>
         ) : ( 
           <VoteButtonDislike count={countVoting} onClick={this.onVote} isVoted={isDislikeVoted}/> 
         )}
-      </Fragment>
+      </>
     );
   }
 }

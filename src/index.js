@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { Router } from 'react-router-dom';
@@ -16,7 +16,7 @@ store.firebaseAuthIsReady.then(() => {
   ReactDOM.render(
     <Provider store={store}>
       <Router basename={process.env.PUBLIC_URL} history={history}>
-        <Fragment>
+        <>
           <ReduxToastr
             position='bottom-right'  
             transitionIn='fadeIn'
@@ -26,7 +26,7 @@ store.firebaseAuthIsReady.then(() => {
             timeOut={5000}
           />
           <App />
-        </Fragment>
+        </>
       </Router>
     </Provider>,
     document.getElementById('root')

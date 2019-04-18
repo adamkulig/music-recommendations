@@ -70,10 +70,10 @@ const fetchPage = params => async (dispatch, getState) => {
   const allRecs = get(state, 'allRecs.data.allRecs', []);
   const isFiltered = !isNil(genres) || !isNil(band);
   const desiredRecs = isFiltered ? filterRecs(allRecs, params) : allRecs;
- 
+
   const totalRecs = desiredRecs.length;
   const totalPages = Math.ceil(totalRecs / RECS.pageSize);
-  if (inRange(page, 1, totalPages + 1)) {
+  if (inRange(page, 1, totalPages + 1) || isFiltered) {
     const startIndex = page * RECS.pageSize - RECS.pageSize;
     const endIndex = page * RECS.pageSize;
     const recs = slice(desiredRecs, startIndex, endIndex)
