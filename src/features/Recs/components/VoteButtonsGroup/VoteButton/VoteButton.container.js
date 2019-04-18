@@ -23,7 +23,7 @@ class VoteButtonContainer extends Component {
         like: (currentVote === newVote) ? null : newVote
       })
     } else {
-      toastr.error(messages.toastrError, messages.toastrErrorVote);
+      toastr.warning(messages.toastrVoteDisabled);
     }
   }
 

@@ -11,6 +11,9 @@ import { filtersToQueryString } from 'helpers/filters.helpers';
 import history from 'history.js';
 
 class RecFiltersContainer extends Component {
+  state = {
+    isOpen: false
+  }
 
   onFilterRecs = filters => {
     const filtersForUrl = {...filters, 'page': '1', };
@@ -20,14 +23,27 @@ class RecFiltersContainer extends Component {
       pathname: routes.Recs,
       search: queryString
     })
+    this.setState({
+      isOpen: false
+    })
+  }
+
+  toggle = () => {
+    console.log('toggle');
+    this.setState({
+      isOpen: !this.state.isOpen
+    })
   }
 
   render() {
     const { handleSubmit, submitting } = this.props;
+    const { isOpen } = this.state;
     return (
       <RecsFilters 
         handleSubmit={handleSubmit(this.onFilterRecs)} 
         submitting={submitting}
+        isOpen={isOpen}
+        toggle={this.toggle}
       />
     );
   }

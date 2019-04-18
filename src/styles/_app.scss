@@ -71,4 +71,7 @@ textarea {
 .btn-filter {
   position: relative;
   top: 3px;
+  &--mobile {
+    top: 10px;
+  }
 }

@@ -161,7 +161,7 @@ const fetchRec = id => async (dispatch, getState, { getFirestore }) => {
     } else {
       dispatch(asyncActionCancelled(ACTIONS.FETCH_REC));
       history.push(routes.Recs);
-      toastr.error(messages.toastrError, messages.toastrSuccessRecDoesNotExist);
+      toastr.error(messages.toastrError, messages.toastrErrorRecDoesNotExist);
     }
   } catch(error){
     dispatch(asyncActionRejected(ACTIONS.FETCH_REC, error));

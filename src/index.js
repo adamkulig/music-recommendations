@@ -7,7 +7,7 @@ import App from './features/App';
 import * as serviceWorker from './serviceWorker.js';
 import history from './history';
 import './styles/base.scss';
-//redux
+
 import { Provider } from 'react-redux';
 import ReduxToastr from 'react-redux-toastr'
 import store from './state/store';

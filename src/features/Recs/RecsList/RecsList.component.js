@@ -16,7 +16,7 @@ const RecsListComponent = ({ recs }) => {
           <PaginationContainer />
         </>
       ) : (
-        <p className='lead text-center'>No results.</p>
+        <p className='text-center'>No results.</p>
       )}
     </div>
   )
