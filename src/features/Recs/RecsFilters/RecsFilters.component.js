@@ -1,40 +1,24 @@
-
 import React from 'react';
-import { Field } from 'redux-form';
-import { Card, CardBody, Form, Row, Col, Button } from 'reactstrap';
-import { IoMdSearch } from "react-icons/io";
+import { Card, CardBody } from 'reactstrap';
 
-import InputField from 'components/Forms/InputField/InputField.component';
-import SelectField from 'components/Forms/SelectField/SelectField.component';
-import { GENRES } from 'variables/recs';
+import RecsFiltersForm from './components/RecsFiltersForm.component';
+import RecsFiltersFormMobile from './components/RecsFiltersFormMobile.component';
 
-const RecsFiltersComponent = ({ handleSubmit, submitting }) => {
+const RecsFiltersComponent = ({ handleSubmit, submitting, isOpen, toggle }) => {
   return (
     <Card className='mb-3'>
       <CardBody>
-        <Form onSubmit={handleSubmit} autoComplete="off">
-          <Row className='d-flex align-items-center'>
-            <Field
-              isMulti
-              name="genres"
-              component={SelectField} 
-              options={GENRES}
-              placeholder='choose genres...'
-              additionalClasses='col-12 col-md-6'
-            />
-            <Field
-              name="band" 
-              type="text" 
-              component={InputField} 
-              noValidate
-              placeholder="write band's name..."
-              additionalClasses='col'
-            />
-            <Col md="auto" >
-              <Button disabled={submitting} className='btn-filter float-right'><IoMdSearch size={24}/></Button>
-            </Col>
-          </Row>
-        </Form>
+        <div className='d-md-none'>
+          <RecsFiltersFormMobile 
+            handleSubmit={handleSubmit}
+            submitting={submitting}
+            isOpen={isOpen}
+            toggle={toggle}
+          />
+        </div>
+        <div className='d-none d-md-block'>
+          <RecsFiltersForm handleSubmit={handleSubmit} submitting={submitting} />
+        </div>
       </CardBody>
     </Card>
   )
