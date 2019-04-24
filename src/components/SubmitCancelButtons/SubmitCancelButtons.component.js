@@ -10,7 +10,7 @@ const SubmitCancelButtons = ({ submitting, onCancel }) => {
       <Button color='secondary' className='mr-1' type='reset' disabled={submitting} onClick={onCancel}>
         Cancel
       </Button>
-      <LaddaButtonWrapper type='submit' loading={submitting} additionalClasses='btn-primary'>>
+      <LaddaButtonWrapper type='submit' loading={submitting} additionalClasses='btn-primary'>
         Submit
       </LaddaButtonWrapper>
     </ButtonGroup>
