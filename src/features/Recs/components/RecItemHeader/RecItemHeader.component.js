@@ -1,8 +1,11 @@
 import React from 'react';
-import moment from 'moment';
 import { string, object } from 'prop-types';
+import { distanceInWordsToNow } from 'date-fns';
 
 const RecItemHeader = ({ user, createdAt }) => {
+  const time = distanceInWordsToNow(
+    createdAt.toDate()
+  )
   return (
     <div className='d-flex align-center justify-content-between'>
       <div>
@@ -15,7 +18,7 @@ const RecItemHeader = ({ user, createdAt }) => {
       </div>
       <div>
         <span className='text-muted small'>
-          {moment(createdAt.toDate()).fromNow()}
+          {time}
         </span>
       </div>
     </div>
